@@ -7,13 +7,12 @@ class Tab4 {
 
     async render() {
         const view = await TemplatesManager.getTemplate('tab4')
-        this.el = TemplatesManager.getRenderElement('tab4')
-        this.el.innerHTML = view
+        this.el = TemplatesManager.renderElement('tab4', view)
     }
 
-    show() { this.el.children[0].classList.add('active') }
+    show() { this.el.classList.add('active') }
 
-    hide() { this.el.children[0].classList.remove('active') }
+    hide() { this.el.classList.remove('active') }
 }
 
 export default new Tab4()

@@ -21,8 +21,7 @@ class Tabs {
     
     async render(){
         const view = await TemplatesManager.getTemplate('tabs')
-        const el = TemplatesManager.getRenderElement('tabs')
-        el.innerHTML = view
+        const el = TemplatesManager.renderElement('tabs', view)
 
         await this.renderTabs()
     }

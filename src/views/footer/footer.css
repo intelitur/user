@@ -1,0 +1,77 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    z-index: 1000;
+    width: calc(100% - 280px);
+    font-family: "Lato", sans-serif;
+    height: 48px;
+    margin-left: 280px;
+}
+
+@media only screen and (max-width: 700px) {
+    .footer{
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+.footer__tablink {
+    transition: 0.3s;
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 0;
+    width: 15%;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+  }
+  
+.footer__tablink__label {
+    transition: 1s;
+    opacity: 0;
+    margin-left: 0px;
+    display: none;
+}
+
+.footer__tablink:hover {
+    background-color: #777;
+}
+
+.footer__tablink.active {
+    width: 55%;
+}
+
+.active .footer__tablink__label{
+    animation: visible_in 1300ms;
+    margin-left:15px;
+    display: block;
+    opacity: 1;
+}
+
+.footer__tablink--1.active {
+    background-color: var(--tab1_color);
+}
+
+.footer__tablink--2.active {
+    background-color: var(--tab2_color);
+}
+
+.footer__tablink--3.active {
+    background-color: var(--tab3_color);
+}
+
+.footer__tablink--4.active {
+    background-color: var(--tab4_color);
+}
+
+
+@keyframes visible_in {
+    0% { opacity: 0;}
+    25% { opacity: 0;}
+    100% { opacity: 1;}
+  }

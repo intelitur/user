@@ -1,0 +1,19 @@
+:root{
+    --is_mobile_at: 700px
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    transition: 0.5s;
+    margin-right: 0;
+    width: 100%;
+    background-color: #dbdbdb;
+}
+

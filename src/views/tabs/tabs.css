@@ -6,7 +6,8 @@
 }
 
 .tabs{
-    overflow: hidden;
+    display: grid;
+    overflow-x: hidden;
     position: relative;
     width: calc(100% - 280px);
     height: 100%;
@@ -15,7 +16,6 @@
 
 .tabs__tab--content {
     transition: 0.5s;
-    color: white;
     display: block;
     text-align: center;
     
@@ -23,16 +23,28 @@
     left: 100%;
 }
 
+[theme=light] .tabs__tab--content {
+    color: white;
+}
+
+[theme=color] .tabs__tab--content {
+    color: white;
+}
+
+
+
 @media only screen and (max-width: 700px) {
     .tabs{
         width: 100%;
         height: 100%;
         margin-left: 0px;
+        overflow: hidden;
     }
 
     .tabs__tab--content{
       position: absolute;
-      height: calc(100%);
+      height: calc(100% - 48px);
+      overflow: hidden;
     }
 
     .tabs__tab--content.active{

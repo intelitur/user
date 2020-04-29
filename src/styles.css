@@ -5,8 +5,16 @@
 html, body {
     height: 100%;
     width: 100%;
-    overflow: hidden;
     margin: 0;
+}
+
+
+
+
+@media only screen and (max-width: 700px){
+    html, body {
+        overflow: hidden;
+    }
 }
 
 body {

@@ -31,7 +31,6 @@ class Footer {
 
     addEventListeners(){
         const tablinks = this.el.querySelectorAll(".footer__tablink")
-        console.log(tablinks)
         tablinks.forEach((tablink, i) => {
             tablink.addEventListener('click', (() => {
                 this.showTab(i + 1)

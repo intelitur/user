@@ -1,3 +1,56 @@
-.tab1{
+[theme=color] .tab1 {
     background-color: var(--tab1_color);
+}
+
+[theme=light] .tab1 {
+    color: var(--tab1_color);
+    background-color: white;
+}
+
+/* Mobile css */
+
+@media only screen and (max-width: 700px) {
+    .tab1--content {
+        height: 65%;
+    }
+    .tab1__calendar--container {
+        height: 40%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .tab1__calendar--button {
+        margin: auto 30px;
+        background-color: tomato;
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        font-size: 40px;
+        color: white;
+        display: flex;
+        border: none;
+        padding: 0;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        cursor: pointer;
+    }
+    
+    .tab1__calendar--button:focus {
+        outline: none;
+    }
+
+    .tab1__calendar--icon {
+        margin: auto
+    }
+
+    .tab1__calendar__events--container{
+        margin: auto 0;
+        height: 80%;
+        width: 60%;
+    }
+
+    .tab1__calendar__events--item{
+        height: 100%;
+        width: 90%;
+        background-color: aqua;
+    }
 }

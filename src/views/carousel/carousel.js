@@ -20,7 +20,6 @@ class Carousel {
 
     addEventListeners(){
         const items = this.el.querySelectorAll(".carousel__items-container")[0].childNodes
-        console.log(items)
         items.forEach((item, i) => {
             item.addEventListener('click', (() => {
                 this.showImage(i)

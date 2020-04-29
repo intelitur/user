@@ -6,11 +6,6 @@ function initRender(){
     }
 
     Object.values(initElements).forEach(el => el.render())
-
-    window.globalFunctions = {
-        showTab: footer.showTab.bind(footer)
-    }
-
     
 }
 

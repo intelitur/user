@@ -1,5 +1,6 @@
 import TemplatesManager from "../../../utils/TemplatesManager";
 import Carousel from "../../carousel/carousel";
+import DesignController from "../../../utils/DesignController";
 
 class Tab1 {
 
@@ -14,7 +15,15 @@ class Tab1 {
     async render(){
         const view = await TemplatesManager.getTemplate('tab1')
         this.el = TemplatesManager.renderElement('tab1', view)
+        await this.renderContent()
+    }
+
+    async renderContent(){
         await this.carousel.render('tab1_carousel')
+
+        const htmlName = DesignController.mobile? 'mobile_tab1_content': 'tab1_content'
+        const view = await TemplatesManager.getTemplate(htmlName)
+        TemplatesManager.renderElement('tab1_content', view)
     }
 
     show() { this.el.classList.add('active') }

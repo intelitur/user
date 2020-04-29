@@ -1,3 +1,7 @@
-.tab3{
+[theme=color] .tab3{
     background-color: var(--tab3_color);
+}
+
+[theme=light] .tab3{
+    color: var(--tab3_color);
 }

@@ -1,0 +1,55 @@
+<div style="width: 37%; height: calc(25vh - 88px); display: flex; justify-content: center; box-shadow: 0px 1px 10px 4px rgba(0, 0, 0, 0.2); border-radius: 5px;
+        position: absolute; right: 55%; top: 77.5vh" id="temp_div">
+        <label style="font-size: 35px; margin: auto 0" id="temp">
+            <div class="loader-min">Loading...</div>
+        </label>
+        <div style="margin: auto 0;">
+            <img id="temp_icon" style="display: none; height: 100%;">
+            <!--<i style="font-size: 35px"class="fas fa-cloud-sun-rain"></i>-->
+            <!--<i style="font-size: 35px" class="fas fa-cloud-showers-heavy"></i>-->
+            <!--<i style="font-size: 35px"class="fas fa-sun"></i>-->
+            <!--<i style="font-size: 35px"class="fas fa-cloud"></i>-->
+        </div>
+    </div>
+    <div style="position: absolute; top: calc(90% - 34.4px); right: 0; font-size: 60px; font-variant: small-caps; width: 47%; 
+    text-align: center; transition: 0.05s;" id="tab_1_title">
+        La Fortuna
+    </div>
+    <div style="width: calc(100% - 50px); padding: 10px 25px; display: flex; flex-direction: column; margin-top: calc(20vh); position: relative;"
+        id="tab_1_container">
+
+        <div style="display: flex; width: calc(100% - 15px); height: 600px; margin-left: 10px; margin-right: 5px; position: relative;"
+            id="coming_events">
+            <div style="height: 100%; display: flex; width: 50%;">
+                <div class="loader">Loading...</div>
+            </div>
+            <div style="height: 100%; display: flex; width: 50%;">
+                <div class="loader">Loading...</div>
+            </div>
+        </div>
+
+        <div style="margin: 10px 0; padding: 20px; background-color: white; color: black; height: calc(560px); width: calc(60% - 90px); top: 200px;
+         box-shadow: 0px 1px 10px 4px rgba(0, 0, 0, 0.2); border-radius: 5px; position: absolute; transition: left 0.5s; opacity: 1; left:  -60%;"
+            id="calendar_container">
+        </div>
+
+
+
+    </div>
+    <div style="display: flex; height: 240px; margin: 50px 0">
+        <div style="width: 50px; margin: auto; z-index: 2; position: relative; height: 50px;">
+            <button class="btn-pass-contest" id="previous_pass_contest" onclick="tab1Control.previousContests()">
+                <i class="fas fa-arrow-left" style="margin: auto; font-size: 15px;"></i>
+            </button>
+        </div>
+
+        <div style="position: relative; min-width: calc(100% - 150px);">
+            <div id="contests_container">
+            </div>
+        </div>
+        <div style="width: 50px; margin: auto; z-index: 2; position: relative; height: 50px;">
+            <button class="btn-pass-contest" id="next_pass_contest" onclick="tab1Control.nextContests()">
+                <i class="fas fa-arrow-right" style="margin: auto; font-size: 15px;"></i>
+            </button>
+        </div>
+    </div>

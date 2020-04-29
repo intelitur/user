@@ -5,8 +5,16 @@
 html, body {
     height: 100%;
     width: 100%;
-    overflow: hidden;
     margin: 0;
+}
+
+
+
+
+@media only screen and (max-width: 700px){
+    html, body {
+        overflow: hidden;
+    }
 }
 
 body {
@@ -85,8 +93,6 @@ render {
 
 .footer__tablink {
     transition: 0.3s;
-    background-color: #555;
-    color: white;
     float: left;
     border: none;
     outline: none;
@@ -97,7 +103,23 @@ render {
     display: flex;
     justify-content: center;
     font-size: 1rem;
-  }
+}
+
+[theme=color] .footer__tablink {
+    background-color: #555;
+    color: white;
+}
+
+[theme=light] .footer__tablink {
+    background-color: white;
+    color: rgb(145, 145, 145);
+    border-bottom: solid 3px rgba(255, 255, 255, 0);
+    font-weight: 500;
+}
+
+[theme=light] .footer__tablink:not(:first-child) {
+    border-left: rgba(187, 187, 187, 0.596) solid 1px;
+}
   
 .footer__tablink__label {
     transition: 1s;
@@ -106,8 +128,12 @@ render {
     display: none;
 }
 
-.footer__tablink:hover {
+[theme=color] .footer__tablink:hover {
     background-color: #777;
+}
+
+[theme=light] .footer__tablink:hover {
+    background-color: rgb(250, 250, 250);
 }
 
 .footer__tablink.active {
@@ -115,33 +141,55 @@ render {
 }
 
 .active .footer__tablink__label{
-    animation: visible_in 1300ms;
-    margin-left:15px;
+    animation: visible_in 1000ms;
+    margin-left: 15px;
     display: block;
     opacity: 1;
 }
 
-.footer__tablink--1.active {
+[theme=color] .footer__tablink--1.active {
     background-color: var(--tab1_color);
 }
 
-.footer__tablink--2.active {
+[theme=light] .footer__tablink--1.active {
+    color: var(--tab1_color);
+    border-bottom-color: var(--tab1_control);
+}
+
+[theme=color] .footer__tablink--2.active {
     background-color: var(--tab2_color);
 }
 
-.footer__tablink--3.active {
+[theme=light] .footer__tablink--2.active {
+    color: var(--tab2_color);
+    border-bottom-color: var(--tab2_control);
+}
+
+[theme=color] .footer__tablink--3.active {
     background-color: var(--tab3_color);
 }
 
-.footer__tablink--4.active {
+[theme=light] .footer__tablink--3.active {
+    color: var(--tab3_color);
+    border-bottom-color: var(--tab3_control);
+}
+
+[theme=color] .footer__tablink--4.active {
     background-color: var(--tab4_color);
+}
+
+[theme=light] .footer__tablink--4.active {
+    color: var(--tab4_color);
+    border-bottom-color: var(--tab4_control);
 }
 
 
 @keyframes visible_in {
-    0% { opacity: 0;}
-    25% { opacity: 0;}
-    100% { opacity: 1;}
+    0% { opacity: 0; margin-left: 0; width: 0px;}
+    10% { width: max-content;}
+    25% { opacity: 0; margin-left: 0; width: auto;}
+    75% { margin-left: 15px;}
+    100% { opacity: 1 }
   }:root{
     --tab1_color: tomato;
     --tab2_color: mediumseagreen;
@@ -150,7 +198,8 @@ render {
 }
 
 .tabs{
-    overflow: hidden;
+    display: grid;
+    overflow-x: hidden;
     position: relative;
     width: calc(100% - 280px);
     height: 100%;
@@ -159,7 +208,6 @@ render {
 
 .tabs__tab--content {
     transition: 0.5s;
-    color: white;
     display: block;
     text-align: center;
     
@@ -167,28 +215,105 @@ render {
     left: 100%;
 }
 
+[theme=light] .tabs__tab--content {
+    color: white;
+}
+
+[theme=color] .tabs__tab--content {
+    color: white;
+}
+
+
+
 @media only screen and (max-width: 700px) {
     .tabs{
         width: 100%;
         height: 100%;
         margin-left: 0px;
+        overflow: hidden;
     }
 
     .tabs__tab--content{
       position: absolute;
-      height: calc(100%);
+      height: calc(100% - 48px);
+      overflow: hidden;
     }
 
     .tabs__tab--content.active{
         left: 0%;
     }
 }
-.tab1{
+[theme=color] .tab1 {
     background-color: var(--tab1_color);
-}.tab2{
+}
+
+[theme=light] .tab1 {
+    color: var(--tab1_color);
+    background-color: white;
+}
+
+/* Mobile css */
+
+@media only screen and (max-width: 700px) {
+    .tab1--content {
+        height: 65%;
+    }
+    .tab1__calendar--container {
+        height: 40%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .tab1__calendar--button {
+        margin: auto 30px;
+        background-color: tomato;
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        font-size: 40px;
+        color: white;
+        display: flex;
+        border: none;
+        padding: 0;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        cursor: pointer;
+    }
+    
+    .tab1__calendar--button:focus {
+        outline: none;
+    }
+
+    .tab1__calendar--icon {
+        margin: auto
+    }
+
+    .tab1__calendar__events--container{
+        margin: auto 0;
+        height: 80%;
+        width: 60%;
+    }
+
+    .tab1__calendar__events--item{
+        height: 100%;
+        width: 90%;
+        background-color: aqua;
+    }
+}[theme=color] .tab2{
     background-color: var(--tab2_color);
-}.tab3{
+}
+
+[theme=light] .tab2{
+    color: var(--tab2_color);
+}[theme=color] .tab3{
     background-color: var(--tab3_color);
-}.tab4{
+}
+
+[theme=light] .tab3{
+    color: var(--tab3_color);
+}[theme=color] .tab4{
     background-color: var(--tab4_color);
+}
+
+[theme=light] .tab4{
+    color: var(--tab4_color);
 }

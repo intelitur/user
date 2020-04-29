@@ -1,18 +1,23 @@
-<section class="tab1--content">
-    <article class="tab1__calendar--container">
-        <button class="tab1__calendar--button">
-            <i class="fas fa-calendar-alt tab1__calendar--icon"></i>
-        </button>
-
-        <div class="tab1__calendar__events--container">
-            <div class="tab1__calendar__events--item"></div>
+    <div>
+        <div class="tab1__carousel--container">
+            <render render=tab1_carousel></render>
         </div>
-    </article>
-</section>
-<!-- <div style="height: 52%;display: flex">
-    <div style="width: calc(50% - 0.5px); padding-top: 10px;">
-        <div style="height: 27%; display: flex">
-            <div class="conc-card">
+        <section class="tab1--content">
+            <article class="tab1__calendar--container">
+                <button class="tab1__calendar--button">
+                    <i class="fas fa-calendar-alt tab1__calendar--icon"></i>
+                </button>
+                
+                <div class="tab1__calendar__events--container">
+                    <div class="tab1__calendar__events--item"></div>
+                </div>
+            </article>
+        </section>
+    </div>
+    <!-- <div style="height: 52%;display: flex">
+        <div style="width: calc(50% - 0.5px); padding-top: 10px;">
+            <div style="height: 27%; display: flex">
+                <div class="conc-card">
                 <div class="conc-card-info">
                     <div style="margin: auto">
                         <label><b>Concurso 1</b></label>
@@ -57,12 +62,12 @@
     <div style="width: 50%" class="events-section">
         <div style="height: 50%; display: flex">
             <button class="icon-button" style="color: rgba(255, 99, 71, 0.6)"
-                onclick="tab1Control.showCalendar(true)"><i class="fas fa-calendar-alt"></i></button>
+            onclick="tab1Control.showCalendar(true)"><i class="fas fa-calendar-alt"></i></button>
         </div>
         <div style="height: 50%; display: flex;" id="coming_events_mobile">
             <div class="loader">Loading...</div>
         </div>
-
+        
     </div>
 </div>
 <div style="height: 13%">

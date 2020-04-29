@@ -10,6 +10,13 @@
 /* Mobile css */
 
 @media only screen and (max-width: 700px) {
+    .tab1>div{
+        height: calc(100% - 48px);
+        overflow: hidden;
+    }
+    .tab1__carousel--container{
+        height: 35%;
+    }
     .tab1--content {
         height: 65%;
     }
@@ -18,20 +25,30 @@
         display: flex;
         justify-content: space-between;
     }
+
     .tab1__calendar--button {
         margin: auto 30px;
-        background-color: tomato;
+        
         width: 85px;
         height: 85px;
         border-radius: 50%;
         font-size: 40px;
-        color: white;
         display: flex;
         border: none;
         padding: 0;
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         transition: 0.35s;
         cursor: pointer;
+    }
+
+    [theme=color] .tab1__calendar--button {
+        background-color: white;
+        color: var(--tab1_color);
+    }
+
+    [theme=light] .tab1__calendar--button {
+        color: white;
+        background-color: var(--tab1_color);
     }
     
     .tab1__calendar--button:focus {
@@ -51,6 +68,6 @@
     .tab1__calendar__events--item{
         height: 100%;
         width: 90%;
-        background-color: aqua;
+        background-color: var(--tab1_color);
     }
 }

@@ -19,11 +19,12 @@ class Tab1 {
     }
 
     async renderContent(){
-        await this.carousel.render('tab1_carousel')
-
         const htmlName = DesignController.mobile? 'mobile_tab1_content': 'tab1_content'
         const view = await TemplatesManager.getTemplate(htmlName)
         TemplatesManager.renderElement('tab1_content', view)
+        console.log("hi")
+
+        await this.carousel.render('tab1_carousel')
     }
 
     show() { this.el.classList.add('active') }

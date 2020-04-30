@@ -30,7 +30,22 @@ const copyWebpack = new CopyWebpackPlugin([
         from: './src/views/**/*.html',
         to: './html/',
         flatten: true,
-    }
+    },
+    {
+         from : './node_modules/leaflet/dist/*.css',
+         to: './assets/leaflet',
+         flatten: true,
+    },
+    {
+         from : './node_modules/leaflet.fullscreen/*.css',
+         to: './assets/leaflet',
+         flatten: true,
+    },
+    {
+         from : './node_modules/leaflet.fullscreen/*.png',
+         to: './assets/leaflet',
+         flatten: true,
+    },
 ])
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')

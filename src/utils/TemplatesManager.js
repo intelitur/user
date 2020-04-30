@@ -1,7 +1,7 @@
 class TemplatesManager {
 
     static async getTemplate(name) {
-        if (!TemplatesManager.templates[name]) {
+        if (!TemplatesManager.templates[name] || (typeof TemplatesManager.templates[name] !== 'string')) {
             let request = fetch(`./html/${name}.html`, {mode: 'no-cors'})
 
             let htmlText = (await request).text()

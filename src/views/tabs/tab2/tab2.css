@@ -3,5 +3,16 @@
 }
 
 [theme=light] .tab2{
+    background-color: white;
     color: var(--tab2_color);
 }
+
+/* Mobile css */
+
+@media only screen and (max-width: 700px) {
+    .map__container{
+        height: 100%;
+        width: 100%;
+    }
+}
+

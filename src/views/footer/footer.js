@@ -19,7 +19,7 @@ class Footer {
         ]
         await tabs.render()
         this.addEventListeners()
-        this.showTab()
+        this.showTab(2)
 
     }
 

@@ -22,7 +22,6 @@ class Tab1 {
         const htmlName = DesignController.mobile? 'mobile_tab1_content': 'tab1_content'
         const view = await TemplatesManager.getTemplate(htmlName)
         TemplatesManager.renderElement('tab1_content', view)
-        console.log("hi")
 
         await this.carousel.render('tab1_carousel')
     }

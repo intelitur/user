@@ -16,9 +16,16 @@ class TemplatesManager {
             htmlNode = TemplatesManager.createHtmlNode(htmlNode)
         htmlNode.setAttribute('render', name)
         const element = document.querySelectorAll(`[render*=${name}]`)[0]
+        htmlNode.className = `${element.className} ${htmlNode.className}`
         element.parentNode.insertBefore(htmlNode, element)
         element.parentNode.removeChild(element)
         return htmlNode
+    }
+
+    static contextPipe(htmlText, context){
+        const withLoops = TemplatesManager.doLoops.bind(context)(htmlText)
+        const html = withLoops.outerHTML
+        return html.patch(context)
     }
 
     static doLoops(htmlText){

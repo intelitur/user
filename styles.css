@@ -29,16 +29,25 @@ render {
     overflow: hidden;
 }
 
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 100%;
+    transition: left 0.5s;
+    background-color: white;
+    z-index: 2000;
+    overflow: hidden;
+}
+
+.overlay.visible {
+    left: 0;
+}
+
 .carousel{
     position: relative;
     width: 100%;
-    height: 75vh;
-}
-
-@media screen and (max-width: 700px){
-    .carousel{
-        height: 35%;
-    }
+    height: 100%;
 }
 
 .carousel__images-container{
@@ -74,6 +83,36 @@ render {
 
 .carousel__items-container__item.active{
     background-color: rgba(255, 255, 255, 0.8);
+}.overlay--event {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.overlay--event__tb--container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.overlay--event__back {
+    padding: 6px;
+    margin: 0;
+    left: 0;
+    background-color: transparent;
+    color: gray;
+    font-size: 30px;
+    border: none;
+}
+
+.overlay--event__back:focus {
+    outline: none;
+}
+
+.overlay--event__title {
+    text-align: center;
+    margin: auto 13px;
+    margin-top: 10px;
+    width: calc(90% - 42px);
 }.footer {
     position: absolute;
     bottom: 0;
@@ -190,7 +229,20 @@ render {
     25% { opacity: 0; margin-left: 0; width: auto;}
     75% { margin-left: 15px;}
     100% { opacity: 1 }
-  }:root{
+  }/* Mobile css */
+
+@media only screen and (max-width: 700px) {
+    .map{
+        height: 100%;
+        width: 100%;
+    }
+
+    .map-event-tooltip__link{
+        text-align: center;
+        font-size: 14px;
+        text-decoration: none;
+    }
+}:root{
     --tab1_color: tomato;
     --tab2_color: mediumseagreen;
     --tab3_color: cornflowerblue;
@@ -255,6 +307,13 @@ render {
 /* Mobile css */
 
 @media only screen and (max-width: 700px) {
+    .tab1>div{
+        height: calc(100% - 48px);
+        overflow: hidden;
+    }
+    .tab1__carousel--container{
+        height: 35%;
+    }
     .tab1--content {
         height: 65%;
     }
@@ -263,20 +322,30 @@ render {
         display: flex;
         justify-content: space-between;
     }
+
     .tab1__calendar--button {
         margin: auto 30px;
-        background-color: tomato;
+        
         width: 85px;
         height: 85px;
         border-radius: 50%;
         font-size: 40px;
-        color: white;
         display: flex;
         border: none;
         padding: 0;
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         transition: 0.35s;
         cursor: pointer;
+    }
+
+    [theme=color] .tab1__calendar--button {
+        background-color: white;
+        color: var(--tab1_color);
+    }
+
+    [theme=light] .tab1__calendar--button {
+        color: white;
+        background-color: var(--tab1_color);
     }
     
     .tab1__calendar--button:focus {
@@ -296,15 +365,27 @@ render {
     .tab1__calendar__events--item{
         height: 100%;
         width: 90%;
-        background-color: aqua;
+        background-color: var(--tab1_color);
     }
 }[theme=color] .tab2{
     background-color: var(--tab2_color);
 }
 
 [theme=light] .tab2{
+    background-color: white;
     color: var(--tab2_color);
-}[theme=color] .tab3{
+}
+
+/* Mobile css */
+
+@media only screen and (max-width: 700px) {
+    .map__container{
+        height: 100%;
+        width: 100%;
+    }
+}
+
+[theme=color] .tab3{
     background-color: var(--tab3_color);
 }
 

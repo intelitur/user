@@ -1,5 +1,6 @@
 .carousel{
     width: 100%;
+<<<<<<< HEAD
     position: relative;
     
 }
@@ -8,6 +9,9 @@
     .carousel{
         height: 39%;
     }
+=======
+    height: 100%;
+>>>>>>> origin/walter
 }
 
 .carousel__images-container{

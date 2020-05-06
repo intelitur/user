@@ -1,0 +1,9 @@
+.calendar--container{
+    width: calc(100% - 10px);
+    height: calc(100% - 20px);
+    margin: 10px 5px;
+}
+
+.calendar {
+    height: 100%;
+}

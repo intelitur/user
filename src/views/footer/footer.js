@@ -1,6 +1,9 @@
 import TemplatesManager from "../../utils/TemplatesManager";
 import tabs from "../tabs/tabs";
 
+
+import './footer.css'
+
 class Footer {
 
     constructor(){
@@ -19,7 +22,7 @@ class Footer {
         ]
         await tabs.render()
         this.addEventListeners()
-        this.showTab()
+        //this.showTab(2)
 
     }
 

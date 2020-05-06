@@ -4,6 +4,7 @@ import tab2 from "./tab2/tab2";
 import tab3 from "./tab3/tab3";
 import tab4 from "./tab4/tab4";
 
+import './tabs.css'
 class Tabs {
 
     constructor(){

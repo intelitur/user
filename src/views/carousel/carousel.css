@@ -4,9 +4,9 @@
     
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 900px){
     .carousel{
-        height: 40%;
+        height: 100%;
     }
 }
 
@@ -19,6 +19,7 @@
     flex-direction: row;
     transition: right 0.4s;
     overflow-x: visible;
+    
 }
 
 .carousel__images-container__img{
@@ -33,7 +34,26 @@
     bottom: 5%;
     font-size: 35px;
 }
+.carousel__item-weather{
+ 
+    position: absolute;
+    bottom: 0;
+    background-color: tomato;
+    opacity: 0.8;
+    width: 75px;
+    color: white;
+    height: 60px;
+    margin-left: 280px;
+    border-radius: 20%;
+    text-align: center;
 
+}
+.carousel__item-weather-text{
+    text-align: center;
+    margin:auto;
+    margin-right: 0;
+    margin-right: 0;
+}
 
 /*
 .carousel__items-container__item.active{

@@ -12,12 +12,11 @@ class Carousel {
         const view = TemplatesManager.doLoops.bind(this)(template)
         this.el = TemplatesManager.renderElement(name, view)
 
-        this.addEventListeners()
         this.showImage(0)
         if(this.animationOptions.autoSlide.enabled)
             setInterval(this.showImage.bind(this), this.animationOptions.autoSlide.ms)
     }
-
+/** 
     addEventListeners(){
         const items = this.el.querySelectorAll(".carousel__items-container")[0].childNodes
         items.forEach((item, i) => {
@@ -26,12 +25,12 @@ class Carousel {
             }).bind(this))
         })
     }
-
+*/
     showImage(i){
-        const items = this.el.querySelectorAll(".carousel__items-container")[0].childNodes
+        //const items = this.el.querySelectorAll(".carousel__items-container")[0].childNodes
         const imageContainer = this.el.querySelectorAll(".carousel__images-container")[0]
 
-
+        /*
         if(!i){
             items.forEach((el, index) => {
                 if(el.classList.contains('active')){
@@ -39,16 +38,17 @@ class Carousel {
                 }
             })
         }
+        */
 
-        i = items[i]? i: 0
+        //i = items[i]? i: 0
 
         let disactiveAll = element => element.classList.remove('active')
         let active = element => element.classList.add('active')
 
-        items.forEach((disactiveAll))
+        //items.forEach((disactiveAll))
         imageContainer.style.right = `${i}00%`
 
-        active(items[i])
+        //active(items[i])
     }
 }
 

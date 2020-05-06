@@ -14,9 +14,9 @@ class DesignController {
     }
 
 
-    static showEvent(event_id) {
+    static async showEvent(event_id) {
         const eventView = new EventView(event_id)
-        eventView.render()
+        await eventView.render()
         this.showOverlay()
     }
 

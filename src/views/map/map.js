@@ -32,7 +32,7 @@ class Map {
         this.config = config
 
         //Quitar
-        DesignController.showCalendar()
+        //DesignController.showCalendar()
     }
 
     async render(htmlName) {

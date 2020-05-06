@@ -1,4 +1,5 @@
 import footer from './views/footer/footer'
+import './styles.css'
 
 function initRender(){
     const initElements = {

@@ -1,19 +1,5 @@
 const path = require('path')
-const fs = require('file-system')
 
-const getCssFiles = function (currentDirPath) {
-    var files = []
-    fs.readdirSync(currentDirPath).forEach(function (name) {
-        var file_path = path.join(currentDirPath, name);
-        var stat = fs.statSync(file_path);
-        if (stat.isFile() && path.extname(file_path) === '.css') {
-            files.push(file_path);
-        } else if (stat.isDirectory()) {
-            files = [...files, ...getCssFiles(file_path)]
-        }
-    });
-    return files
-}
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const htmlWebpack = new HtmlWebpackPlugin(
@@ -31,44 +17,22 @@ const copyWebpack = new CopyWebpackPlugin([
         to: './html/',
         flatten: true,
     },
-    {
-         from : './node_modules/leaflet/dist/*.css',
-         to: './assets/leaflet',
-         flatten: true,
-    },
-    {
-         from : './node_modules/leaflet.fullscreen/*.css',
-         to: './assets/leaflet',
-         flatten: true,
-    },
-    {
-         from : './node_modules/leaflet.fullscreen/*.png',
-         to: './assets/leaflet',
-         flatten: true,
-    },
 ])
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const extractText = new ExtractTextPlugin(
-    "styles.css"
-);
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const miniCssExtract = new MiniCssExtractPlugin({
+    filename: 'assets/[name].css'
+})
 
 module.exports = {
-    entry: {
-        'styles.css': 
-            getCssFiles('./src').map((file_path) => 
-            path.resolve(__dirname, file_path))
-        ,
-        'main.js': [
-            path.resolve(__dirname, 'src/index.js')
-        ]
-    },
+    entry: './src/index.js'
+    ,
     output: {
-        filename: '[name]',
         path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js',
     },
     resolve: {
-        extensions: ['.js', '.css']
+        extensions: ['.js']
     },
     module: {
         rules: [
@@ -81,16 +45,34 @@ module.exports = {
             },
             {
                 test: /\.css?$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            url: true
+                        }
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            url: true
+                        }
+                    }
+                ]
+            },
+            { 
+                test: /\.(png|jpg)$/, 
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'assets/images',
+                    publicPath: 'images',
+                },
             }
         ]
     },
     plugins: [
         htmlWebpack,
         copyWebpack,
-        extractText
+        miniCssExtract
     ]
 }

@@ -1,6 +1,8 @@
 import TemplatesManager from "../../../utils/TemplatesManager";
 import Map from "../../map/map"
 
+
+import './tab2.css'
 class Tab2 {
 
     constructor(){

@@ -2,6 +2,8 @@ import EventsService from '../../services/EventsService'
 import TemplatesManager from '../../utils/TemplatesManager'
 import DesignController from '../../utils/DesignController'
 
+
+import './event.css'
 class EventView {
 
     constructor(event_id) {

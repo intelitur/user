@@ -5,6 +5,12 @@ import EventsService from '../../services/EventsService'
 import GeoJSONUtils from '../../utils/GeoJSONUtils'
 import DesignController from '../../utils/DesignController'
 
+
+import 'leaflet/dist/leaflet.css'
+import 'leaflet.fullscreen/Control.FullScreen.css'
+import './map.css'
+
+
 class Map {
     constructor(config = {
         tileConfig: {
@@ -24,6 +30,9 @@ class Map {
         }
     }) {
         this.config = config
+
+        //Quitar
+        DesignController.showCalendar()
     }
 
     async render(htmlName) {

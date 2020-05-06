@@ -1,5 +1,8 @@
 import TemplatesManager from "../../utils/TemplatesManager";
 
+
+import './carousel.css'
+
 class Carousel {
 
     constructor(images, animationOptions = {autoSlide: {enabled: true, ms: 6000}}){

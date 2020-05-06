@@ -23,6 +23,7 @@ body {
     margin-right: 0;
     width: 100%;
     background-color: #dbdbdb;
+    position: relative;
 }
 
 render {

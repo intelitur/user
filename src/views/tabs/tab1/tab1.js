@@ -2,6 +2,8 @@ import TemplatesManager from "../../../utils/TemplatesManager";
 import Carousel from "../../carousel/carousel";
 import DesignController from "../../../utils/DesignController";
 
+
+import './tab1.css'
 class Tab1 {
 
     constructor(){

@@ -1,1 +1,1 @@
-export const API_URL = "https://34.66.145.62:3000"
+export const API_URL = "https://intelitur.styes.net"

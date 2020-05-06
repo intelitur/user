@@ -26,6 +26,11 @@ class Tab1 {
         TemplatesManager.renderElement('tab1_content', view)
 
         await this.carousel.render('tab1_carousel')
+        this.configCalendarButton()
+    }
+
+    configCalendarButton(){
+        this.el.querySelector('.tab1__calendar--button').addEventListener('click', DesignController.showCalendar)
     }
 
     show() { this.el.classList.add('active') }

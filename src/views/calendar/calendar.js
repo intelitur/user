@@ -4,6 +4,7 @@ import listPlugin from '@fullcalendar/list'
 
 import TemplatesManager from '../../utils/TemplatesManager'
 import DesignController from '../../utils/DesignController'
+import EventsService from '../../services/EventsService'
 
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
@@ -36,7 +37,7 @@ class CalendarView {
                     month: 'Mes',
                     listWeek: 'Semana'
                 },
-                eventClick: this.eventClick(),
+                eventClick: this.eventClick,
                 eventMouseEnter: function (info) {
                     if (!DesignController.mobile) {
                         let props = info.event.extendedProps;
@@ -44,7 +45,7 @@ class CalendarView {
                         window.eventPopup.style.right = ''
                         window.eventPopup.style.left = String(info.jsEvent.clientX) + "px"
                         window.eventPopup.style.top = String(info.jsEvent.clientY) + "px"
-                        window.eventPopup.innerHTML =
+                        window.eventPopup.innerHTML = ''
                            
                         window.eventPopup.style.display = 'block';
                         setTimeout((() => { window.eventPopup.style.opacity = '1' }), 20);
@@ -78,6 +79,11 @@ class CalendarView {
         this.calendar.updateSize()
 
         console.log(this)
+    }
+
+
+    async renderEvents(){
+        let events = EventsService.getEvents()
     }
 
 

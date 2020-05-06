@@ -1,4 +1,4 @@
-:root{
+:root {
     --is_mobile_at: 700px
 }
 
@@ -8,10 +8,7 @@ html, body {
     margin: 0;
 }
 
-
-
-
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 700px) {
     html, body {
         overflow: hidden;
     }
@@ -45,3 +42,15 @@ render {
     left: 0;
 }
 
+.main-loading {
+    position: absolute;
+    top: 0;
+    height: 5px;
+    width: 100%;
+    z-index: 10000;
+    display: none;
+}
+
+.main-loading.visible {
+    display: block;
+}

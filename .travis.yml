@@ -18,4 +18,4 @@ deploy:
   target_branch: gh-pages
   commit_message: "Deplay Release"
   on:
-    branch: master
+    branch: developer

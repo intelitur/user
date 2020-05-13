@@ -15,18 +15,31 @@ class DesignController {
 
 
     static async showEvent(event_id) {
+        DesignController.showLoadingBar()
         const eventView = new EventView(event_id)
         await eventView.render()
-        this.showOverlay()
+        DesignController.hideLoadingBar()
+        DesignController.showOverlay()
+
     }
 
-    static showCalendar(){
+    static async showCalendar(){
+        DesignController.showLoadingBar()
         if(!DesignController.calendar){
             DesignController.calendar = new CalendarView()
         }
         let calendar = DesignController.calendar
-        calendar.render()
-        this.showOverlay()
+        await calendar.render()
+        DesignController.hideLoadingBar()
+        DesignController.showOverlay()
+    }
+
+    static showLoadingBar(){
+        document.querySelector('.main-loading').classList.add('visible')
+    }
+
+    static hideLoadingBar(){
+        document.querySelector('.main-loading').classList.remove('visible')
     }
 }
 

@@ -26,6 +26,7 @@ class Tab1 {
         TemplatesManager.renderElement('tab1_content', view)
 
         await this.carousel.render('tab1_carousel')
+        this.configCalendarButton()
         if(DesignController.mobile){
             this.hiddenDiv();
         }
@@ -39,6 +40,11 @@ class Tab1 {
         padre.children[1].addEventListener('mouseleave', function(){
             padre.children[0].classList.remove('hidden');
         });
+        
+    }
+
+    configCalendarButton(){
+        this.el.querySelector('.tab1__calendar--button').addEventListener('click', DesignController.showCalendar)
     }
 
     show() { this.el.classList.add('active') }

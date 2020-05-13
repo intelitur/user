@@ -1,3 +1,4 @@
+
 <div>
     <div class="tab1__carousel--container">
         <render render=tab1_carousel></render>
@@ -6,12 +7,14 @@
         <article class="tab1__calendar--container">
 
             <div class="tab1__calendar__events--container">
-                <div class="tab1__calendar__events--item"></div>
-                <div class="tab1__calendar__events--item"></div>
+                <div class="tab1__calendar__events--item1">
+                </div>
+                <div class="tab1__calendar__events--item2" id="item2"></div>
             </div>
 
             <div class="tab1__calendar__concurso--container">
                 <div class="tab1__calendar__concurso--item">Concurso 1</div>
+                <i class="material-icons tab1__calendar__concurso--move">expand_more</i>
                 <button class="tab1__calendar__concurso--button">Ver más</button>
             </div>
 
@@ -19,6 +22,10 @@
             <button class="tab1__calendar--button">
                 <i class="fas fa-calendar-alt tab1__calendar--icon"></i>
             </button>
+            <div class="buscador">
+                <i class="material-icons">search</i>
+                <input class="buscador-input" type="search" id="search" placeholder="Search..." />
+            </div>
 
         </article>
     </section>

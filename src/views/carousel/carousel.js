@@ -2,11 +2,12 @@ import TemplatesManager from "../../utils/TemplatesManager";
 
 
 import './carousel.css'
-
+var numImage =0;
 class Carousel {
 
     constructor(images, animationOptions = {autoSlide: {enabled: true, ms: 6000}}){
         this.images = images
+        
         this.animationOptions = animationOptions
     }
 
@@ -18,6 +19,7 @@ class Carousel {
         this.showImage(0)
         if(this.animationOptions.autoSlide.enabled)
             setInterval(this.showImage.bind(this), this.animationOptions.autoSlide.ms)
+        this.nextImage();
     }
 /** 
     addEventListeners(){
@@ -28,11 +30,24 @@ class Carousel {
             }).bind(this))
         })
     }
-*/
+*/  
+    nextImage(){
+        const boton = this.el.querySelector("#changeImage");
+        boton.addEventListener('click', (() => {
+            if (numImage >= this.images.length-1){
+                numImage=0;
+                this.showImage(numImage)
+            }else{
+                numImage++;
+                this.showImage(numImage)
+            }
+        }).bind(this))
+
+    }
+    
     showImage(i){
         //const items = this.el.querySelectorAll(".carousel__items-container")[0].childNodes
         const imageContainer = this.el.querySelectorAll(".carousel__images-container")[0]
-
         /*
         if(!i){
             items.forEach((el, index) => {

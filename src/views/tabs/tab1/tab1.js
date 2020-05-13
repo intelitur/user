@@ -26,6 +26,19 @@ class Tab1 {
         TemplatesManager.renderElement('tab1_content', view)
 
         await this.carousel.render('tab1_carousel')
+        if(DesignController.mobile){
+            this.hiddenDiv();
+        }
+    }
+
+    hiddenDiv(){
+        const padre = this.el.querySelector('.tab1__calendar__events--container');
+        padre.children[1].addEventListener('mouseenter', function(){
+            padre.children[0].classList.add('hidden');
+        });
+        padre.children[1].addEventListener('mouseleave', function(){
+            padre.children[0].classList.remove('hidden');
+        });
     }
 
     show() { this.el.classList.add('active') }

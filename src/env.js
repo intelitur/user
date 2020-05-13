@@ -1,1 +1,1 @@
-export const API_URL = "https://intelitur.styes.net"
+export const API_URL = "http://localhost:3000"

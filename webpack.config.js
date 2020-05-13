@@ -17,6 +17,11 @@ const copyWebpack = new CopyWebpackPlugin([
         to: './html/',
         flatten: true,
     },
+    {
+        from: './src/services/info/*.json',
+        to: './info/',
+        flatten: true,
+    },
 ])
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')

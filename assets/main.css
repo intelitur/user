@@ -1,13 +1,7 @@
 .carousel{
     width: 100%;
     position: relative;
-    
-}
-
-@media screen and (max-width: 900px){
-    .carousel{
-        height: 100%;
-    }
+    height: 100%;
 }
 
 .carousel__images-container{
@@ -23,9 +17,11 @@
 }
 
 .carousel__images-container__img{
-    max-width: 100%;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
     min-width: 100%;
-    height: 200px;
+    min-height: 100%;
 }
 
 .carousel__items-container{
@@ -34,25 +30,52 @@
     bottom: 5%;
     font-size: 35px;
 }
+
+@media only screen and (min-width: 700px) {
+    .carousel__item-weather{
+        display: none
+    }
+
+    .carousel__items--button{
+        display: none;
+    }
+}
 .carousel__item-weather{
- 
     position: absolute;
     bottom: 0;
-    background-color: tomato;
-    opacity: 0.8;
-    width: 75px;
+    background : rgba(255,99,71,0.6);
+    width: 80px;
     color: white;
     height: 60px;
-    margin-left: 280px;
     border-radius: 20%;
+    justify-content: center;
+    font-size: 35px;
     text-align: center;
+    
+    margin-left: 10px;
 
 }
-.carousel__item-weather-text{
-    text-align: center;
-    margin:auto;
-    margin-right: 0;
-    margin-right: 0;
+.carousel__item-weather i{
+    font-size: 22px;
+    margin-top: 16px;
+    left:50px;
+    position: absolute;
+}
+.carousel__item-weather a{
+    position: absolute;
+    font-size: 33px;
+    margin-top: 10px;
+    left: 0;
+}
+.carousel__items-icono{
+    font-size: 50px;
+}
+.carousel__items--button{
+    background : rgba(255,99,71,0.7);
+    border: none;
+    border-radius: 40%;
+    margin-left: 308px;
+    color:white;
 }
 
 /*
@@ -1356,14 +1379,185 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     background-color: white;
 }
 
+/* Desktop css */
+
+@media only screen and (min-width: 700px) {
+    .tab1 {
+        height: calc(100vh - 48px);
+        overflow-y: hidden;
+    }
+
+    .tab1__content {
+        height: calc(100vh - 48px);
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .overflow {
+        height: calc(450px);
+    }
+
+    .tab1__mosaic--container {
+        top: 0px;
+        position: sticky;
+        height: calc(100vh - 48px);
+        width: 100%;
+        display: flex;
+        
+    }
+
+    .tab1__content--left {
+        width: 38%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .tab1__content--right {
+        width: 62%;
+        height: calc(100vh - 48px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tab1--button {
+        z-index: 100;
+        position: absolute;
+        top: calc(calc(50vh - 24px) - calc(15vh / 2));
+        left: calc(38% - calc(15vh / 2));
+        background-color: tomato;
+        width: 15vh;
+        height: 15vh;
+        border-radius: 50%;
+        font-size: 6vh;
+        color: white;
+        display: flex;
+        border: none;
+        padding: 0;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        cursor: pointer;
+    }
+    [theme=color] .tab1--button {
+        background-color: white;
+        color: var(--tab1_color);
+    }
+    [theme=light] .tab1--button {
+        color: white;
+        background-color: var(--tab1_color);
+    }
+    .tab1--button:focus {
+        outline: none;
+    }
+    .tab1--icon {
+        margin: auto;
+    }
+
+    
+    .tab1__carousel--right {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .tab1__calendar--right {
+        position: absolute;
+        top: 5%;
+        bottom: 5%;
+        height: calc(90vh - 48px);
+        left: 2.5%;
+        right: 2.5%;
+        width: 95%;
+        margin: -10px -5px;
+        color: black
+    }
+
+    .tab1__contests--right{
+        height: 100%;
+        width: 100%;
+    }
+
+    .mosaic__item--right {
+        transform: rotate(180deg);
+        transform-origin: -50% 50%;
+        transition: transform 0.3s;
+        overflow: hidden;
+    }
+
+    .mosaic__item--right.active {
+        transform: rotate(0deg);
+        animation: mosaicAnimationRight 0.5s;
+        z-index: 10;
+    }
+
+
+    @keyframes mosaicAnimationRight {
+        from {
+            transform: rotate(180deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .tab1__carousel--left {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        color: black;
+        background-color: aqua !important;
+    }
+
+    .tab1__calendar--left {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        color: black;
+        background-color: magenta !important;
+    }
+
+    .tab1__contests--left{
+        height: 100%;
+        width: 100%;
+        color: black;
+        background-color: hotpink !important;
+    }
+
+    .mosaic__item--left {
+        transform: rotate(-180deg);
+        transform-origin: -50% 50%;
+        transition: transform 0.5s;
+        overflow: hidden;
+        z-index: 5;
+        background-color: white;
+    }
+
+    .mosaic__item--left.active {
+        transform: rotate(0deg);
+        animation: mosaicAnimationLeft 0.5s;
+        z-index: 10;
+    }
+
+
+    @keyframes mosaicAnimationLeft {
+        from {
+            transform: rotate(-180deg);
+        }
+        to {
+            transform: rotate(-360deg);
+        }
+    }
+    
+}
+
 /* Mobile css */
 
 @media only screen and (max-width: 700px) {
-    .tab1>div{
+    .tab1>div {
         height: calc(100% - 48px);
         overflow: hidden;
     }
-    .tab1__carousel--container{
+    .tab1__carousel--container {
         height: 37%;
     }
     .tab1--content {
@@ -1374,9 +1568,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         display: flex;
         justify-content: space-between;
     }
-
     .tab1__calendar--button {
-        
         position: absolute;
         margin-left: 280px;
         margin-bottom: 20px;
@@ -1394,34 +1586,27 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         transition: 0.35s;
         cursor: pointer;
     }
-
     [theme=color] .tab1__calendar--button {
         background-color: white;
         color: var(--tab1_color);
     }
-
     [theme=light] .tab1__calendar--button {
         color: white;
         background-color: var(--tab1_color);
     }
-    
     .tab1__calendar--button:focus {
         outline: none;
     }
-
     .tab1__calendar--icon {
         margin: auto;
-
     }
-
-    .tab1__calendar__events--container{
+    .tab1__calendar__events--container {
         float: right;
         margin: auto 10px;
         height: 100%;
         width: 50%;
     }
-    
-    .tab1__calendar__concurso--container{
+    .tab1__calendar__concurso--container {
         float: left;
         height: 100%;
         width: 50%;
@@ -1431,16 +1616,43 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         border-right-width: 0px;
         border-top: 0px;
         position: relative;
-        
     }
-    .tab1__calendar__events--item{
+    .tab1__calendar__concurso--move {
+        color: black;
+        font-size: 25px;
+    }
+    .tab1__calendar__events--item1 {
         margin-top: 30px;
-        height: 50%;
+        height: 45%;
         width: 100%;
         background-color: black;
         opacity: 0.4;
+        transition: 0.2s;
     }
-    .tab1__calendar__concurso--item{
+    .tab1__calendar__events--item1:hover {
+        margin-top: 60px;
+        height: 80%;
+    }
+    .tab1__calendar__events--item1:hover~.tab1__calendar__events--item2 {
+        visibility: hidden;
+    }
+    .tab1__calendar__events--item2 {
+        margin-top: 30px;
+        height: 45%;
+        width: 100%;
+        background-color: black;
+        opacity: 0.4;
+        transition: 0.2s;
+    }
+    .tab1__calendar__events--item2:hover {
+        margin-top: 50px;
+        height: 80%;
+    }
+    .tab1__calendar__events--item1.hidden {
+        height: 0;
+        visibility: hidden;
+    }
+    .tab1__calendar__concurso--item {
         margin-top: 40px;
         height: 60%;
         margin-left: 12px;
@@ -1449,7 +1661,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         background-color: black;
         opacity: 0.4;
     }
-    .tab1__calendar__concurso--button{
+    .tab1__calendar__concurso--button {
         right: 0px;
         position: absolute;
         width: 100%;
@@ -1457,6 +1669,35 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         bottom: 5px;
         background: none;
         border-bottom: none;
+    }
+    .tab1__calendar__events--button {
+        background: none;
+        font-size: 27px;
+    }
+    .buscador {
+        position: absolute;
+        bottom: 30px;
+        left: 20px;
+        color: white;
+        background: rgba(255, 99, 71, 0.9);
+        width: 60%;
+        height: 4%;
+    }
+    .buscador i {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        font-size: 20px;
+    }
+    .buscador-input {
+        color: white;
+        border: none;
+        background: none;
+        width: 80%;
+        height: 100%;
+    }
+    .buscador-input::placeholder {
+        color: white;
     }
 }
 /* required styles */
@@ -2131,6 +2372,160 @@ svg.leaflet-image-layer.leaflet-interactive path {
     color: var(--tab2_color);
 }
 
+/* Desktop css */
+
+.map__container{
+    height: calc(100vh - 48px);
+    width: 100%;
+}
+
+.map {
+    height: 100%;
+}
+
+/* Desktop css */
+
+@media only screen and (min-width: 700px) {
+    .tab2 {
+        height: calc(100vh - 48px);
+        overflow-y: hidden;
+    }
+
+    .tab2__content {
+        height: calc(100vh - 48px);
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .overflow {
+        height: calc(450px);
+    }
+
+    .tab2__mosaic--container {
+        top: 0px;
+        position: sticky;
+        height: calc(100vh - 48px);
+        width: 100%;
+        display: flex;
+        
+    }
+
+    .tab2__content--left {
+        width: 38%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .tab2__content--right {
+        width: 62%;
+        height: calc(100vh - 48px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tab2--button {
+        z-index: 100;
+        position: absolute;
+        top: calc(calc(50vh - 24px) - calc(15vh / 2));
+        left: calc(38% - calc(15vh / 2));
+        background-color: var(--tab2_color);
+        width: 15vh;
+        height: 15vh;
+        border-radius: 50%;
+        font-size: 6vh;
+        color: white;
+        display: flex;
+        border: none;
+        padding: 0;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        cursor: pointer;
+    }
+    [theme=color] .tab2--button {
+        background-color: white;
+        color: var(--tab2_color);
+    }
+    [theme=light] .tab2--button {
+        color: white;
+        background-color: var(--tab2_color);
+    }
+    .tab2--button:focus {
+        outline: none;
+    }
+    .tab2--icon {
+        margin: auto;
+    }
+
+    
+    .tab2__map--right {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .mosaic__item--right {
+        transform: rotate(180deg);
+        transform-origin: -50% 50%;
+        transition: transform 0.3s;
+        overflow: hidden;
+    }
+
+    .mosaic__item--right.active {
+        transform: rotate(0deg);
+        animation: mosaicAnimationRight 0.5s;
+        z-index: 10;
+    }
+
+
+    @keyframes mosaicAnimationRight {
+        from {
+            transform: rotate(180deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .tab2__map--left {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        color: black;
+        background-color: aqua !important;
+    }
+
+    .mosaic__item--left {
+        transform: rotate(-180deg);
+        transform-origin: -50% 50%;
+        transition: transform 0.5s;
+        overflow: hidden;
+        z-index: 5;
+        background-color: white;
+    }
+
+    .mosaic__item--left.active {
+        transform: rotate(0deg);
+        animation: mosaicAnimationLeft 0.5s;
+        z-index: 10;
+    }
+
+    .tab2 .overflow {
+        height: 150px;
+    };
+
+
+    @keyframes mosaicAnimationLeft {
+        from {
+            transform: rotate(-180deg);
+        }
+        to {
+            transform: rotate(-360deg);
+        }
+    }
+
+}
+
 /* Mobile css */
 
 @media only screen and (max-width: 700px) {
@@ -2150,11 +2545,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 .tabs{
     display: grid;
-    overflow-x: hidden;
+    overflow: hidden;
     position: relative;
-    width: calc(100% - 280px);
-    height: 100%;
-    margin-left: 280px;
+    width: calc(100% - 0%);
+    height: calc(100% - 48px);
+    margin-left: 0%;
 }
 
 .tabs__tab--content {
@@ -2165,6 +2560,20 @@ svg.leaflet-image-layer.leaflet-interactive path {
     width: 100%;
     left: 100%;
 }
+
+@media only screen and (min-width: 700px) {
+    .tabs__tab--content{
+        display: none;
+    }
+
+    .tabs__tab--content.active{
+        z-index: 10;
+        display: block;
+    }
+
+}
+
+
 
 [theme=light] .tabs__tab--content {
     color: white;
@@ -2198,11 +2607,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .footer {
     position: absolute;
     bottom: 0;
-    z-index: 1000;
-    width: calc(100% - 280px);
+    z-index: 10000;
+    width: calc(100%);
     font-family: "Lato", sans-serif;
     height: 48px;
-    margin-left: 280px;
+    margin-left: 0;
 }
 
 @media only screen and (max-width: 700px) {
@@ -2320,6 +2729,7 @@ html, body {
     height: 100%;
     width: 100%;
     margin: 0;
+    overflow-x: hidden;
 }
 
 @media only screen and (max-width: 700px) {
@@ -2348,7 +2758,7 @@ render {
     left: 100%;
     transition: left 0.5s;
     background-color: white;
-    z-index: 2000;
+    z-index: 20000;
     overflow: hidden;
 }
 

@@ -1,17 +1,34 @@
-<div style="width: 37%; height: calc(25vh - 88px); display: flex; justify-content: center; box-shadow: 0px 1px 10px 4px rgba(0, 0, 0, 0.2); border-radius: 5px;
-        position: absolute; right: 55%; top: 77.5vh" id="temp_div">
-        <label style="font-size: 35px; margin: auto 0" id="temp">
-            <div class="loader-min">Loading...</div>
-        </label>
-        <div style="margin: auto 0;">
-            <img id="temp_icon" style="display: none; height: 100%;">
-            <!--<i style="font-size: 35px"class="fas fa-cloud-sun-rain"></i>-->
-            <!--<i style="font-size: 35px" class="fas fa-cloud-showers-heavy"></i>-->
-            <!--<i style="font-size: 35px"class="fas fa-sun"></i>-->
-            <!--<i style="font-size: 35px"class="fas fa-cloud"></i>-->
+<div class="tab1__content">
+    <div class="tab1__mosaic--container">
+        <button class="tab1--button">
+            <i class="far fa-images tab1--icon"></i>
+        </button>
+        <div class="tab1__content--left">
+            <div class="tab1__carousel--left mosaic__item--left active">
+                <div>hola</div>
+            </div>
+            <div class="tab1__calendar--left mosaic__item--left ">
+                <div>hola</div>
+            </div>
+            <div class="tab1__contests--left mosaic__item--left ">
+                <div>Hola</div>
+            </div>
+        </div>
+        <div class="tab1__content--right">
+            <div class="mosaic__item--right tab1__carousel--right active">
+                <render render=tab1_carousel></render>
+            </div>
+            <div class="mosaic__item--right tab1__calendar--right">
+                <render render=tab1_calendar></render>
+            </div>
+            <div class="mosaic__item--right tab1__contests--right">
+                <div>Hola</div>
+            </div>
         </div>
     </div>
-    <div style="position: absolute; top: calc(90% - 34.4px); right: 0; font-size: 60px; font-variant: small-caps; width: 47%; 
+    <div class="overflow"></div>
+</div>
+<!-- <div style="position: absolute; top: calc(90% - 34.4px); right: 0; font-size: 60px; font-variant: small-caps; width: 47%; 
     text-align: center; transition: 0.05s;" id="tab_1_title">
         La Fortuna
     </div>
@@ -52,4 +69,4 @@
                 <i class="fas fa-arrow-right" style="margin: auto; font-size: 15px;"></i>
             </button>
         </div>
-    </div>
+    </div> -->

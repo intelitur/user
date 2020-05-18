@@ -1,5 +1,6 @@
 import TemplatesManager from "../../utils/TemplatesManager";
 import tabs from "../tabs/tabs";
+import DesignController from "../../utils/DesignController";
 
 
 import './footer.css'
@@ -7,6 +8,7 @@ import './footer.css'
 class Footer {
 
     constructor(){
+        this.initTabs.bind(this)
     }
 
     async render(){
@@ -22,7 +24,8 @@ class Footer {
         ]
         await tabs.render()
         this.addEventListeners()
-        this.showTab(1)
+        this.showTab(2)
+        DesignController.showTab = this.showTab.bind(this)
 
     }
 

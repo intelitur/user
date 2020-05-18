@@ -24,7 +24,7 @@ class CalendarView {
                 ],
                 defaultView: DesignController.mobile? 'listWeek' : 'dayGridMonth',
                 header: {
-                    left: 'back',
+                    left: DesignController.mobile? 'back': '',
                     center: '',
                     right: 'title'
                 },
@@ -38,24 +38,24 @@ class CalendarView {
                     listWeek: 'Semana'
                 },
                 eventClick: this.eventClick,
-                eventMouseEnter: function (info) {
-                    if (!DesignController.mobile) {
-                        let props = info.event.extendedProps;
-                        console.log(info.jsEvent)
-                        window.eventPopup.style.right = ''
-                        window.eventPopup.style.left = String(info.jsEvent.clientX) + "px"
-                        window.eventPopup.style.top = String(info.jsEvent.clientY) + "px"
-                        window.eventPopup.innerHTML = ''
+                // eventMouseEnter: function (info) {
+                //     if (!DesignController.mobile) {
+                //         let props = info.event.extendedProps;
+                //         console.log(info.jsEvent)
+                //         window.eventPopup.style.right = ''
+                //         window.eventPopup.style.left = String(info.jsEvent.clientX) + "px"
+                //         window.eventPopup.style.top = String(info.jsEvent.clientY) + "px"
+                //         window.eventPopup.innerHTML = ''
                            
-                        window.eventPopup.style.display = 'block';
-                        setTimeout((() => { window.eventPopup.style.opacity = '1' }), 20);
-                        tab1Control.showPopupImage(props.event_id)
-                    }
-                },
-                eventMouseLeave: function (info) {
-                    if (!(window.eventPopup.parentElement.querySelector(':hover') === window.eventPopup) && !DesignController.mobile)
-                        tab1Control.closeEventPopup();
-                },
+                //         window.eventPopup.style.display = 'block';
+                //         setTimeout((() => { window.eventPopup.style.opacity = '1' }), 20);
+                //         tab1Control.showPopupImage(props.event_id)
+                //     }
+                // },
+                // eventMouseLeave: function (info) {
+                //     if (!(window.eventPopup.parentElement.querySelector(':hover') === window.eventPopup) && !DesignController.mobile)
+                //         tab1Control.closeEventPopup();
+                // },
                 customButtons: {
                     back: {
                         text: 'Atras',
@@ -68,26 +68,43 @@ class CalendarView {
     }
 
 
-    async render() {
+    async render(name) {
         const template = await TemplatesManager.getTemplate('calendar')
 
-        this.el = TemplatesManager.renderElement('overlay', template)
+        this.el = TemplatesManager.renderElement(name, template)
 
         this.calendar = new Calendar(this.el.children[0], this.config)
 
         this.calendar.render()
         this.calendar.updateSize()
+        this.calendar.renderComponent()
+        console.log(this.calendar.tryRerender())
+        
 
-        console.log(this)
+        await this.renderEvents()
     }
 
 
     async renderEvents(){
-        let events = EventsService.getEvents()
+        let events = await EventsService.getEvents()
+
+        events.forEach((event) => {
+            let calendarEvent = {
+                title: event.name,
+                start: event.date_range.initial_date.split("T")[0] + "T" + (event.initial_time ? event.initial_time : "00:00:00"),
+                end: event.date_range.final_date.split("T")[0] + "T" + (event.final_time ? event.final_time : "23:59:00"),
+                allDay: event.all_day,
+                backgroundColor: event.color,
+                borderColor: event.color,
+                extendedProps: event
+            }
+            this.calendar.addEvent(calendarEvent);
+        });
     }
 
 
     eventClick(eventInfo) {
+        DesignController.showEvent(eventInfo.event.extendedProps.event_id, DesignController.showCalendar)
         // if (DesignController.mobile)
         //     tab1Control.openEventPopup(eventInfo);
         // else

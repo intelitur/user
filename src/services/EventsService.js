@@ -5,8 +5,8 @@ const module = 'events'
 class EventsService {
 
     static async updateEvents(){
-        //let response = await fetch(`${API_URL}/${module}`)
-        let response = await fetch(`./info/events.json`)
+        let response = await fetch(`${API_URL}/${module}`)
+        //let response = await fetch(`./info/events.json`)
         response = await response.json()
         return response
     }

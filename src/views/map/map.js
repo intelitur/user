@@ -24,7 +24,7 @@ class Map {
             options: {
                 fullscreenControl: true,
                 fullscreenControlOptions: {
-                    position: 'topleft'
+                    position: DesignController.mobile? 'topleft': 'topright' 
                 }
             }
         }
@@ -57,7 +57,7 @@ class Map {
             }
         )
 
-        this.map.addControl(mapLayersControl.setPosition('bottomleft'))
+        this.map.addControl(mapLayersControl.setPosition(DesignController.mobile? 'bottomleft': 'bottomright'))
         this.map.mapLayersControl = mapLayersControl
         this.setupEventsTile()
     }

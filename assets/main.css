@@ -1505,7 +1505,6 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         height: 100%;
         width: 100%;
         color: black;
-        background-color: aqua !important;
     }
 
     .tab1__calendar--left {
@@ -1513,14 +1512,12 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         height: 100%;
         width: 100%;
         color: black;
-        background-color: magenta !important;
     }
 
     .tab1__contests--left{
         height: 100%;
         width: 100%;
         color: black;
-        background-color: hotpink !important;
     }
 
     .mosaic__item--left {

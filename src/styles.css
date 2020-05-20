@@ -42,6 +42,21 @@ render {
     left: 0;
 }
 
+.searchScreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 100%;
+    transition: left 0.5s;
+    background-color: white;
+    z-index: 2000;
+    overflow: hidden;
+}
+
+.searchScreen.visible {
+    left: 0;
+}
+
 .main-loading {
     position: absolute;
     top: 0;

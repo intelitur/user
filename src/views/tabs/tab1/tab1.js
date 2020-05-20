@@ -27,8 +27,10 @@ class Tab1 {
 
         await this.carousel.render('tab1_carousel')
         this.configCalendarButton()
+        this.showSearchScreen()
         if(DesignController.mobile){
             this.hiddenDiv();
+            this.itemConcurso();
         }
     }
 
@@ -43,6 +45,23 @@ class Tab1 {
         
     }
 
+    itemConcurso(){
+        const padre = this.el.querySelector('.tab1__calendar__concurso--container');
+        padre.children[3].addEventListener('mouseenter', function(){
+            padre.children[1].classList.add('visible');
+            padre.children[2].classList.add('visible');
+        })
+        padre.children[0].addEventListener('mouseenter', function(){
+            
+            padre.children[2].classList.remove('visible');
+            padre.children[1].classList.remove('visible');
+        })
+
+    }
+    async showSearchScreen(){
+        this.el.querySelector('.search-input').addEventListener('click', DesignController.showSearchScreen)
+
+    }
     configCalendarButton(){
         this.el.querySelector('.tab1__calendar--button').addEventListener('click', DesignController.showCalendar)
     }

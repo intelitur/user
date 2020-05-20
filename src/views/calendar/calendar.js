@@ -79,6 +79,8 @@ class CalendarView {
         this.calendar.updateSize()
         this.calendar.renderComponent()
         console.log(this.calendar.tryRerender())
+
+        
         
 
         await this.renderEvents()
@@ -109,6 +111,13 @@ class CalendarView {
         //     tab1Control.openEventPopup(eventInfo);
         // else
         //     tab1Control.showEvent(eventInfo.event.extendedProps.event_id)
+    }
+
+    updateSize(){
+        this.calendar.isHandlingWindowResize = true
+        this.calendar.updateSize()
+        this.calendar.publiclyTrigger('windowResize', [this.calendar.view])
+        this.calendar.isHandlingWindowResize = false
     }
 }
     

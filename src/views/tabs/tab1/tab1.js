@@ -40,7 +40,7 @@ class Tab1 {
     async renderCalendar() {
         this.calendar = new CalendarView()
         await this.calendar.render('tab1_calendar')
-
+        
     }
 
     setupSrollAnimation() {
@@ -85,6 +85,11 @@ class Tab1 {
                 item.classList.remove('active')
             }
         })
+
+        if(module === 1 && !this.calendar.updated){
+            this.calendar.updateSize()       
+            this.calendar.updated = true
+        }
         
         if (module === 3) {
             DesignController.showTab(2)
@@ -105,13 +110,8 @@ class Tab1 {
         if (DesignController.mobile)
             this.el.querySelector('.tab1__calendar--button').addEventListener('click', DesignController.showCalendar)
         else {
-            const carouselContainerRight = this.el.querySelector('.tab1__carousel--right')
-            const calendarContainerRight = this.el.querySelector('.tab1__calendar--right')
-            const contestsContainerRight = this.el.querySelector('.tab1__contests--right')
-
             const container = this.el.children[0]
             this.el.querySelector('.tab1--button').addEventListener('click', (function () {
-                const module = Math.floor(container.scrollTop / 150)
                 container.scrollTop += 151
             }).bind(this))
         }

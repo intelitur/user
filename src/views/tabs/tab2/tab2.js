@@ -24,13 +24,15 @@ class Tab2 {
 
         await this.renderMap()
         this.setupSrollAnimation()
-
     }
 
     async renderMap(){
         const map = new Map()
         await map.render('map')
         map.setMapView(10.471681129073158, -84.64514404535294, 15);
+
+        this.map = map
+        console.log(this.map)
     }
 
     setupSrollAnimation() {
@@ -44,8 +46,8 @@ class Tab2 {
             else if(module >= 150){
                 this.goTo(3)
             }
-
         }).bind(this))
+
     }
 
     goTo(i) {

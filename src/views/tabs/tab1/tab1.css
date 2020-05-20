@@ -7,14 +7,258 @@
     background-color: white;
 }
 
+/* Desktop css */
+
+@media only screen and (min-width: 700px) {
+    .tab1 {
+        height: calc(100vh - 48px);
+        overflow-y: hidden;
+    }
+
+    .tab1__content {
+        height: calc(100vh - 48px);
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .overflow {
+        height: calc(450px);
+    }
+
+    .tab1__mosaic--container {
+        top: 0px;
+        position: sticky;
+        height: calc(100vh - 48px);
+        width: 100%;
+        display: flex;
+        
+    }
+
+    .tab1__content--left {
+        width: 38%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .tab1__content--right {
+        width: 62%;
+        height: calc(100vh - 48px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tab1--button {
+        z-index: 100;
+        position: absolute;
+        top: calc(calc(50vh - 24px) - calc(15vh / 2));
+        left: calc(38% - calc(15vh / 2));
+        background-color: tomato;
+        width: 15vh;
+        height: 15vh;
+        border-radius: 50%;
+        font-size: 6vh;
+        color: white;
+        display: flex;
+        border: none;
+        padding: 0;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        cursor: pointer;
+    }
+    [theme=color] .tab1--button {
+        background-color: white;
+        color: var(--tab1_color);
+    }
+    [theme=light] .tab1--button {
+        color: white;
+        background-color: var(--tab1_color);
+    }
+    .tab1--button:focus {
+        outline: none;
+    }
+    .tab1--icon {
+        margin: auto;
+    }
+
+    
+    .tab1__carousel--right {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .tab1__calendar--right {
+        position: absolute;
+        top: 5%;
+        bottom: 5%;
+        height: calc(90vh - 48px);
+        left: 2.5%;
+        right: 2.5%;
+        width: 95%;
+        margin: -10px -5px;
+        color: black
+    }
+
+    .tab1__contests--right{
+        height: 100%;
+        width: 100%;
+    }
+
+    .mosaic__item--right {
+        transform: rotate(180deg);
+        transform-origin: -50% 50%;
+        transition: transform 0.3s;
+        overflow: hidden;
+    }
+
+    .mosaic__item--right.active {
+        transform: rotate(0deg);
+        animation: mosaicAnimationRight 0.5s;
+        z-index: 10;
+    }
+
+
+    @keyframes mosaicAnimationRight {
+        from {
+            transform: rotate(180deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .tab1__carousel--left {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        color: black;
+    }
+
+    .tab1__calendar--left {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        color: black;
+    }
+
+    .tab1__contests--left{
+        height: 100%;
+        width: 100%;
+        color: black;
+    }
+
+    .mosaic__item--left {
+        transform: rotate(-180deg);
+        transform-origin: -50% 50%;
+        transition: transform 0.5s;
+        overflow: hidden;
+        z-index: 5;
+        background-color: white;
+    }
+
+    .mosaic__item--left.active {
+        transform: rotate(0deg);
+        animation: mosaicAnimationLeft 0.5s;
+        z-index: 10;
+    }
+
+
+    @keyframes mosaicAnimationLeft {
+        from {
+            transform: rotate(-180deg);
+        }
+        to {
+            transform: rotate(-360deg);
+        }
+    }
+
+
+
+
+
+
+
+    .tab1__weather--container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(226, 226, 226);
+    }
+
+    .tab1__weather__temperature{
+        width: 80%;
+        height: 35%;
+        margin: auto;
+        margin-top: 10%;
+        background-color: white;
+        display: flex;
+        text-align: center;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        border-radius: 10px;
+    }
+
+    .tab1 ::-webkit-scrollbar-thumb {
+        background: var(--tab1_color);
+        border-radius: 5px;
+      }
+
+    .tab1__weather__temperature--span{
+        margin: auto;
+        font-size: calc(50px + 4vw);
+        color: tomato
+    }
+
+    .tab1__weather__temperature--icon{
+
+    }
+
+    .tab1__coming-events--container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(226, 226, 226);
+    }
+
+    .tab1__coming-events--item{
+        width: 82%;
+        height: 40%;
+        margin: auto;
+        background-color: white;
+        justify-content: center;
+        display: flex;
+        text-align: center;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.3s;
+    }
+
+    .tab1__coming-events--item:first-child{
+        margin-bottom: 3%;
+    }
+
+    .tab1__coming-events--item:last-child{
+        margin-top: 3%;
+    }
+
+    .tab1__coming-events--item:hover{
+        width: 85%;
+        height: 43%;
+        
+    }
+
+    
+}
+
 /* Mobile css */
 
 @media only screen and (max-width: 700px) {
-    .tab1>div{
+    .tab1>div {
         height: calc(100% - 48px);
         overflow: hidden;
     }
-    .tab1__carousel--container{
+    .tab1__carousel--container {
         height: 37%;
     }
     .tab1--content {
@@ -25,9 +269,7 @@
         display: flex;
         justify-content: space-between;
     }
-
     .tab1__calendar--button {
-        
         position: absolute;
         margin-left:calc(100vw - 80px);
         margin-bottom: 20px;
@@ -45,27 +287,21 @@
         transition: 0.35s;
         cursor: pointer;
     }
-
     [theme=color] .tab1__calendar--button {
         background-color: white;
         color: var(--tab1_color);
     }
-
     [theme=light] .tab1__calendar--button {
         color: white;
         background-color: var(--tab1_color);
     }
-    
     .tab1__calendar--button:focus {
         outline: none;
     }
-
     .tab1__calendar--icon {
         margin: auto;
-
     }
-
-    .tab1__calendar__events--container{
+    .tab1__calendar__events--container {
         float: right;
         margin: auto 10px;
         height: 100%;
@@ -82,7 +318,6 @@
         background-color: black;
         opacity: 0.4;
         transition: 0.2s;
-        
     }
     .tab1__calendar__events--item2{
         margin-top: 60px;
@@ -97,8 +332,7 @@
         margin-top: 60px;
         height: 80%;
     }
-    .tab1__calendar__events--item1:hover ~.tab1__calendar__events--item2{
-
+    .tab1__calendar__events--item1:hover~.tab1__calendar__events--item2 {
         visibility: hidden;
     }
     .tab1__calendar__events--item2 {
@@ -108,15 +342,13 @@
         background-color: black;
         opacity: 0.4;
         transition: 0.2s;
-        
     }
-    
-    .tab1__calendar__events--item2:hover{
-        margin-top:50px;
+    .tab1__calendar__events--item2:hover {
+        margin-top: 50px;
         height: 80%;
     }
-    .tab1__calendar__events--item1.hidden{
-        height:0;
+    .tab1__calendar__events--item1.hidden {
+        height: 0;
         visibility: hidden;
     }
     .tab1__calendar__concurso--container{
@@ -176,7 +408,7 @@
         visibility: visible;
         
     }
-    .tab1__calendar__concurso--button{
+    .tab1__calendar__concurso--button {
         right: 0px;
         width: 100%;
         height: 35px;
@@ -192,10 +424,9 @@
     .search{
         position: absolute;
         bottom: 30px;
-        left:20px;
-        color:white;
-        
-        background : rgba(255,99,71,0.9);
+        left: 20px;
+        color: white;
+        background: rgba(255, 99, 71, 0.9);
         width: 60%;
         height: 4%;
     }
@@ -208,7 +439,7 @@
     .search-input{
         color:white;
         border: none;
-        background : none;
+        background: none;
         width: 80%;
         height: 100%;
     }

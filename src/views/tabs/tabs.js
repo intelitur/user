@@ -5,6 +5,7 @@ import tab3 from "./tab3/tab3";
 import tab4 from "./tab4/tab4";
 
 import './tabs.css'
+import DesignController from "../../utils/DesignController";
 class Tabs {
 
     constructor(){
@@ -30,6 +31,13 @@ class Tabs {
     showTab(i = 1){
         this.tabs.forEach(tab => tab.hide())
         this.tabs[i - 1].show()
+        if(i == 2){
+            this.tabs[i - 1].map.map._onResize()
+            if(!DesignController.mobile){
+                this.tabs[1].el.children[0].scrollTop = 15
+            }
+        }
+        
     }
 
 }

@@ -7,6 +7,206 @@
     color: var(--tab2_color);
 }
 
+/* Desktop css */
+
+.map__container{
+    height: calc(100vh - 48px);
+    width: 100%;
+}
+
+.map {
+    height: 100%;
+}
+
+/* Desktop css */
+
+@media only screen and (min-width: 700px) {
+    .tab2 {
+        height: calc(100vh - 48px);
+        overflow-y: hidden;
+    }
+
+    .tab2__content {
+        height: calc(100vh - 48px);
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .overflow {
+        height: calc(450px);
+    }
+
+    .tab2__mosaic--container {
+        top: 0px;
+        position: sticky;
+        height: calc(100vh - 48px);
+        width: 100%;
+        display: flex;
+        
+    }
+
+    .tab2__content--left {
+        width: 38%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .tab2__content--right {
+        width: 62%;
+        height: calc(100vh - 48px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tab2--button {
+        z-index: 100;
+        position: absolute;
+        top: calc(calc(50vh - 24px) - calc(15vh / 2));
+        left: calc(38% - calc(15vh / 2));
+        background-color: var(--tab2_color);
+        width: 15vh;
+        height: 15vh;
+        border-radius: 50%;
+        font-size: 6vh;
+        color: white;
+        display: flex;
+        border: none;
+        padding: 0;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        cursor: pointer;
+    }
+    [theme=color] .tab2--button {
+        background-color: white;
+        color: var(--tab2_color);
+    }
+    [theme=light] .tab2--button {
+        color: white;
+        background-color: var(--tab2_color);
+    }
+    .tab2--button:focus {
+        outline: none;
+    }
+    .tab2--icon {
+        margin: auto;
+    }
+
+    
+    .tab2__map--right {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .mosaic__item--right {
+        transform: rotate(180deg);
+        transform-origin: -50% 50%;
+        transition: transform 0.3s;
+        overflow: hidden;
+    }
+
+    .mosaic__item--right.active {
+        transform: rotate(0deg);
+        animation: mosaicAnimationRight 0.5s;
+        z-index: 10;
+    }
+
+
+    @keyframes mosaicAnimationRight {
+        from {
+            transform: rotate(180deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .tab2__map--left {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        color: black;
+        background-color: aqua !important;
+    }
+
+    .mosaic__item--left {
+        transform: rotate(-180deg);
+        transform-origin: -50% 50%;
+        transition: transform 0.5s;
+        overflow: hidden;
+        z-index: 5;
+        background-color: white;
+    }
+
+    .mosaic__item--left.active {
+        transform: rotate(0deg);
+        animation: mosaicAnimationLeft 0.5s;
+        z-index: 10;
+    }
+
+    .tab2 .overflow {
+        height: 150px;
+    };
+
+
+    @keyframes mosaicAnimationLeft {
+        from {
+            transform: rotate(-180deg);
+        }
+        to {
+            transform: rotate(-360deg);
+        }
+    }
+
+    .tab2__left--container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color:white
+    }
+
+    .tab2__left--title{
+        margin: 7.5% auto;
+        font-size: calc(20px + 1.5vw);
+        color: var(--tab2_color)
+    }
+
+    .tab2__left--item{
+        width: 70%;
+        height: 21%;
+        margin: auto;
+        background-color: white;
+        justify-content: space-evenly;
+        display: flex;
+        text-align: center;
+        /*box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);*/
+        border-radius: 20px;
+        border: solid 1px var(--tab2_color);
+        transition: 0.3s;
+    }
+
+    .tab2__left--item:first-child{
+        margin-bottom: 3%;
+    }
+
+    .tab2__left--item:last-child{
+        margin-top: 3%;
+    }
+
+    .tab2__left--item:hover{
+        width: 72%;
+        height: 24%;
+    }
+
+    .tab2 ::-webkit-scrollbar-thumb {
+        background: var(--tab2_color);
+        border-radius: 5px;
+    }
+
+}
+
 /* Mobile css */
 
 @media only screen and (max-width: 700px) {

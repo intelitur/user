@@ -5,8 +5,8 @@ const module = 'events'
 class EventsService {
 
     static async updateEvents(){
-        //let response = await fetch(`${API_URL}/${module}`)
-        let response = await fetch(`./info/events.json`)
+        let response = await fetch(`${API_URL}/${module}`)
+        //let response = await fetch(`./info/events.json`)
         response = await response.json()
         return response
     }
@@ -26,8 +26,8 @@ class EventsService {
     }
 
     static async getEventImages(event_id, quantity = 0) {
-        //let response = await fetch(`${API_URL}/${module}/${event_id}/images/${quantity}`)
-        let response = await fetch(`./info/eventImages.json`)
+        let response = await fetch(`${API_URL}/${module}/${event_id}/images/${quantity}`)
+        //let response = await fetch(`./info/eventImages.json`)
         console.log(response);
         response = await response.json()
         return response

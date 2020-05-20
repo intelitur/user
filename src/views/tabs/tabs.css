@@ -7,11 +7,11 @@
 
 .tabs{
     display: grid;
-    overflow-x: hidden;
+    overflow: hidden;
     position: relative;
-    width: calc(100% - 280px);
-    height: 100%;
-    margin-left: 280px;
+    width: calc(100% - 0%);
+    height: calc(100% - 48px);
+    margin-left: 0%;
 }
 
 .tabs__tab--content {
@@ -22,6 +22,20 @@
     width: 100%;
     left: 100%;
 }
+
+@media only screen and (min-width: 700px) {
+    .tabs__tab--content{
+        display: none;
+    }
+
+    .tabs__tab--content.active{
+        z-index: 10;
+        display: block;
+    }
+
+}
+
+
 
 [theme=light] .tabs__tab--content {
     color: white;

@@ -1,11 +1,11 @@
 .footer {
     position: absolute;
     bottom: 0;
-    z-index: 1000;
-    width: calc(100% - 280px);
+    z-index: 10000;
+    width: calc(100%);
     font-family: "Lato", sans-serif;
     height: 48px;
-    margin-left: 280px;
+    margin-left: 0;
 }
 
 @media only screen and (max-width: 700px) {

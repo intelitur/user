@@ -4,7 +4,7 @@ class TemplatesManager {
         if (!TemplatesManager.templates[name] || (typeof TemplatesManager.templates[name] !== 'string')) {
             let request = fetch(`./html/${name}.html`, {mode: 'no-cors'})
 
-            let htmlText = (await request).text()
+            let htmlText = await (await request).text()
 
             TemplatesManager.templates[name] = htmlText
         }

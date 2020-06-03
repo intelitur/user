@@ -79,10 +79,7 @@ class CalendarView {
         this.calendar.updateSize()
         this.calendar.renderComponent()
         console.log(this.calendar.tryRerender())
-
         
-        
-
         await this.renderEvents()
     }
 

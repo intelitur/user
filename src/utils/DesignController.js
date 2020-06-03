@@ -41,8 +41,8 @@ class DesignController {
         DesignController.showOverlay(doWhenHide)
     }
     static showOverlaySearch() {
-        const overlay = document.querySelector('.searchScreen')
-        overlay.classList.add('visible')
+        const search = document.querySelector('.searchScreen')
+        search.classList.add('visible')
     }
 
     static hideOverlaySearch() {
@@ -53,9 +53,12 @@ class DesignController {
     
     static async showSearchScreen(){
         DesignController.showLoadingBar()
-        
-        let search = new SearchView()
-        await search.render()
+        if(!DesignController.search){
+            DesignController.search = new SearchView()
+            console.log('a')
+        }
+        let search = DesignController.search
+        await search.render('searchScreen')
         DesignController.hideLoadingBar()
         DesignController.showOverlaySearch()
         

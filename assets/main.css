@@ -74,26 +74,27 @@
     background : rgba(255,99,71,0.7);
     border: none;
     border-radius: 40%;
-    margin-left: 308px;
+    margin-left: calc(100vw - 50px);
     color:white;
 }
+
 
 /*
 .carousel__items-container__item.active{
     background-color: rgba(255, 255, 255, 0.8);
 }*/
-.overlay--event {
+.event {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-.overlay--event__tb--container {
+.event__tb--container {
     display: flex;
     justify-content: space-between;
 }
 
-.overlay--event__back {
+.event__back {
     padding: 6px;
     margin: 0;
     left: 0;
@@ -103,15 +104,61 @@
     border: none;
 }
 
-.overlay--event__back:focus {
+.event__back:focus {
     outline: none;
 }
 
-.overlay--event__title {
+.event__title {
     text-align: center;
     margin: auto 13px;
     margin-top: 10px;
     width: calc(90% - 42px);
+}
+
+.event__carousel--container{
+    height: 30%;
+    width: 90%;
+    margin: auto;
+    position: relative;
+}
+
+.event__carousel--container>.carousel{
+    overflow: hidden;
+}
+
+
+.event__carousel--button{
+    position: absolute;
+    top: calc(50% - 16px);
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    color: gray;
+    display: flex;
+    cursor: pointer;
+}
+
+.event__carousel--button.left{
+    left: -15px;
+    
+}
+
+.event__carousel--button.right{
+    right: -15px
+}
+
+.event__carousel--button i{
+    margin: auto;
+}
+
+.event__carousel--container .carousel__item-weather{
+    display: none
+}
+
+.event__carousel--container .carousel__items--button{
+    display: none;
 }
 @charset "UTF-8";
 .fc {
@@ -1370,409 +1417,6 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 .calendar {
     height: 100%;
 }
-[theme=color] .tab1 {
-    background-color: var(--tab1_color);
-}
-
-[theme=light] .tab1 {
-    color: var(--tab1_color);
-    background-color: white;
-}
-
-/* Desktop css */
-
-@media only screen and (min-width: 700px) {
-    .tab1 {
-        height: calc(100vh - 48px);
-        overflow-y: hidden;
-    }
-
-    .tab1__content {
-        height: calc(100vh - 48px);
-        position: relative;
-        overflow-x: hidden;
-        overflow-y: scroll;
-    }
-
-    .overflow {
-        height: calc(450px);
-    }
-
-    .tab1__mosaic--container {
-        top: 0px;
-        position: sticky;
-        height: calc(100vh - 48px);
-        width: 100%;
-        display: flex;
-        
-    }
-
-    .tab1__content--left {
-        width: 38%;
-        height: 100%;
-        position: relative;
-        overflow: hidden;
-    }
-    .tab1__content--right {
-        width: 62%;
-        height: calc(100vh - 48px);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .tab1--button {
-        z-index: 100;
-        position: absolute;
-        top: calc(calc(50vh - 24px) - calc(15vh / 2));
-        left: calc(38% - calc(15vh / 2));
-        background-color: tomato;
-        width: 15vh;
-        height: 15vh;
-        border-radius: 50%;
-        font-size: 6vh;
-        color: white;
-        display: flex;
-        border: none;
-        padding: 0;
-        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-        transition: 0.35s;
-        cursor: pointer;
-    }
-    [theme=color] .tab1--button {
-        background-color: white;
-        color: var(--tab1_color);
-    }
-    [theme=light] .tab1--button {
-        color: white;
-        background-color: var(--tab1_color);
-    }
-    .tab1--button:focus {
-        outline: none;
-    }
-    .tab1--icon {
-        margin: auto;
-    }
-
-    
-    .tab1__carousel--right {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-    }
-
-    .tab1__calendar--right {
-        position: absolute;
-        top: 5%;
-        bottom: 5%;
-        height: calc(90vh - 48px);
-        left: 2.5%;
-        right: 2.5%;
-        width: 95%;
-        margin: -10px -5px;
-        color: black
-    }
-
-    .tab1__contests--right{
-        height: 100%;
-        width: 100%;
-    }
-
-    .mosaic__item--right {
-        transform: rotate(180deg);
-        transform-origin: -50% 50%;
-        transition: transform 0.3s;
-        overflow: hidden;
-    }
-
-    .mosaic__item--right.active {
-        transform: rotate(0deg);
-        animation: mosaicAnimationRight 0.5s;
-        z-index: 10;
-    }
-
-
-    @keyframes mosaicAnimationRight {
-        from {
-            transform: rotate(180deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-    
-    .tab1__carousel--left {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        color: black;
-    }
-
-    .tab1__calendar--left {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        color: black;
-    }
-
-    .tab1__contests--left{
-        height: 100%;
-        width: 100%;
-        color: black;
-    }
-
-    .mosaic__item--left {
-        transform: rotate(-180deg);
-        transform-origin: -50% 50%;
-        transition: transform 0.5s;
-        overflow: hidden;
-        z-index: 5;
-        background-color: white;
-    }
-
-    .mosaic__item--left.active {
-        transform: rotate(0deg);
-        animation: mosaicAnimationLeft 0.5s;
-        z-index: 10;
-    }
-
-
-    @keyframes mosaicAnimationLeft {
-        from {
-            transform: rotate(-180deg);
-        }
-        to {
-            transform: rotate(-360deg);
-        }
-    }
-
-
-
-
-
-
-
-    .tab1__weather--container{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        background-color: rgb(226, 226, 226);
-    }
-
-    .tab1__weather__temperature{
-        width: 80%;
-        height: 35%;
-        margin: auto;
-        margin-top: 10%;
-        background-color: white;
-        display: flex;
-        text-align: center;
-        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-        border-radius: 10px;
-    }
-
-    .tab1 ::-webkit-scrollbar-thumb {
-        background: var(--tab1_color);
-        border-radius: 5px;
-      }
-
-    .tab1__weather__temperature--span{
-        margin: auto;
-        font-size: calc(50px + 4vw);
-        color: tomato
-    }
-
-    .tab1__weather__temperature--icon{
-
-    }
-
-    .tab1__coming-events--container{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        background-color: rgb(226, 226, 226);
-    }
-
-    .tab1__coming-events--item{
-        width: 82%;
-        height: 40%;
-        margin: auto;
-        background-color: white;
-        justify-content: center;
-        display: flex;
-        text-align: center;
-        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-        transition: 0.3s;
-    }
-
-    .tab1__coming-events--item:first-child{
-        margin-bottom: 3%;
-    }
-
-    .tab1__coming-events--item:last-child{
-        margin-top: 3%;
-    }
-
-    .tab1__coming-events--item:hover{
-        width: 85%;
-        height: 43%;
-        
-    }
-
-    
-}
-
-/* Mobile css */
-
-@media only screen and (max-width: 700px) {
-    .tab1>div {
-        height: calc(100% - 48px);
-        overflow: hidden;
-    }
-    .tab1__carousel--container {
-        height: 37%;
-    }
-    .tab1--content {
-        height: 65%;
-    }
-    .tab1__calendar--container {
-        height: 80%;
-        display: flex;
-        justify-content: space-between;
-    }
-    .tab1__calendar--button {
-        position: absolute;
-        margin-left: 280px;
-        margin-bottom: 20px;
-        bottom: 0;
-        background-color: tomato;
-        width: 55px;
-        height: 55px;
-        border-radius: 50%;
-        font-size: 25px;
-        color: white;
-        display: flex;
-        border: none;
-        padding: 0;
-        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-        transition: 0.35s;
-        cursor: pointer;
-    }
-    [theme=color] .tab1__calendar--button {
-        background-color: white;
-        color: var(--tab1_color);
-    }
-    [theme=light] .tab1__calendar--button {
-        color: white;
-        background-color: var(--tab1_color);
-    }
-    .tab1__calendar--button:focus {
-        outline: none;
-    }
-    .tab1__calendar--icon {
-        margin: auto;
-    }
-    .tab1__calendar__events--container {
-        float: right;
-        margin: auto 10px;
-        height: 100%;
-        width: 50%;
-    }
-    .tab1__calendar__concurso--container {
-        float: left;
-        height: 100%;
-        width: 50%;
-        border: solid gray;
-        border-left-width: 1px;
-        border-bottom-width: 1px;
-        border-right-width: 0px;
-        border-top: 0px;
-        position: relative;
-    }
-    .tab1__calendar__concurso--move {
-        color: black;
-        font-size: 25px;
-    }
-    .tab1__calendar__events--item1 {
-        margin-top: 30px;
-        height: 45%;
-        width: 100%;
-        background-color: black;
-        opacity: 0.4;
-        transition: 0.2s;
-    }
-    .tab1__calendar__events--item1:hover {
-        margin-top: 60px;
-        height: 80%;
-    }
-    .tab1__calendar__events--item1:hover~.tab1__calendar__events--item2 {
-        visibility: hidden;
-    }
-    .tab1__calendar__events--item2 {
-        margin-top: 30px;
-        height: 45%;
-        width: 100%;
-        background-color: black;
-        opacity: 0.4;
-        transition: 0.2s;
-    }
-    .tab1__calendar__events--item2:hover {
-        margin-top: 50px;
-        height: 80%;
-    }
-    .tab1__calendar__events--item1.hidden {
-        height: 0;
-        visibility: hidden;
-    }
-    .tab1__calendar__concurso--item {
-        margin-top: 40px;
-        height: 60%;
-        margin-left: 12px;
-        width: 85%;
-        text-align: center;
-        background-color: black;
-        opacity: 0.4;
-    }
-    .tab1__calendar__concurso--button {
-        right: 0px;
-        position: absolute;
-        width: 100%;
-        height: 30px;
-        bottom: 5px;
-        background: none;
-        border-bottom: none;
-    }
-    .tab1__calendar__events--button {
-        background: none;
-        font-size: 27px;
-    }
-    .buscador {
-        position: absolute;
-        bottom: 30px;
-        left: 20px;
-        color: white;
-        background: rgba(255, 99, 71, 0.9);
-        width: 60%;
-        height: 4%;
-    }
-    .buscador i {
-        position: absolute;
-        left: 0;
-        top: 2px;
-        font-size: 20px;
-    }
-    .buscador-input {
-        color: white;
-        border: none;
-        background: none;
-        width: 80%;
-        height: 100%;
-    }
-    .buscador-input::placeholder {
-        color: white;
-    }
-}
 /* required styles */
 
 .leaflet-pane,
@@ -2429,25 +2073,28 @@ svg.leaflet-image-layer.leaflet-interactive path {
         height: 100%;
         width: 100%;
     }
-
-    .map-event-tooltip__link{
-        text-align: center;
-        font-size: 14px;
-        text-decoration: none;
-    }
 }
-[theme=color] .tab2{
+.map-event-tooltip__link{
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* .leaflet-popup{
+    min-width: 180px;
+} */
+[theme=color] .tab2 {
     background-color: var(--tab2_color);
 }
 
-[theme=light] .tab2{
+[theme=light] .tab2 {
     background-color: white;
     color: var(--tab2_color);
 }
 
 /* Desktop css */
 
-.map__container{
+.map__container {
     height: calc(100vh - 48px);
     width: 100%;
 }
@@ -2463,27 +2110,22 @@ svg.leaflet-image-layer.leaflet-interactive path {
         height: calc(100vh - 48px);
         overflow-y: hidden;
     }
-
     .tab2__content {
         height: calc(100vh - 48px);
         position: relative;
         overflow-x: hidden;
         overflow-y: scroll;
     }
-
     .overflow {
         height: calc(450px);
     }
-
     .tab2__mosaic--container {
         top: 0px;
         position: sticky;
         height: calc(100vh - 48px);
         width: 100%;
         display: flex;
-        
     }
-
     .tab2__content--left {
         width: 38%;
         height: 100%;
@@ -2496,7 +2138,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
         position: relative;
         overflow: hidden;
     }
-
     .tab2--button {
         z-index: 100;
         position: absolute;
@@ -2529,10 +2170,306 @@ svg.leaflet-image-layer.leaflet-interactive path {
     .tab2--icon {
         margin: auto;
     }
-
-    
     .tab2__map--right {
         position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    .mosaic__item--right {
+        transform: rotate(180deg);
+        transform-origin: -50% 50%;
+        transition: transform 0.3s;
+        overflow: hidden;
+    }
+    .mosaic__item--right.active {
+        transform: rotate(0deg);
+        animation: mosaicAnimationRight 0.5s;
+        z-index: 10;
+    }
+    @keyframes mosaicAnimationRight {
+        from {
+            transform: rotate(180deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    .tab2__map--left {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        color: black;
+        background-color: aqua !important;
+    }
+    .mosaic__item--left {
+        transform: rotate(-180deg);
+        transform-origin: -50% 50%;
+        transition: transform 0.5s;
+        overflow: hidden;
+        z-index: 5;
+        background-color: white;
+    }
+    .mosaic__item--left.active {
+        transform: rotate(0deg);
+        animation: mosaicAnimationLeft 0.5s;
+        z-index: 10;
+    }
+    .tab2 .overflow {
+        height: 150px;
+    }
+
+    .tab2 .lds-dual-ring{
+        display: none;
+        position: absolute;
+        top: calc(calc(50vh - 24px) - calc(15vh / 2));
+        left: calc(38% - calc(15vh / 2));
+        width: 15vh;
+        height: 15vh;
+        z-index: 99;
+    }
+
+    .tab2 .lds-dual-ring.visible{
+        display: inline-flex;
+    }
+    
+    .tab2 .lds-dual-ring:after {
+        width: 100%;
+        height: 100%;
+        border: 6px solid var(--tab2_color);
+        border-color: var(--tab2_color) transparent var(--tab2_color) transparent;
+        margin: -6px;
+    }
+    @keyframes mosaicAnimationLeft {
+        from {
+            transform: rotate(-180deg);
+        }
+        to {
+            transform: rotate(-360deg);
+        }
+    }
+    .tab2__left--container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        position: relative;
+    }
+    .tab2__left--title {
+        margin: 7.5% auto;
+        font-size: calc(20px + 1.5vw);
+        color: var(--tab2_color)
+    }
+    .tab2__left--item {
+        width: 70%;
+        height: 21%;
+        margin: auto;
+        background-color: white;
+        justify-content: space-evenly;
+        display: flex;
+        text-align: center;
+        /*box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);*/
+        border-radius: 20px;
+        border: solid 1px var(--tab2_color);
+        transition: 0.3s;
+    }
+    .tab2__left--item:first-child {
+        margin-bottom: 3%;
+    }
+    .tab2__left--item:last-child {
+        margin-top: 3%;
+    }
+    .tab2__left--item:hover {
+        width: 72%;
+        height: 24%;
+    }
+    .tab2>::-webkit-scrollbar-thumb {
+        background: var(--tab2_color);
+        border-radius: 5px;
+    }
+    .tab2__left__info--container {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        left: -100%;
+        position: absolute;
+        transition: left 0.5s;
+        z-index: 50;
+    }
+    .tab2__left__info--container.visible {
+        left: 0%;
+    }
+}
+
+/* Mobile css */
+
+@media only screen and (max-width: 700px) {
+    .map__container {
+        height: 100%;
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 700px) {
+    .search_container{
+        height: 100%;
+        width: 100%;
+    }
+    .div_search{
+        border: 0.3px solid;
+        border-color: gray;
+        position: absolute;
+        top: 13px;
+        left: 69px;
+        color: black;
+        width: 70%;
+        height: 4%;
+    }
+    .div_search i{
+        position: absolute;
+        
+        left: 0;
+        top: 2px;
+        font-size: 20px;
+    }
+    .div_search input{
+        color:black;
+        border: none;
+        margin-left: 20px;
+        background: none;
+        width: 90%;
+        height: 100%;
+    }
+    .div_search_input::placeholder{
+        margin-left: 10px;
+        color:black;
+    }
+    .search_container_button{
+        background-color: #2C3E50;
+        border-color: #2C3E50;
+        color: white;
+        border-radius: 30%;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+    .search__container--item{
+        margin-top: 50px;
+        margin: auto;
+        width: 65%;
+        height: 20%;
+        background-color: #2C3E50;
+    }
+    .search_content{
+        width: 100%;
+        height: 100%;
+    }
+    .search_content_top{
+        width: 100%;
+        height: 10%;
+    }
+}
+[theme=color] .tab1 {
+    background-color: var(--tab1_color);
+}
+
+[theme=light] .tab1 {
+    color: var(--tab1_color);
+    background-color: white;
+}
+
+/* Desktop css */
+
+@media only screen and (min-width: 700px) {
+    .tab1 {
+        height: calc(100vh - 48px);
+        overflow-y: hidden;
+    }
+
+    .tab1__content {
+        height: calc(100vh - 48px);
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .overflow {
+        height: calc(450px);
+    }
+
+    .tab1__mosaic--container {
+        top: 0px;
+        position: sticky;
+        height: calc(100vh - 48px);
+        width: 100%;
+        display: flex;
+        
+    }
+
+    .tab1__content--left {
+        width: 38%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .tab1__content--right {
+        width: 62%;
+        height: calc(100vh - 48px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tab1--button {
+        z-index: 100;
+        position: absolute;
+        top: calc(calc(50vh - 24px) - calc(15vh / 2));
+        left: calc(38% - calc(15vh / 2));
+        background-color: tomato;
+        width: 15vh;
+        height: 15vh;
+        border-radius: 50%;
+        font-size: 6vh;
+        color: white;
+        display: flex;
+        border: none;
+        padding: 0;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        cursor: pointer;
+    }
+    [theme=color] .tab1--button {
+        background-color: white;
+        color: var(--tab1_color);
+    }
+    [theme=light] .tab1--button {
+        color: white;
+        background-color: var(--tab1_color);
+    }
+    .tab1--button:focus {
+        outline: none;
+    }
+    .tab1--icon {
+        margin: auto;
+    }
+
+    
+    .tab1__carousel--right {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .tab1__calendar--right {
+        position: absolute;
+        top: 5%;
+        bottom: 5%;
+        height: calc(90vh - 48px);
+        left: 2.5%;
+        right: 2.5%;
+        width: 95%;
+        margin: -10px -5px;
+        color: black
+    }
+
+    .tab1__contests--right{
         height: 100%;
         width: 100%;
     }
@@ -2560,12 +2497,24 @@ svg.leaflet-image-layer.leaflet-interactive path {
         }
     }
     
-    .tab2__map--left {
+    .tab1__carousel--left {
         position: absolute;
         height: 100%;
         width: 100%;
         color: black;
-        background-color: aqua !important;
+    }
+
+    .tab1__calendar--left {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        color: black;
+    }
+
+    .tab1__contests--left{
+        height: 100%;
+        width: 100%;
+        color: black;
     }
 
     .mosaic__item--left {
@@ -2583,10 +2532,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
         z-index: 10;
     }
 
-    .tab2 .overflow {
-        height: 150px;
-    };
-
 
     @keyframes mosaicAnimationLeft {
         from {
@@ -2597,64 +2542,322 @@ svg.leaflet-image-layer.leaflet-interactive path {
         }
     }
 
-    .tab2__left--container{
+    .tab1__weather--container{
         width: 100%;
         height: 100%;
         display: flex;
         flex-direction: column;
-        background-color:white
+        background-color: rgb(226, 226, 226);
     }
 
-    .tab2__left--title{
-        margin: 7.5% auto;
-        font-size: calc(20px + 1.5vw);
-        color: var(--tab2_color)
-    }
-
-    .tab2__left--item{
-        width: 70%;
-        height: 21%;
+    .tab1__weather__temperature{
+        width: 80%;
+        height: 35%;
         margin: auto;
+        margin-top: 10%;
         background-color: white;
-        justify-content: space-evenly;
         display: flex;
         text-align: center;
-        /*box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);*/
-        border-radius: 20px;
-        border: solid 1px var(--tab2_color);
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        border-radius: 10px;
+    }
+
+    .tab1>::-webkit-scrollbar-thumb {
+        background: var(--tab1_color);
+        border-radius: 5px;
+      }
+
+    .tab1__weather__temperature--span{
+        margin: auto;
+        font-size: calc(50px + 4vw);
+        color: tomato
+    }
+
+    .tab1__coming-events--container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(226, 226, 226);
+    }
+
+    .tab1__coming-events--item{
+        width: 82%;
+        height: 40%;
+        margin: auto;
+        background-color: white;
+        justify-content: center;
+        display: flex;
+        text-align: center;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         transition: 0.3s;
     }
 
-    .tab2__left--item:first-child{
+    .tab1__coming-events--item:first-child{
         margin-bottom: 3%;
     }
 
-    .tab2__left--item:last-child{
+    .tab1__coming-events--item:last-child{
         margin-top: 3%;
     }
 
-    .tab2__left--item:hover{
-        width: 72%;
-        height: 24%;
+    .tab1__coming-events--item:hover{
+        width: 85%;
+        height: 43%;
+        
     }
-
-    .tab2 ::-webkit-scrollbar-thumb {
-        background: var(--tab2_color);
-        border-radius: 5px;
-    }
-
 }
 
 /* Mobile css */
 
 @media only screen and (max-width: 700px) {
-    .map__container{
-        height: 100%;
-        width: 100%;
+    .tab1>div {
+        height: calc(100% - 48px);
+        overflow: hidden;
     }
+    .tab1__carousel--container {
+        height: 37%;
+    }
+    .tab1--content {
+        height: 65%;
+    }
+    .tab1__calendar--container {
+        height: 80%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .tab1__calendar--button {
+        position: absolute;
+        margin-left:calc(100vw - 100px);
+        margin-bottom: 20px;
+        top: 5px;
+        left:20px;
+        background-color: tomato;
+        width: 40px;
+        height: 35px;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        display: flex;
+        border: none;
+        padding: 0;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        cursor: pointer;
+    }
+    [theme=color] .tab1__calendar--button {
+        background-color: white;
+        color: var(--tab1_color);
+    }
+    [theme=light] .tab1__calendar--button {
+        color: white;
+        background-color: var(--tab1_color);
+    }
+    .tab1__calendar--button:focus {
+        outline: none;
+    }
+    .tab1__calendar--icon {
+        margin: auto;
+    }
+    .tab1__calendar__events--container {
+        float: right;
+        margin: auto 10px;
+        height: 100%;
+        width: 50%;
+    }
+    .tab1__event--button{
+        margin-top: 5px;
+        margin-left: 5px;
+        border: none;
+        float: left;
+        height: 10px;
+        width: 0px;
+        border-radius: 50%;
+    }
+    .events__containerName{
+        position: relative;
+        top: 0;
+        height: 20px;
+        border-style: ridge;
+        color: black;
+        border-radius: 10px;
+    }
+    .tab1__calendar__events--item1{
+        margin-top: 40px;
+        height: 44%;
+        width: 100%;
+        color: black;
+        border-style: ridge;
+        border-radius: 10px;
+        background-color:rgba(255, 255, 255);
+        transition: 0.2s;
+    }
+    input[type = "radio"]{ 
+        display:none;
+        color: grey;
+    }
+    input[type = "radio"]~label{ 
+        margin-left: -6px;
+        color: grey;
+    }
+    .tab1__event__containerStars{
+        position: relative;
+        bottom: 0;
+        height: 20px;
+        margin-top: calc(100% - 48%);
+        display:flex;
+        flex-direction: row;
+        
+    }
+    .clasificacion{
+        position:relative;
+        margin-top: 0px;
+        margin-left: 5px;
+        
+    }
+    .tab1__calendar__events--item2{
+        margin-top: 30px;
+        height: 44%;
+        width: 100%;
+        border-radius: 10px;
+        border-style: ridge;
+        transition: 0.2s;
+        color: black;
+    }
+    .tab1__calendar__events--item1:hover{
+        margin-top: 60px;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        height: 80%;
+    }
+    .tab1__calendar__events--item1:hover~.tab1__calendar__events--item2 {
+        visibility: hidden;
+    }
+    .tab1__calendar__events--item2:hover {
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        height: 80%;
+    }
+    .tab1__calendar__events--item1.hidden {
+        height: 0;
+        visibility: hidden;
+    }
+    .tab__event--more{
+        height: 20px;
+        width: 70px;
+        background-color: white;
+        border:none;
+        color:blue;
+        margin-left: 20px;
+    }
+    .tab1__calendar__concurso--container{
+        float: right;
+        margin: auto 10px;
+        height: 100%;
+        width: 50%;
+        
+    }
+    .tab1__calendar__concurso--item1{
+        margin-top: 40px;
+        height: 45%;
+        width: 100%;
+        background-color: black;
+        opacity: 0.4;
+        transition: 0.2s;
+        
+    }
+    .tab1__calendar__concurso--item2{
+        margin-top: 30px;
+        height: 45%;
+        width: 100%;
+        background-color: black;
+        opacity: 0.4;
+        transition: 0.2s;
+    }
+    .tab1__calendar__concurso--item1:hover{
+        margin-top: 60px;
+        height: 80%;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    }
+    .tab1__calendar__concurso--item1.hidden{
+        height: 0;
+        visibility: hidden;
+    }
+    .tab1__calendar__concurso--item2:hover {
+        margin-top: 60px;
+        height: 80%;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    }
+    .tab1__calendar__events--item2:hover {
+        margin-top: 60px;
+        height: 80%;
+    }
+    .tab1__calendar__concurso--item1:hover~.tab1__calendar__concurso--item2 {
+        visibility: hidden;
+    }
+    .tab1__calendar__concurso--moveUp{
+        color: black;
+        border: none;
+        background: none;
+        font-size: 25px;
+    }
+    .tab1__calendar__concurso--moveDown{
+        margin-top: 5px;
+        color: black;
+        border: none;
+        background: none;
+        font-size: 25px;
+    }
+    
+    .tab1__calendar__concurso--move:hover~.tab1__calendar__concurso--item2{
+        visibility: visible;
+        
+    }
+    .tab1__calendar__concurso--button {
+        right: 0px;
+        width: 100%;
+        height: 35px;
+        margin-top: 10px;
+        background: none;
+        border-bottom: none;
+    }
+    
+    .tab1__calendar__events--button{
+        background: none;
+        font-size: 27px;
+    }
+    .search{
+        position: absolute;
+        bottom: 30px;
+        left: 15px;
+        top: 10px;
+        color: white;
+        background: rgba(255, 99, 71, 0.9);
+        width: 70%;
+        height: 4%;
+    }
+    .search i{
+        position: absolute;
+        left: 0;
+        top: 2px;
+        font-size: 20px;
+    }
+    .search-input{
+        color:white;
+        border: none;
+        background: none;
+        
+        width: 80%;
+        height: 100%;
+    }
+    .search-input::placeholder{
+        color:white;
+    }
+  
+
+    .div{
+        height: 100%;
+    }
+    
 }
-
-
 :root{
     --tab1_color: tomato;
     --tab2_color: mediumseagreen;
@@ -2882,7 +3085,23 @@ render {
 }
 
 .overlay.visible {
+    
     left: 0;
+}
+
+.searchScreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 100%;
+    transition: top 0.5s;
+    background-color: white;
+    z-index: 20000;
+}
+
+.searchScreen.visible {
+    left: 0;
+    top: 0;
 }
 
 .main-loading {
@@ -2898,26 +3117,86 @@ render {
     display: block;
 }
 
+.img--overlay{
+    position: absolute;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    z-index: 20001;
+    background-color: rgba(50, 50, 50, 0.646);
+}
+
+.img--overlay--img{
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    margin: auto;
+}
+
+img:not(.img--overlay--img){
+    cursor: pointer;
+}
+
+
+.img--overlay.visible{
+    display: flex;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.6s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(100deg);
+    }
+    40% {
+        transform: rotate(200deg);
+    }
+    60% {
+        transform: rotate(300deg);
+    }
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 8px;
-  }
-  
-  /* Track */
-  
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
     background: #f1f1f13f;
-  }
-  
-  /* Handle */
-  
-  ::-webkit-scrollbar-thumb {
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
     background: rgba(80, 80, 80, 0.6);
     border-radius: 5px;
-  }
-  
-  /* Handle on hover */
-  
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
     background: rgba(75, 75, 75, 0.6);
-  }
+}

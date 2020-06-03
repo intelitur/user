@@ -1,6 +1,7 @@
 import EventsService from '../../services/EventsService'
 import TemplatesManager from '../../utils/TemplatesManager'
 import DesignController from '../../utils/DesignController'
+import Carousel from "../carousel/carousel";
 
 
 import './event.css'
@@ -11,25 +12,39 @@ class EventView {
         this.eventPromise = this.updateEvent()
     }
 
-    async render() {
+    async render(name) {
         await this.eventPromise
 
         const template = await TemplatesManager.getTemplate('event')
 
         const view = TemplatesManager.contextPipe(template, this)
 
-        this.el = TemplatesManager.renderElement('overlay', view)
+        this.el = TemplatesManager.renderElement(name, view)
 
+        await this.renderContent();
         this.addEventListeners()
     }
 
+    async renderContent(){
+        // this.carousel = new Carousel(this.event.images.map(image => image.url));
+        this.carousel = new Carousel([
+            "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
+            "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
+            "https://intelitur.sytes.net/files/images/20200528174932573-icons8-easter-rabbit-90.png"
+        ]);
+        this.carousel.render('event_carousel')
+    }
+
     addEventListeners(){
-        this.el.querySelector('.overlay--event__back').addEventListener('click', this.hide)
+        this.el.querySelector('.event__back').addEventListener('click', this.hide)
+        this.el.querySelector(".event__carousel--button.left").addEventListener("click", this.carousel.pImage.bind(this.carousel))
+        this.el.querySelector(".event__carousel--button.right").addEventListener("click", this.carousel.nImage.bind(this.carousel))
     }
 
     async updateEvent() {
         this.event = await EventsService.getEvent(this.event_id)
-        this.event.images = await this.getImages()
+        if(this.event.images === undefined)
+            this.event.images = await this.getImages()
     }
 
     async getImages() {
@@ -41,7 +56,10 @@ class EventView {
     }
 
     hide(){
-        DesignController.hideOverlay()
+        if(DesignController.mobile)
+            DesignController.hideOverlay()
+        else
+            document.querySelector(".tab2__left__info--container").classList.remove('visible')
     }
 }
 

@@ -1,8 +1,17 @@
-<div class="overlay--event">
-    <div class="overlay--event__tb--container">
-        <button class='overlay--event__back'>
+<div class="event">
+    <div class="event__tb--container">
+        <button class='event__back'>
             <i class="far fa-arrow-alt-circle-left"></i>
         </button>
-    <h2 class="overlay--event__title" style="color: {event.color}">{event.name}</h2>
+        <h2 class="event__title" style="color: {event.color}">{event.name}</h2>
     </div>
+    <section class="event__carousel--container">
+        <render render="event_carousel"></render>
+        <div class="event__carousel--button left">
+            <i class="material-icons">chevron_left</i>
+        </div>
+        <div class="event__carousel--button right">
+            <i class="material-icons">chevron_right</i>
+        </div>
+    </section>
 </div>

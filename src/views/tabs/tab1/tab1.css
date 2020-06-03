@@ -199,7 +199,7 @@
         border-radius: 10px;
     }
 
-    .tab1 ::-webkit-scrollbar-thumb {
+    .tab1>::-webkit-scrollbar-thumb {
         background: var(--tab1_color);
         border-radius: 5px;
       }

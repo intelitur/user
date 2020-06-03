@@ -7,6 +7,24 @@ import './tab2.css'
 class Tab2 {
 
     constructor(){
+        this.loadingState = false;
+    }
+
+    get loading(){
+        return this.loadingState
+    }
+
+    set loading(value){
+        console.log(value)
+        this.loadingState = value
+        if(!DesignController.mobile){
+            if(value === true){
+                this.el.querySelector(".lds-dual-ring").classList.add("visible")
+            }
+            else{
+                this.el.querySelector(".lds-dual-ring").classList.remove("visible")
+            }
+        }
     }
     
     async render(){
@@ -21,9 +39,10 @@ class Tab2 {
         const htmlName = DesignController.mobile ? 'mobile_tab2_content' : 'tab2_content'
         const view = await TemplatesManager.getTemplate(htmlName)
         TemplatesManager.renderElement('tab2_content', view)
-
+        this.loading = true;
         await this.renderMap()
         this.setupSrollAnimation()
+        this.loading = false;
     }
 
     async renderMap(){
@@ -51,12 +70,27 @@ class Tab2 {
     }
 
     goTo(i) {
+        if(!DesignController.mobile)
+            this.hideInfoContainer()
+            
         DesignController.showTab(i);
     }
 
     show() { this.el.classList.add('active') }
 
-    hide() { this.el.classList.remove('active') }
+    hide() {
+        if(!DesignController.mobile)
+            this.hideInfoContainer() 
+        this.el.classList.remove('active') 
+    }
+
+    showInfoContainer(){
+        this.el.querySelector('.tab2__left__info--container').classList.add('visible')
+    }
+
+    hideInfoContainer(){
+        this.el.querySelector('.tab2__left__info--container').classList.remove('visible')
+    }
 }
 
 export default new Tab2()

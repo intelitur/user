@@ -78,10 +78,7 @@ class CalendarView {
         this.calendar.render()
         this.calendar.updateSize()
         this.calendar.renderComponent()
-        console.log(this.calendar.tryRerender())
-
-        
-        
+        console.log(this.calendar.tryRerender())    
 
         await this.renderEvents()
     }
@@ -106,7 +103,11 @@ class CalendarView {
 
 
     eventClick(eventInfo) {
+        
         DesignController.showEvent(eventInfo.event.extendedProps.event_id, DesignController.showCalendar)
+        if(!DesignController.mobile){
+            DesignController.showTab(2)
+        }
         // if (DesignController.mobile)
         //     tab1Control.openEventPopup(eventInfo);
         // else

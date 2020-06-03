@@ -173,12 +173,6 @@
         }
     }
 
-
-
-
-
-
-
     .tab1__weather--container{
         width: 100%;
         height: 100%;
@@ -208,10 +202,6 @@
         margin: auto;
         font-size: calc(50px + 4vw);
         color: tomato
-    }
-
-    .tab1__weather__temperature--icon{
-
     }
 
     .tab1__coming-events--container{
@@ -247,8 +237,6 @@
         height: 43%;
         
     }
-
-    
 }
 
 /* Mobile css */
@@ -271,14 +259,15 @@
     }
     .tab1__calendar--button {
         position: absolute;
-        margin-left: 280px;
+        margin-left:calc(100vw - 100px);
         margin-bottom: 20px;
-        bottom: 0;
+        top: 5px;
+        left:20px;
         background-color: tomato;
-        width: 55px;
-        height: 55px;
+        width: 40px;
+        height: 35px;
         border-radius: 50%;
-        font-size: 25px;
+        font-size: 18px;
         color: white;
         display: flex;
         border: none;
@@ -307,97 +296,196 @@
         height: 100%;
         width: 50%;
     }
-    .tab1__calendar__concurso--container {
+    .tab1__event--button{
+        margin-top: 5px;
+        margin-left: 5px;
+        border: none;
         float: left;
-        height: 100%;
-        width: 50%;
-        border: solid gray;
-        border-left-width: 1px;
-        border-bottom-width: 1px;
-        border-right-width: 0px;
-        border-top: 0px;
+        height: 10px;
+        width: 0px;
+        border-radius: 50%;
+    }
+    .events__containerName{
         position: relative;
-    }
-    .tab1__calendar__concurso--move {
+        top: 0;
+        height: 20px;
+        border-style: ridge;
         color: black;
-        font-size: 25px;
+        border-radius: 10px;
     }
-    .tab1__calendar__events--item1 {
-        margin-top: 30px;
-        height: 45%;
+    .tab1__calendar__events--item1{
+        margin-top: 40px;
+        height: 44%;
         width: 100%;
-        background-color: black;
-        opacity: 0.4;
+        color: black;
+        border-style: ridge;
+        border-radius: 10px;
+        background-color:rgba(255, 255, 255);
         transition: 0.2s;
     }
-    .tab1__calendar__events--item1:hover {
+    input[type = "radio"]{ 
+        display:none;
+        color: grey;
+    }
+    input[type = "radio"]~label{ 
+        margin-left: -6px;
+        color: grey;
+    }
+    .tab1__event__containerStars{
+        position: relative;
+        bottom: 0;
+        height: 20px;
+        margin-top: calc(100% - 48%);
+        display:flex;
+        flex-direction: row;
+        
+    }
+    .clasificacion{
+        position:relative;
+        margin-top: 0px;
+        margin-left: 5px;
+        
+    }
+    .tab1__calendar__events--item2{
+        margin-top: 30px;
+        height: 44%;
+        width: 100%;
+        border-radius: 10px;
+        border-style: ridge;
+        transition: 0.2s;
+        color: black;
+    }
+    .tab1__calendar__events--item1:hover{
         margin-top: 60px;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         height: 80%;
     }
     .tab1__calendar__events--item1:hover~.tab1__calendar__events--item2 {
         visibility: hidden;
     }
-    .tab1__calendar__events--item2 {
-        margin-top: 30px;
-        height: 45%;
-        width: 100%;
-        background-color: black;
-        opacity: 0.4;
-        transition: 0.2s;
-    }
     .tab1__calendar__events--item2:hover {
-        margin-top: 50px;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         height: 80%;
     }
     .tab1__calendar__events--item1.hidden {
         height: 0;
         visibility: hidden;
     }
-    .tab1__calendar__concurso--item {
+    .tab__event--more{
+        height: 20px;
+        width: 70px;
+        background-color: white;
+        border:none;
+        color:blue;
+        margin-left: 20px;
+    }
+    .tab1__calendar__concurso--container{
+        float: right;
+        margin: auto 10px;
+        height: 100%;
+        width: 50%;
+        
+    }
+    .tab1__calendar__concurso--item1{
         margin-top: 40px;
-        height: 60%;
-        margin-left: 12px;
-        width: 85%;
-        text-align: center;
+        height: 45%;
+        width: 100%;
         background-color: black;
         opacity: 0.4;
+        transition: 0.2s;
+        
+    }
+    .tab1__calendar__concurso--item2{
+        margin-top: 30px;
+        height: 45%;
+        width: 100%;
+        background-color: black;
+        opacity: 0.4;
+        transition: 0.2s;
+    }
+    .tab1__calendar__concurso--item1:hover{
+        margin-top: 60px;
+        height: 80%;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    }
+    .tab1__calendar__concurso--item1.hidden{
+        height: 0;
+        visibility: hidden;
+    }
+    .tab1__calendar__concurso--item2:hover {
+        margin-top: 60px;
+        height: 80%;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    }
+    .tab1__calendar__events--item2:hover {
+        margin-top: 60px;
+        height: 80%;
+    }
+    .tab1__calendar__concurso--item1:hover~.tab1__calendar__concurso--item2 {
+        visibility: hidden;
+    }
+    .tab1__calendar__concurso--moveUp{
+        color: black;
+        border: none;
+        background: none;
+        font-size: 25px;
+    }
+    .tab1__calendar__concurso--moveDown{
+        margin-top: 5px;
+        color: black;
+        border: none;
+        background: none;
+        font-size: 25px;
+    }
+    
+    .tab1__calendar__concurso--move:hover~.tab1__calendar__concurso--item2{
+        visibility: visible;
+        
     }
     .tab1__calendar__concurso--button {
         right: 0px;
-        position: absolute;
         width: 100%;
-        height: 30px;
-        bottom: 5px;
+        height: 35px;
+        margin-top: 10px;
         background: none;
         border-bottom: none;
     }
-    .tab1__calendar__events--button {
+    
+    .tab1__calendar__events--button{
         background: none;
         font-size: 27px;
     }
-    .buscador {
+    .search{
         position: absolute;
         bottom: 30px;
-        left: 20px;
+        left: 15px;
+        top: 10px;
         color: white;
         background: rgba(255, 99, 71, 0.9);
-        width: 60%;
+        width: 70%;
         height: 4%;
     }
-    .buscador i {
+    .search i{
         position: absolute;
         left: 0;
         top: 2px;
         font-size: 20px;
     }
-    .buscador-input {
-        color: white;
+    .search-input{
+        color:white;
         border: none;
         background: none;
+        
         width: 80%;
         height: 100%;
     }
-    .buscador-input::placeholder {
-        color: white;
+    .search-input::placeholder{
+        color:white;
     }
+  
+
+    .div{
+        height: 100%;
+    }
+    
 }

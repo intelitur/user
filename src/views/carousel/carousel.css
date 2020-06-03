@@ -74,9 +74,10 @@
     background : rgba(255,99,71,0.7);
     border: none;
     border-radius: 40%;
-    margin-left: 308px;
+    margin-left: calc(100vw - 50px);
     color:white;
 }
+
 
 /*
 .carousel__items-container__item.active{

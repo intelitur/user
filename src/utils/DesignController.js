@@ -1,6 +1,7 @@
 import EventView from '../views/event/event'
 import CalendarView from '../views/calendar/calendar'
 import tab2 from '../views/tabs/tab2/tab2'
+import SearchView from '../views/search/search'
 
 class DesignController {
 
@@ -50,6 +51,29 @@ class DesignController {
         await calendar.render('overlay')
         DesignController.hideLoadingBar()
         DesignController.showOverlay(doWhenHide)
+    }
+    static showOverlaySearch() {
+        const search = document.querySelector('.searchScreen')
+        search.classList.add('visible')
+    }
+
+    static hideOverlaySearch() {
+        const overlay = document.querySelector('.searchScreen')
+        overlay.classList.remove('visible')
+    }
+
+    
+    static async showSearchScreen(){
+        DesignController.showLoadingBar()
+        if(!DesignController.search){
+            DesignController.search = new SearchView()
+            console.log('a')
+        }
+        let search = DesignController.search
+        await search.render('searchScreen')
+        DesignController.hideLoadingBar()
+        DesignController.showOverlaySearch()
+        
     }
 
     static showLoadingBar(){

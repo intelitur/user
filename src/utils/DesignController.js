@@ -2,6 +2,8 @@ import EventView from '../views/event/event'
 import CalendarView from '../views/calendar/calendar'
 import tab2 from '../views/tabs/tab2/tab2'
 import SearchView from '../views/search/search'
+import tabs from '../views/tabs/tabs'
+import footer from '../views/footer/footer'
 
 class DesignController {
 
@@ -31,6 +33,7 @@ class DesignController {
             DesignController.showOverlay(doWhenHide)
         }   
         else{
+            footer.showTab(2)
             tab2.loading = true
             tab2.map.showEventPopup(event_id)
             const eventView = new EventView(event_id)
@@ -85,7 +88,6 @@ class DesignController {
     }
 
     static setupImageView(){
-        console.log("Change")
         document.querySelectorAll("img:not([config='true'])").forEach((img) => {
             img.setAttribute('config', 'true')
             img.addEventListener('click', ()=> {

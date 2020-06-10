@@ -78,7 +78,6 @@ class Map {
         const tooltipHTML =  await TemplatesManager.getTemplate('map.event.tooltip');
 
         let onEachFeature = (feature, layer) => {
-            console.log(layer)
             this.eventLayers.push(layer)
             const dateString = feature.properties.point.date_range.initial_date.split("T")[0].split("-")
             
@@ -108,7 +107,6 @@ class Map {
         })
         this.map.mapLayersControl.addOverlay(layer, "Eventos")
         this.map.mapLayersControl._layers.filter((layer) => layer.name == "Eventos")[0].layer.addTo(this.map)
-        console.log(tab2)
         tab2.loading = false;
     }
 

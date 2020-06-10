@@ -22,6 +22,7 @@ body {
     width: 100%;
     background-color: #dbdbdb;
     position: relative;
+    overflow: hidden;
 }
 
 render {

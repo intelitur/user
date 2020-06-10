@@ -23,12 +23,24 @@ class EventsService {
         if(event){
             return event
         }
+        else{
+            let response = await fetch(`${API_URL}/${module}/${event_id}`)
+            //let response = await fetch(`./info/eventImages.json`)
+            response = await response.json()
+            if(response[0])
+                return response[0]
+        }
     }
 
     static async getEventImages(event_id, quantity = 0) {
         let response = await fetch(`${API_URL}/${module}/${event_id}/images/${quantity}`)
         //let response = await fetch(`./info/eventImages.json`)
-        console.log(response);
+        response = await response.json()
+        return response
+    }
+
+    static async getComingEvents(){
+        let response = await fetch(`${API_URL}/${module}/coming`)
         response = await response.json()
         return response
     }

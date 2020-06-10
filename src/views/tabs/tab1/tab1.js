@@ -6,6 +6,9 @@ import EventsService from "../../../services/EventsService";
 
 
 import './tab1.css'
+import './css/tab1_viewEventDesktop.css'
+
+
 class Tab1 {
     
     constructor() {
@@ -39,6 +42,7 @@ class Tab1 {
         else {
             await this.renderCalendar()
             this.setupSrollAnimation()
+            await this.renderComingEvents()
         }
     }
 
@@ -46,6 +50,46 @@ class Tab1 {
         this.calendar = new CalendarView()
         await this.calendar.render('tab1_calendar')
         
+    }
+
+    async renderComingEvents(){
+        let comingEvents = await EventsService.getComingEvents()
+
+        console.log(comingEvents)
+
+        let template = await TemplatesManager.getTemplate("tab1_viewEventDesktop")
+
+        TemplatesManager.renderElement("tab1_comingEvent1", template.patch({...comingEvents[0], ...this.getDateInfo(comingEvents[0])}));
+        TemplatesManager.renderElement("tab1_comingEvent2", template.patch({...comingEvents[1], ...this.getDateInfo(comingEvents[1])}));
+
+        const comingEventsDOM = this.el.querySelectorAll(".tab1__coming-event--button")
+
+        comingEventsDOM.forEach(item => {
+            item.addEventListener('click', DesignController.showEvent.bind(this, item.getAttribute("event_id")))
+        })
+    }
+
+    getDateInfo(event){
+
+        const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+
+        const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+        console.log(event.date_range)
+
+        const date = new Date(event.date_range.initial_date)
+
+        
+        const monthName = months[date.getMonth()]
+
+        const dayName = days[date.getDay()]
+
+        const dateI = date.getDate() + 1
+
+        return {
+            monthName,
+            dayName,
+            dateI
+        }
     }
 
     setupSrollAnimation() {

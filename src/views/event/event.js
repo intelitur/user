@@ -30,7 +30,6 @@ class EventView {
         this.carousel = new Carousel([
             "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
             "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
-            "https://intelitur.sytes.net/files/images/20200528174932573-icons8-easter-rabbit-90.png"
         ]);
         this.carousel.render('event_carousel')
     }
@@ -43,6 +42,7 @@ class EventView {
 
     async updateEvent() {
         this.event = await EventsService.getEvent(this.event_id)
+        console.log(this.event)
         if(this.event.images === undefined)
             this.event.images = await this.getImages()
     }

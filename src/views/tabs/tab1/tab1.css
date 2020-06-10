@@ -181,16 +181,47 @@
         background-color: rgb(226, 226, 226);
     }
 
+    .tab1__card {
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        border-radius: 10px;
+    }
+
     .tab1__weather__temperature{
         width: 80%;
         height: 35%;
         margin: auto;
-        margin-top: 10%;
         background-color: white;
         display: flex;
         text-align: center;
+    }
+
+    .tab1__weather__title{
+        width: calc(100% - 40px);
+        height: calc(50% - 40px);
+        margin: 0;
+        background-color: white;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .tab1__weather__title h2 {
+        margin: auto 0;
+        margin-bottom: 10px;
+        font-size: calc(20px + 2vw);
+        color: var(--tab1_color);
+        text-align: center;
+        width: 100%;
+        font-weight: 200; 
+    }
+
+    .tab1__weather__title--span{
+        margin: auto;
+        margin-top: 10px;
+        font-size: calc (10px + 2vw);
+        color: rgb(86, 86, 86)
     }
 
     .tab1>::-webkit-scrollbar-thumb {
@@ -200,9 +231,11 @@
 
     .tab1__weather__temperature--span{
         margin: auto;
-        font-size: calc(50px + 4vw);
-        color: tomato
+        font-size: calc(40px + 4vw);
+        color: rgb(86, 86, 86)
     }
+
+    
 
     .tab1__coming-events--container{
         width: 100%;
@@ -217,9 +250,6 @@
         height: 40%;
         margin: auto;
         background-color: white;
-        justify-content: center;
-        display: flex;
-        text-align: center;
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         transition: 0.3s;
     }
@@ -233,9 +263,8 @@
     }
 
     .tab1__coming-events--item:hover{
-        width: 85%;
-        height: 43%;
-        
+        width: 83%;
+        height: 41%;
     }
 }
 

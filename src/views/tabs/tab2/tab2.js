@@ -15,7 +15,6 @@ class Tab2 {
     }
 
     set loading(value){
-        console.log(value)
         this.loadingState = value
         if(!DesignController.mobile){
             if(value === true){

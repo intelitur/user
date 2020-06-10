@@ -74,9 +74,8 @@ class Tab1 {
         const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
         const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
-        console.log(event.date_range)
 
-        const date = new Date(event.date_range.initial_date)
+        const date = new Date(event.date_range.initial_date.split("T")[0])
 
         
         const monthName = months[date.getMonth()]

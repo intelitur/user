@@ -17,7 +17,7 @@ class EventView {
 
         const template = await TemplatesManager.getTemplate('event')
 
-        const view = TemplatesManager.contextPipe(template, this)
+        const view = TemplatesManager.contextPipe(template, {...this, datetime: this.getDateTimeInfo()})
 
         this.el = TemplatesManager.renderElement(name, view)
 
@@ -53,6 +53,44 @@ class EventView {
 
     async getContestants() {
         return EventsService.getContestants(this.event_id)
+    }
+
+    getDateTimeInfo(){
+
+        const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+
+        const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+
+        const startDate = new Date(this.event.date_range.initial_date.split("T")[0])
+        
+        const startMonthName = months[startDate.getMonth()]
+
+        const startDayName = days[startDate.getDay()]
+
+        const startDateI = startDate.getDate() + 1
+
+        const startTime = this.event.initial_time != null? this.event.initial_time.split(":").slice(0, 2).join(":"): undefined
+
+        const endDate = new Date(this.event.date_range.final_date.split("T")[0])
+        
+        const endMonthName = months[endDate.getMonth()]
+
+        const endDayName = days[endDate.getDay()]
+
+        const endDateI = endDate.getDate() + 1
+
+        const endTime = this.event.final_time != null? this.event.final_time.split(":").slice(0, 2).join(":"): undefined
+
+        return {
+            startMonthName,
+            startDayName,
+            startDateI,
+            startTime,
+            endMonthName,
+            endDayName,
+            endDateI,
+            endTime
+        }
     }
 
     hide(){

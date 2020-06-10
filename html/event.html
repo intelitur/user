@@ -14,4 +14,19 @@
             <i class="material-icons">chevron_right</i>
         </div>
     </section>
+    <section class="event__date--container">
+        <div class="event__date">
+            <em>{datetime.startDayName}</em>
+            <strong>{datetime.startMonthName}</strong>
+            <span style="color: {event.color}">{datetime.startDateI}</span>
+            <label>{event.initial_time == null? "Todo el día": o.datetime.startTime}</label>
+        </div>
+        <i class="fas fa-arrow-right event__date--arrow"></i>
+        <div class="event__date">
+            <em>{datetime.endDayName}</em>
+            <strong>{datetime.endMonthName}</strong>
+            <span style="color: {event.color}">{datetime.endDateI}</span>
+            <label>{event.final_time == null? "Todo el día": o.datetime.endTime}</label>
+        </div>
+    </section>
 </div>

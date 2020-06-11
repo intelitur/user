@@ -135,8 +135,8 @@ class Tab1 {
         
         const tooltipHTML = await TemplatesManager.getTemplate('tab1_viewEvent');
         let events = await EventsService.getEvents();
-        const htmlNode = TemplatesManager.createHtmlNode(tooltipHTML.patch({events: events[0].name}));
-        const htmlNode2 = TemplatesManager.createHtmlNode(tooltipHTML.patch({name: "walter2"}));
+        const htmlNode = TemplatesManager.createHtmlNode(tooltipHTML.patch({events: events[0]}));
+        const htmlNode2 = TemplatesManager.createHtmlNode(tooltipHTML.patch({events : events[1]}));
         
         console.log(events);
         var info = new Tab1(this.el.children[0]);

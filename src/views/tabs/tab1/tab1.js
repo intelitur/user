@@ -103,11 +103,12 @@ class Tab1 {
 
     hiddenDiv(events) {
         const padre = this.el.querySelector('.tab1__calendar__events--container');
-        console.log(padre.children[1]);
+        console.log(padre.children[0]);
+        /**
         padre.children[0].addEventListener('mouseenter', function () {
-            padre.children[0].children[0].children[5].style.marginTop="100px;";
-            start.style.marginTop =  'calc(100% - 48%);'
-        });
+            
+            padre.children[0].children[0].children[4].classList.add('size');
+        }); */
         padre.children[1].addEventListener('mouseenter', function () {
             padre.children[0].classList.add('hidden');
             //padre.children[1].children[2].text = events[0].detail;
@@ -133,17 +134,19 @@ class Tab1 {
     async getEvents(){
         
         const tooltipHTML = await TemplatesManager.getTemplate('tab1_viewEvent');
-        const htmlNode = TemplatesManager.createHtmlNode(tooltipHTML);
         let events = await EventsService.getEvents();
+        const htmlNode = TemplatesManager.createHtmlNode(tooltipHTML.patch({events: events[0].name}));
+        const htmlNode2 = TemplatesManager.createHtmlNode(tooltipHTML.patch({name: "walter2"}));
+        
         console.log(events);
         var info = new Tab1(this.el.children[0]);
         //var date = new Date();
         //console.log(events[0].date_range.initial_date);
         const padre = this.el.querySelector('.tab1__calendar__events--container');
+        console.log(htmlNode);
         padre.children[0].appendChild(htmlNode);
-        padre.children[0].children[0].children[1].text= events[0].name;
-        padre.children[0].children[0].children[0].style.backgroundColor = events[0].color;
-        
+
+        padre.children[1].appendChild(htmlNode2);
         //padre.children[0].children[1].text= "jueves 03:40"; padre.children[0].children[2].text= "Martes 3:20";
         //padre.children[0].children[1].text= events[0].name; date = events[0].date_range.initial_date;
         

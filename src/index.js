@@ -23,8 +23,11 @@ function configStringPatch(){
         return Strings.patch(this, o);
     }
 }
+
+
+
+
 configStringPatch()
 
-window.addEventListener('scroll', e => console.log(e))
 
 initRender()

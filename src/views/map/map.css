@@ -5,10 +5,13 @@
         height: 100%;
         width: 100%;
     }
-
-    .map-event-tooltip__link{
-        text-align: center;
-        font-size: 14px;
-        text-decoration: none;
-    }
 }
+.map-event-tooltip__link{
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* .leaflet-popup{
+    min-width: 180px;
+} */

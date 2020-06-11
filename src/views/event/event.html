@@ -1,8 +1,32 @@
-<div class="overlay--event">
-    <div class="overlay--event__tb--container">
-        <button class='overlay--event__back'>
+<div class="event">
+    <div class="event__tb--container">
+        <button class='event__back'>
             <i class="far fa-arrow-alt-circle-left"></i>
         </button>
-    <h2 class="overlay--event__title" style="color: {event.color}">{event.name}</h2>
+        <h2 class="event__title" style="color: {event.color}">{event.name}</h2>
     </div>
+    <section class="event__carousel--container">
+        <render render="event_carousel"></render>
+        <div class="event__carousel--button left">
+            <i class="material-icons">chevron_left</i>
+        </div>
+        <div class="event__carousel--button right">
+            <i class="material-icons">chevron_right</i>
+        </div>
+    </section>
+    <section class="event__date--container">
+        <div class="event__date">
+            <em>{datetime.startDayName}</em>
+            <strong>{datetime.startMonthName}</strong>
+            <span style="color: {event.color}">{datetime.startDateI}</span>
+            <label>{event.initial_time == null? "Todo el día": o.datetime.startTime}</label>
+        </div>
+        <i class="fas fa-arrow-right event__date--arrow"></i>
+        <div class="event__date">
+            <em>{datetime.endDayName}</em>
+            <strong>{datetime.endMonthName}</strong>
+            <span style="color: {event.color}">{datetime.endDateI}</span>
+            <label>{event.final_time == null? "Todo el día": o.datetime.endTime}</label>
+        </div>
+    </section>
 </div>

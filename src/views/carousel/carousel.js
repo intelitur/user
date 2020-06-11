@@ -44,6 +44,26 @@ class Carousel {
         }).bind(this))
 
     }
+
+    pImage(){
+        if (numImage <= 0){
+            numImage = this.images.length - 1;
+            this.showImage(numImage)
+        }else{
+            numImage--;
+            this.showImage(numImage)
+        }
+    }
+
+    nImage(){
+        if (numImage >= this.images.length-1){
+            numImage=0;
+            this.showImage(numImage)
+        }else{
+            numImage++;
+            this.showImage(numImage)
+        }
+    }
     
     showImage(i){
         //const items = this.el.querySelectorAll(".carousel__items-container")[0].childNodes

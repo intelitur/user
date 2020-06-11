@@ -1,6 +1,9 @@
 import EventView from '../views/event/event'
 import CalendarView from '../views/calendar/calendar'
+import tab2 from '../views/tabs/tab2/tab2'
 import SearchView from '../views/search/search'
+import tabs from '../views/tabs/tabs'
+import footer from '../views/footer/footer'
 
 class DesignController {
 
@@ -22,11 +25,23 @@ class DesignController {
 
 
     static async showEvent(event_id, doWhenHide) {
-        DesignController.showLoadingBar()
-        const eventView = new EventView(event_id)
-        await eventView.render()
-        DesignController.hideLoadingBar()
-        DesignController.showOverlay(doWhenHide)
+        if(DesignController.mobile){
+            DesignController.showLoadingBar()
+            const eventView = new EventView(event_id)
+            await eventView.render('overlay')
+            DesignController.hideLoadingBar()
+            DesignController.showOverlay(doWhenHide)
+        }   
+        else{
+            footer.showTab(2)
+            tab2.loading = true
+            tab2.map.showEventPopup(event_id)
+            const eventView = new EventView(event_id)
+            await eventView.render('tab2__left__info')
+            document.querySelector(".tab2__left__info--container").classList.add('visible')
+            tab2.map.showEventPopup(event_id)
+            tab2.loading = false
+        }
 
     }
 
@@ -71,8 +86,26 @@ class DesignController {
     static hideLoadingBar(){
         document.querySelector('.main-loading').classList.remove('visible')
     }
+
+    static setupImageView(){
+        document.querySelectorAll("img:not([config='true'])").forEach((img) => {
+            img.setAttribute('config', 'true')
+            img.addEventListener('click', ()=> {
+                DesignController.showImage(img.getAttribute('src'))
+            })
+        })
+    }
+
+    static showImage(imgUrl){
+        document.querySelector(".img--overlay").children[0].setAttribute('src', imgUrl)
+        document.querySelector(".img--overlay").classList.add('visible')
+    }
+
 }
 
 DesignController.mobile = window.screen.width < 700
+
+document.addEventListener('DOMSubtreeModified', DesignController.setupImageView)
+document.querySelector('.img--overlay').addEventListener("click", ()=> document.querySelector('.img--overlay').classList.remove("visible"))
 
 export default DesignController

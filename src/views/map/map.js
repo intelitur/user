@@ -4,6 +4,7 @@ import leaflet_fullscreen from "leaflet.fullscreen/Control.FullScreen"
 import EventsService from '../../services/EventsService'
 import GeoJSONUtils from '../../utils/GeoJSONUtils'
 import DesignController from '../../utils/DesignController'
+import tab2 from "../tabs/tab2/tab2";
 
 
 import 'leaflet/dist/leaflet.css'
@@ -30,9 +31,7 @@ class Map {
         }
     }) {
         this.config = config
-
-        //Quitar
-        //DesignController.showCalendar()
+        this.eventLayers = [];
     }
 
     async render(htmlName) {
@@ -71,23 +70,23 @@ class Map {
     }
 
     async setupEventsTile() {
+        tab2.loading = true;
         let events = await EventsService.getEvents()
-
-        events = events.slice(0, 4) // Quitar esta línea
 
         const geoJSON = GeoJSONUtils.buildEventsGeoJson(events)
 
         const tooltipHTML =  await TemplatesManager.getTemplate('map.event.tooltip');
 
         let onEachFeature = (feature, layer) => {
+            this.eventLayers.push(layer)
             const dateString = feature.properties.point.date_range.initial_date.split("T")[0].split("-")
             
             const schedule = !feature.properties.point.initial_time? " todo el día" : (" a las " + feature.properties.point.initial_time.substring(0, 5))
             const tooltip = tooltipHTML.patch({dateString, feature, layer, schedule})
 
             const htmlNode = TemplatesManager.createHtmlNode(tooltip)
-            htmlNode.addEventListener('click', (function() {
-                DesignController.showEvent(feature.properties.point.event_id)
+            htmlNode.addEventListener('click', (async function() {
+                await DesignController.showEvent(feature.properties.point.event_id)
             }))
             layer.bindPopup(htmlNode)
         }
@@ -108,7 +107,18 @@ class Map {
         })
         this.map.mapLayersControl.addOverlay(layer, "Eventos")
         this.map.mapLayersControl._layers.filter((layer) => layer.name == "Eventos")[0].layer.addTo(this.map)
+        tab2.loading = false;
+    }
 
+    async showEventPopup(event_id){
+        let eventLayer = this.eventLayers.find((layer) => layer.feature.properties.point.event_id == event_id)
+
+        await eventLayer._popup.update()
+        eventLayer._popup
+        .setLatLng(eventLayer._latlng)
+        .openOn(this.map)
+        
+        this.map.flyTo(eventLayer._latlng, 17)
     }
 }
 

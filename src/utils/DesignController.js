@@ -14,9 +14,11 @@ class DesignController {
             DesignController.doWhenHide = doWhenHide
     }
 
-    static hideOverlay() {
+    static hideOverlay(force) {
         const overlay = document.querySelector('.overlay')
         overlay.classList.remove('visible')
+        if(force)
+            DesignController.doWhenHide = undefined
         if(DesignController.doWhenHide){
             DesignController.doWhenHide()
             DesignController.doWhenHide = undefined

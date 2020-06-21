@@ -21,13 +21,35 @@
                 </div>
             </div>
             <div class="tab1__calendar--left mosaic__item--left ">
+                <div class="tab1__coming-events--header">
+                    <h4 class = "hide">Eventos próximos</h4>
+                    <div class="active">
+                        <input type="text" placeholder="Buscar...">
+                        <button>
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
                 <div class="tab1__coming-events--container">
-                    <div class="tab1__coming-events--item" render="tab1_comingEvent1"></div>
-                    <div class="tab1__coming-events--item" render="tab1_comingEvent2"></div>
+                    <div>
+                        <div class="tab1__coming-events--no-more" style="font-size: 12px; color: gray; margin: 20px auto; margin-bottom: 40px; display: none;"> No hay más eventos próximos para mostrar</div>
+                        <div class="lds-ellipsis" style="margin: 0 auto; color: tomato; margin-bottom: 100px; height: 0;">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="tab1__contests--left mosaic__item--left ">
-                <div>Hola</div>
+                <div class="tab1__adds--container">
+                    <div class="tab1__adds--item"> ADD</div>
+                    <div class="tab1__adds--item"> ADD</div>
+                    <div class="tab1__adds--item"> ADD</div>
+                    <div class="tab1__adds--item"> ADD</div>
+                    <div class="tab1__adds--item"> ADD</div>
+                </div>
             </div>
         </div>
         <div class="tab1__content--right">
@@ -38,51 +60,15 @@
                 <render render=tab1_calendar></render>
             </div>
             <div class="mosaic__item--right tab1__contests--right">
-                <div>Hola</div>
+                <div class="tab1__contests--container">
+                    <div class="tab1__contests--item"></div>
+                    <div class="tab1__contests--item"></div>
+                    <div class="tab1__contests--item"></div>
+                    <div class="tab1__contests--item"></div>
+                    <div class="tab1__contests--item"></div>
+                </div>
             </div>
         </div>
     </div>
     <div class="overflow"></div>
 </div>
-<!-- <div style="position: absolute; top: calc(90% - 34.4px); right: 0; font-size: 60px; font-variant: small-caps; width: 47%; 
-    text-align: center; transition: 0.05s;" id="tab_1_title">
-        La Fortuna
-    </div>
-    <div style="width: calc(100% - 50px); padding: 10px 25px; display: flex; flex-direction: column; margin-top: calc(20vh); position: relative;"
-        id="tab_1_container">
-
-        <div style="display: flex; width: calc(100% - 15px); height: 600px; margin-left: 10px; margin-right: 5px; position: relative;"
-            id="coming_events">
-            <div style="height: 100%; display: flex; width: 50%;">
-                <div class="loader">Loading...</div>
-            </div>
-            <div style="height: 100%; display: flex; width: 50%;">
-                <div class="loader">Loading...</div>
-            </div>
-        </div>
-
-        <div style="margin: 10px 0; padding: 20px; background-color: white; color: black; height: calc(560px); width: calc(60% - 90px); top: 200px;
-         box-shadow: 0px 1px 10px 4px rgba(0, 0, 0, 0.2); border-radius: 5px; position: absolute; transition: left 0.5s; opacity: 1; left:  -60%;"
-            id="calendar_container">
-        </div>
-
-
-
-    </div>
-    <div style="display: flex; height: 240px; margin: 50px 0">
-        <div style="width: 50px; margin: auto; z-index: 2; position: relative; height: 50px;">
-            <button class="btn-pass-contest" id="previous_pass_contest" onclick="tab1Control.previousContests()">
-                <i class="fas fa-arrow-left" style="margin: auto; font-size: 15px;"></i>
-            </button>
-        </div>
-
-        <div style="position: relative; min-width: calc(100% - 150px);">
-            <div id="contests_container">
-            </div>
-        </div>
-        <div style="width: 50px; margin: auto; z-index: 2; position: relative; height: 50px;">
-            <button class="btn-pass-contest" id="next_pass_contest" onclick="tab1Control.nextContests()">
-                <i class="fas fa-arrow-right" style="margin: auto; font-size: 15px;"></i>
-            </button>
-        </div>
-    </div> -->

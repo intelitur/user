@@ -883,8 +883,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     .tab2 .overflow {
         height: 150px;
     }
-
-    .tab2 .lds-dual-ring{
+    .tab2 .lds-dual-ring {
         display: none;
         position: absolute;
         top: calc(calc(50vh - 24px) - calc(15vh / 2));
@@ -893,11 +892,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
         height: 15vh;
         z-index: 99;
     }
-
-    .tab2 .lds-dual-ring.visible{
+    .tab2 .lds-dual-ring.visible {
         display: inline-flex;
     }
-    
     .tab2 .lds-dual-ring:after {
         width: 100%;
         height: 100%;
@@ -915,40 +912,128 @@ svg.leaflet-image-layer.leaflet-interactive path {
     }
     .tab2__left--container {
         width: 100%;
-        height: 100%;
+        height: 85%;
         display: flex;
         flex-direction: column;
         background-color: white;
         position: relative;
+        overflow: auto;
     }
     .tab2__left--title {
-        margin: 7.5% auto;
+        width: 100%;
+        height: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: calc(20px + 1.5vw);
-        color: var(--tab2_color)
+        color: white;
+        background-color: var(--tab2_color);
     }
     .tab2__left--item {
-        width: 70%;
-        height: 21%;
-        margin: auto;
+        width: 83%;
+        height: 60px;
+        min-height: 60px;
+        margin: 20px auto;
         background-color: white;
-        justify-content: space-evenly;
         display: flex;
         text-align: center;
-        /*box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);*/
-        border-radius: 20px;
-        border: solid 1px var(--tab2_color);
-        transition: 0.3s;
+        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        border-radius: 30px;
+        transition: 0.5s;
+        overflow: hidden;
     }
-    .tab2__left--item:first-child {
-        margin-bottom: 3%;
+    .tab2__left--item.expanded {
+        height: 300px;
+        min-height: 300px;
     }
-    .tab2__left--item:last-child {
-        margin-top: 3%;
+    .tab2__left--item:hover {}
+    .tab2__left--item--header {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        cursor: pointer;
+        height: 60px;
+        border-radius: 30px;
+        overflow: hidden;
+        border-bottom: 1px solid rgb(231, 231, 231);
     }
-    .tab2__left--item:hover {
-        width: 72%;
-        height: 24%;
+    .tab2__left--item--checkbox--container {
+        display: flex;
+        width: 65px;
+        height: 100%;
+        background-color: var(--tab2_color);
+        margin-right: 10px;
     }
+    .tab2__left--checkbox {
+        margin: auto 12.5px;
+        width: 35px;
+        height: 35px;
+        border: 1px solid var(--tab2_color);
+        border-radius: 50px;
+        background-color: white;
+        position: relative;
+    }
+    .tab2__left--checkbox label {
+        background-color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        height: 35px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 35px;
+    }
+    .tab2__left--checkbox label:after {
+        border: 5px solid var(--tab2_color);
+        border-top: none;
+        border-right: none;
+        content: "";
+        height: 10px;
+        left: 4px;
+        opacity: 0;
+        position: absolute;
+        top: 6px;
+        transform: rotate(-50deg);
+        width: 20px;
+    }
+    .tab2__left--checkbox input[type="checkbox"] {
+        visibility: hidden;
+    }
+    .tab2__left--checkbox input[type="checkbox"]:checked+label {
+        background-color: white;
+        border-color: white;
+    }
+    .tab2__left--checkbox input[type="checkbox"]:checked+label:after {
+        opacity: 1;
+    }
+    .tab2__left--item--title {
+        margin: auto;
+        margin-left: 18px;
+        color: var(--tab2_color);
+        font-size: 25px;
+    }
+
+    .tab2__left--item--expand-icon {
+        margin: auto;
+        margin-top: 20px;
+        color: var(--tab2_color);
+        margin-right: 25px;
+        height: 12px;
+        width: 12px;
+        border-bottom: 4px solid;
+        border-left: 4px solid;
+        /* border-radius: 6px 0; */
+        color: var(--tab2_color);
+        margin-right: 25px;
+        transform: rotate(-45deg);
+        transition: 0.5s;
+    }
+
+    .expanded .tab2__left--item--expand-icon {
+        transform: rotate(135deg);
+        margin-top: 25px;
+    }
+
     .tab2>::-webkit-scrollbar-thumb {
         background: var(--tab2_color);
         border-radius: 5px;
@@ -2659,6 +2744,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     .tab1__contests--right{
         height: 100%;
         width: 100%;
+        background-color: rgb(220, 220, 220);
     }
 
     .mosaic__item--right {
@@ -2791,20 +2877,96 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         color: rgb(86, 86, 86)
     }
 
+    .tab1__coming-events--header{
+        width: calc(100% - 1.5px);
+        height: 50px;
+        
+        background-color: rgb(245, 245, 245);
+        display: flex;
+        border-right: 1.5px solid rgb(241, 241, 241);
+    }
+
+    .tab1__coming-events--header h4 {
+        margin: auto;
+        color: gray;
+        font-weight: 100;
+        font-size: 18px;
+        opacity: 1;
+        transition: opacity 0.4s, width 1s;
+        width: 100%;
+        
+    }
     
+    .tab1__coming-events--header h4.hide {
+        opacity: 0;
+        width: 0%;
+    }
+
+    .tab1__coming-events--header div {
+        display: flex;
+        margin: auto;
+        margin-right: 5%;
+        width: 40px;
+        height: 40px;
+        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        border-radius: 50px;
+        justify-content: space-between;
+        transition: width 0.6s;
+        background-color: white;
+
+    }
+
+    .tab1__coming-events--header div.active {
+        width: 90%;
+    }
+
+    .tab1__coming-events--header div button {
+        width: 40px;
+        height: 40px;
+        margin: auto 0;
+        border: none;
+        border-radius: 50px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .tab1__coming-events--header div *:focus {
+        border: none;
+        outline: none;
+    }
+
+    .tab1__coming-events--header div input {
+        width: 0px;
+        height: 30px;
+        margin: auto;
+        border: none;
+        background-color: white;
+        padding: 0;
+        transition: width 0.6s;
+        font-size: 15px;
+        
+    }
+
+    .tab1__coming-events--header div input {
+        width: calc(80% - 40px);
+    }
+
+
+
 
     .tab1__coming-events--container{
         width: 100%;
-        height: 100%;
+        height: calc(100% - 50px) ;
         display: flex;
         flex-direction: column;
-        background-color: rgb(226, 226, 226);
+        background-color: rgb(245, 245, 245);
+        overflow: auto;
     }
 
     .tab1__coming-events--item{
         width: 82%;
-        height: 40%;
-        margin: auto;
+        height: 30vh;
+        margin: 20px auto;
         background-color: white;
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         transition: 0.3s;
@@ -2820,7 +2982,52 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 
     .tab1__coming-events--item:hover{
         width: 83%;
-        height: 41%;
+        height: 30.5vh;
+    }
+
+
+    .tab1__contests--container{
+        display: flex;
+        flex-flow: row wrap;
+        padding: 20px;
+        justify-content: center;
+        width: 100%;
+        
+    }
+
+    .tab1__contests--item{
+        border-radius: 10px;
+        min-width: 250px;
+        width: 30%;
+        min-height: 110px;
+        height: 20vh;
+        margin: 10px;
+        background-color: white;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.3s;
+    }
+
+    .tab1__adds--container{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        overflow: auto;
+        height: calc(100% - 40px);
+        align-items: center;
+    }
+
+    .tab1__adds--item{
+        width: 85%;
+        min-height: 150px;
+        margin: 10px;
+        background-color: white;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        font-size: 40px;
+        color: gray
     }
 }
 
@@ -3180,6 +3387,61 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     font-size: calc(10px + 0.3vw);
     cursor: pointer;
 }
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: rgb(99, 99, 99);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
+  }
 :root{
     --tab1_color: tomato;
     --tab2_color: mediumseagreen;

@@ -103,6 +103,7 @@
     .tab1__contests--right{
         height: 100%;
         width: 100%;
+        background-color: rgb(220, 220, 220);
     }
 
     .mosaic__item--right {
@@ -235,20 +236,96 @@
         color: rgb(86, 86, 86)
     }
 
+    .tab1__coming-events--header{
+        width: calc(100% - 1.5px);
+        height: 50px;
+        
+        background-color: rgb(245, 245, 245);
+        display: flex;
+        border-right: 1.5px solid rgb(241, 241, 241);
+    }
+
+    .tab1__coming-events--header h4 {
+        margin: auto;
+        color: gray;
+        font-weight: 100;
+        font-size: 18px;
+        opacity: 1;
+        transition: opacity 0.4s, width 1s;
+        width: 100%;
+        
+    }
     
+    .tab1__coming-events--header h4.hide {
+        opacity: 0;
+        width: 0%;
+    }
+
+    .tab1__coming-events--header div {
+        display: flex;
+        margin: auto;
+        margin-right: 5%;
+        width: 40px;
+        height: 40px;
+        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        border-radius: 50px;
+        justify-content: space-between;
+        transition: width 0.6s;
+        background-color: white;
+
+    }
+
+    .tab1__coming-events--header div.active {
+        width: 90%;
+    }
+
+    .tab1__coming-events--header div button {
+        width: 40px;
+        height: 40px;
+        margin: auto 0;
+        border: none;
+        border-radius: 50px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .tab1__coming-events--header div *:focus {
+        border: none;
+        outline: none;
+    }
+
+    .tab1__coming-events--header div input {
+        width: 0px;
+        height: 30px;
+        margin: auto;
+        border: none;
+        background-color: white;
+        padding: 0;
+        transition: width 0.6s;
+        font-size: 15px;
+        
+    }
+
+    .tab1__coming-events--header div input {
+        width: calc(80% - 40px);
+    }
+
+
+
 
     .tab1__coming-events--container{
         width: 100%;
-        height: 100%;
+        height: calc(100% - 50px) ;
         display: flex;
         flex-direction: column;
-        background-color: rgb(226, 226, 226);
+        background-color: rgb(245, 245, 245);
+        overflow: auto;
     }
 
     .tab1__coming-events--item{
         width: 82%;
-        height: 40%;
-        margin: auto;
+        height: 30vh;
+        margin: 20px auto;
         background-color: white;
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         transition: 0.3s;
@@ -264,7 +341,52 @@
 
     .tab1__coming-events--item:hover{
         width: 83%;
-        height: 41%;
+        height: 30.5vh;
+    }
+
+
+    .tab1__contests--container{
+        display: flex;
+        flex-flow: row wrap;
+        padding: 20px;
+        justify-content: center;
+        width: 100%;
+        
+    }
+
+    .tab1__contests--item{
+        border-radius: 10px;
+        min-width: 250px;
+        width: 30%;
+        min-height: 110px;
+        height: 20vh;
+        margin: 10px;
+        background-color: white;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.3s;
+    }
+
+    .tab1__adds--container{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        overflow: auto;
+        height: calc(100% - 40px);
+        align-items: center;
+    }
+
+    .tab1__adds--item{
+        width: 85%;
+        min-height: 150px;
+        margin: 10px;
+        background-color: white;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        font-size: 40px;
+        color: gray
     }
 }
 

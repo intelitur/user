@@ -5,6 +5,7 @@ import Carousel from "../carousel/carousel";
 import CategoryService from "../../services/CategoryService"
 import tab2 from "../tabs/tab2/tab2"
 import footer from "../footer/footer"
+import { IMAGES_BASE_URL } from '../../env';
 
 
 import './event.css'
@@ -29,11 +30,11 @@ class EventView {
     }
 
     async renderContent(){
-        // this.carousel = new Carousel(this.event.images.map(image => image.url));
-        this.carousel = new Carousel([
-            "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
-            "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
-        ]);
+        this.carousel = new Carousel(this.event.images.map(image => `${IMAGES_BASE_URL}/${image}`));
+        // this.carousel = new Carousel([
+        //     "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
+        //     "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
+        // ]);
         this.carousel.render('event_carousel')
     }
 
@@ -54,16 +55,10 @@ class EventView {
     async updateEvent() {
         this.event = await EventsService.getEvent(this.event_id)
         console.log(this.event)
-        if(this.event.images === undefined)
-            this.event.images = await this.getImages()
         if(this.event.categories === undefined)
             this.event.categories = await this.getCategories()
         console.log(this.event.categories)
 
-    }
-
-    async getImages() {
-        return EventsService.getEventImages(this.event_id)
     }
 
     async getContestants() {

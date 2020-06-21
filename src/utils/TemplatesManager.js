@@ -22,10 +22,13 @@ class TemplatesManager {
         return htmlNode
     }
 
-    static contextPipe(htmlText, context){
+    static contextPipe(htmlText, context, returnText = true){
         const withLoops = TemplatesManager.doLoops.bind(context)(htmlText)
-        const html = withLoops.outerHTML
-        return html.patch(context)
+        let html = withLoops.outerHTML
+        html = html.patch(context)
+        if(returnText)
+            return html
+        return TemplatesManager.createHtmlNode(html)
     }
 
     static doLoops(htmlText){

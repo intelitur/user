@@ -10,7 +10,6 @@
     object-fit: contain;
     margin: 0;
     border-radius: 10px;
-    border-left: solid 1px rgb(189, 189, 189);
     background-color: rgb(223, 223, 223);
 }
 
@@ -31,7 +30,7 @@
 
 .tab1__coming-event--date {
     margin: auto;
-    font-size: calc(5px + 0.5vw);
+    font-size: calc(5px + 0.5vh);
     /* change icon size */
     display: block;
     position: relative;

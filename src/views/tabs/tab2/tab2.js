@@ -41,6 +41,7 @@ class Tab2 {
         this.loading = true;
         await this.renderMap()
         this.setupSrollAnimation()
+        this.setupEventListeners()
         this.loading = false;
     }
 
@@ -51,6 +52,20 @@ class Tab2 {
 
         this.map = map
         console.log(this.map)
+    }
+
+    setupEventListeners(){
+        document.querySelectorAll(".tab2__left--item").forEach((item) => {
+            item.addEventListener("click", () => {
+                if(!item.classList.contains("expanded"))
+                    item.classList.add("expanded")
+                else
+                    item.classList.remove("expanded")
+            })
+        })
+
+        document.querySelector("#tab2_checkbox_Eventos").addEventListener("click", ()=> this.map.toggleLayer("Eventos"))
+        
     }
 
     setupSrollAnimation() {

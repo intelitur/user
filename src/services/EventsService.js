@@ -39,8 +39,12 @@ class EventsService {
         return response
     }
 
-    static async getComingEvents(){
-        let response = await fetch(`${API_URL}/${module}/coming`)
+    static async getComingEvents(index, pageSize){
+        let url = `${API_URL}/${module}/incoming`
+        if(index != undefined && pageSize != undefined)
+            url += `?index=${index}&pageSize=${pageSize}`
+        
+        let response = await fetch(url)
         response = await response.json()
         return response
     }

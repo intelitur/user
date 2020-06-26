@@ -32,6 +32,7 @@ class Map {
     }) {
         this.config = config
         this.eventLayers = [];
+        this.layers = [];
     }
 
     async render(htmlName) {
@@ -106,7 +107,9 @@ class Map {
             }
         })
         this.map.mapLayersControl.addOverlay(layer, "Eventos")
-        this.map.mapLayersControl._layers.filter((layer) => layer.name == "Eventos")[0].layer.addTo(this.map)
+        this.layers.push({name: "Eventos", layer})
+        this.toggleLayer("Eventos")
+
         tab2.loading = false;
     }
 
@@ -119,6 +122,14 @@ class Map {
         .openOn(this.map)
         
         this.map.flyTo(eventLayer._latlng, 17)
+    }
+
+    toggleLayer(name){
+        const layer = this.layers.find((layer) => layer.name == name).layer
+        if(this.map.hasLayer(layer))
+            this.map.removeLayer(layer)
+        else    
+            layer.addTo(this.map)
     }
 }
 

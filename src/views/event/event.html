@@ -1,10 +1,7 @@
 <div class="event">
-    <div class="event__tb--container">
-        <button class='event__back'>
-            <i class="far fa-arrow-alt-circle-left"></i>
-        </button>
-        <h2 class="event__title" style="color: {event.color}">{event.name}</h2>
-    </div>
+    <button class='event__back'>
+        <i class="fas fa-arrow-left"></i>
+    </button>
     <section class="event__carousel--container">
         <render render="event_carousel"></render>
         <div class="event__carousel--button left">
@@ -14,19 +11,48 @@
             <i class="material-icons">chevron_right</i>
         </div>
     </section>
-    <section class="event__date--container">
-        <div class="event__date">
-            <em>{datetime.startDayName}</em>
-            <strong>{datetime.startMonthName}</strong>
-            <span style="color: {event.color}">{datetime.startDateI}</span>
-            <label>{event.initial_time == null? "Todo el día": o.datetime.startTime}</label>
-        </div>
-        <i class="fas fa-arrow-right event__date--arrow"></i>
-        <div class="event__date">
-            <em>{datetime.endDayName}</em>
-            <strong>{datetime.endMonthName}</strong>
-            <span style="color: {event.color}">{datetime.endDateI}</span>
-            <label>{event.final_time == null? "Todo el día": o.datetime.endTime}</label>
-        </div>
+    <section class="event__category--container">
+        <div class="event__category" for="category of event.categories">{category.name}</div>
     </section>
+
+    <section class="event__flex--container">
+        <section class="event__date--container">
+            <div class="event__date">
+                <em>{datetime.startDayName}</em>
+                <strong>{datetime.startMonthName}</strong>
+                <span style="color: {event.color}">{datetime.startDateI}</span>
+                <label>{event.initial_time == null? "Todo el día": o.datetime.startTime}</label>
+            </div>
+            <i class="fas fa-arrow-right event__date--arrow"></i>
+            <div class="event__date">
+                <em>{datetime.endDayName}</em>
+
+                <strong>{datetime.endMonthName}</strong>
+                <span style="color: {event.color}">{datetime.endDateI}</span>
+                <label>{event.final_time == null? "Todo el día": o.datetime.endTime}</label>
+            </div>
+        </section>
+        <section class="event__cost--container">
+            <span>{event.cost == 0? "Gratis": ("$" + o.event.cost)}</span>
+        </section>
+    </section>
+
+    <section class="event__description--container">
+        {event.detail}
+    </section>
+
+    <section class="event__address--container"">
+        <div class=" event__address--text">
+        <span>{event.address}</span>
+</div>
+<button class="event__address--button">
+    <i class="fas fa-map-marker-alt"></i>
+</button>
+</section>
+<div class="event__tb--container" style="background-color: {event.color};">
+    <h2 class="event__title">{event.name}</h2>
+    <button class="event__save--button" style="color: {event.color}">
+        <i class="far fa-calendar-plus"></i>
+    </button>
+</div>
 </div>

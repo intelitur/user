@@ -3,20 +3,25 @@ import Carousel from "../../carousel/carousel";
 import DesignController from "../../../utils/DesignController";
 import CalendarView from "../../calendar/calendar";
 import EventsService from "../../../services/EventsService";
+import { IMAGES_BASE_URL } from "../../../env";
 
 
 import './tab1.css'
 import './css/tab1_viewEventDesktop.css'
+import '../../../utils/css/loader-ellipsis.css'
 
 
 class Tab1 {
     
+
     constructor() {
         this.carousel = new Carousel([
             "https://cdn.shopify.com/s/files/1/0094/5052/files/LaFortunaWaterfall-1500x1000x300.jpg?v=1540451385",
             "https://puntadelesteibt.com/wp-content/uploads/2012/07/NTN_6571.jpg",
             "https://d3hne3c382ip58.cloudfront.net/resized/750x420/combination-tour-la-fortuna-in-one-day-tour-2-457721_1549285516.JPG"
         ])
+        this.index = 0;
+        this.pageSize = 3;
     }
 
     async render() {
@@ -40,6 +45,7 @@ class Tab1 {
             this.showSearchScreen()
         }
         else {
+            this.setudDesktopListeners()
             await this.renderCalendar()
             this.setupSrollAnimation()
             await this.renderComingEvents()
@@ -53,20 +59,43 @@ class Tab1 {
     }
 
     async renderComingEvents(){
-        let comingEvents = await EventsService.getComingEvents()
-
-        console.log(comingEvents)
-
         let template = await TemplatesManager.getTemplate("tab1_viewEventDesktop")
+        
+        let comingEvents = await EventsService.getComingEvents(this.index, this.pageSize)
+        comingEvents.forEach((event) => {
+            let node = TemplatesManager.contextPipe(template, {...event, ...this.getDateInfo(event), main_image: this.getMainImage(event)}, false)
+            node.classList.add("tab1__coming-events--item")
+            document.querySelector(".tab1__coming-events--container").insertBefore(node, document.querySelector(".tab1__coming-events--container").lastElementChild)
+        })
 
-        TemplatesManager.renderElement("tab1_comingEvent1", template.patch({...comingEvents[0], ...this.getDateInfo(comingEvents[0])}));
-        TemplatesManager.renderElement("tab1_comingEvent2", template.patch({...comingEvents[1], ...this.getDateInfo(comingEvents[1])}));
+        if(comingEvents.length < this.pageSize){
+            this.el.querySelector(".lds-ellipsis").style.display = "none"
+            this.el.querySelector(".tab1__coming-events--no-more").style.display = "block"
+        }
+        
 
         const comingEventsDOM = this.el.querySelectorAll(".tab1__coming-event--button")
-
         comingEventsDOM.forEach(item => {
             item.addEventListener('click', DesignController.showEvent.bind(this, item.getAttribute("event_id")))
         })
+    }
+
+    setudDesktopListeners(){
+        let loading = false;
+        document.querySelector(".tab1__coming-events--container").addEventListener("scroll", (async (e) => {
+            if(e.target.scrollTop + 70 > e.target.scrollHeight - e.target.clientHeight && !loading){
+                loading = true
+                console.log("Carga")
+                this.index += 1
+                await this.renderComingEvents()
+                loading = false
+                console.log("Ya no carga")
+            }
+                
+        }).bind(this))
+        
+
+        
     }
 
     getDateInfo(event){
@@ -89,6 +118,11 @@ class Tab1 {
             dayName,
             dateI
         }
+    }
+
+    getMainImage(event){
+        console.log(event)
+        return `${IMAGES_BASE_URL}/${event.images[0]}`
     }
 
     setupSrollAnimation() {

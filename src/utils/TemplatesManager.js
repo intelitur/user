@@ -22,10 +22,13 @@ class TemplatesManager {
         return htmlNode
     }
 
-    static contextPipe(htmlText, context){
+    static contextPipe(htmlText, context, returnText = true){
         const withLoops = TemplatesManager.doLoops.bind(context)(htmlText)
-        const html = withLoops.outerHTML
-        return html.patch(context)
+        let html = withLoops.outerHTML
+        html = html.patch(context)
+        if(returnText)
+            return html
+        return TemplatesManager.createHtmlNode(html)
     }
 
     static doLoops(htmlText){
@@ -36,9 +39,12 @@ class TemplatesManager {
             const forValues = loop.getAttribute('for').split(' of ')
             const iteratorName = forValues[0].split(' & ')[0]
             const withIndex = forValues[0].split(' & ').length === 2
-            const iterable = forValues[1]
+            const iterableS = forValues[1].split(".")
+            let iterable = this[iterableS[0]]
+            if(iterableS.length > 1)
+                iterableS.slice(1).forEach((e) => {iterable = iterable[e]})
             parentNode.innerHTML = ''
-            this[iterable].forEach((iterator, i) => {
+            iterable.forEach((iterator, i) => {
                 const obj = Object.fromEntries(withIndex? [[iteratorName, iterator], [i, i]]: [[iteratorName, iterator]])
                 const node = TemplatesManager.createHtmlNode(outerHTML.patch(obj))
                 node.removeAttribute('for')

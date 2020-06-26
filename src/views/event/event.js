@@ -2,6 +2,10 @@ import EventsService from '../../services/EventsService'
 import TemplatesManager from '../../utils/TemplatesManager'
 import DesignController from '../../utils/DesignController'
 import Carousel from "../carousel/carousel";
+import CategoryService from "../../services/CategoryService"
+import tab2 from "../tabs/tab2/tab2"
+import footer from "../footer/footer"
+import { IMAGES_BASE_URL } from '../../env';
 
 
 import './event.css'
@@ -26,11 +30,11 @@ class EventView {
     }
 
     async renderContent(){
-        // this.carousel = new Carousel(this.event.images.map(image => image.url));
-        this.carousel = new Carousel([
-            "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
-            "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
-        ]);
+        this.carousel = new Carousel(this.event.images.map(image => `${IMAGES_BASE_URL}/${image}`));
+        // this.carousel = new Carousel([
+        //     "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
+        //     "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
+        // ]);
         this.carousel.render('event_carousel')
     }
 
@@ -38,21 +42,31 @@ class EventView {
         this.el.querySelector('.event__back').addEventListener('click', this.hide)
         this.el.querySelector(".event__carousel--button.left").addEventListener("click", this.carousel.pImage.bind(this.carousel))
         this.el.querySelector(".event__carousel--button.right").addEventListener("click", this.carousel.nImage.bind(this.carousel))
+        this.el.querySelector(".event__save--button").addEventListener("click", this.downloadEvent.bind(this))
+        this.el.querySelector(".event__address--button").addEventListener("click", (() => { 
+            tab2.map.showEventPopup(this.event.event_id); 
+            if(DesignController.mobile){
+                footer.showTab(2);
+                DesignController.hideOverlay(true); 
+            }
+        }).bind(this))
     }
 
     async updateEvent() {
         this.event = await EventsService.getEvent(this.event_id)
         console.log(this.event)
-        if(this.event.images === undefined)
-            this.event.images = await this.getImages()
-    }
+        if(this.event.categories === undefined)
+            this.event.categories = await this.getCategories()
+        console.log(this.event.categories)
 
-    async getImages() {
-        return EventsService.getEventImages(this.event_id)
     }
 
     async getContestants() {
         return EventsService.getContestants(this.event_id)
+    }
+
+    async getCategories() {
+        return CategoryService.getEventCategories(this.event_id)
     }
 
     getDateTimeInfo(){
@@ -92,12 +106,45 @@ class EventView {
             endTime
         }
     }
+    
 
     hide(){
         if(DesignController.mobile)
             DesignController.hideOverlay()
         else
             document.querySelector(".tab2__left__info--container").classList.remove('visible')
+    }
+
+    downloadEvent() {
+        const SEPARATOR = (navigator.appVersion.indexOf('Win') !== -1) ? '\r\n' : '\n';
+
+        let start = this.event.date_range.initial_date.split("T")[0] + "T" + (this.event.initial_time != null?  this.event.initial_time: "00:00:00")
+        start = start.replace(/:|-/gi, '')
+
+        
+        let end = this.event.date_range.final_date.split("T")[0] + "T" + (this.event.final_time != null?  this.event.final_time: "23:59:59")
+        end = end.replace(/:|-/gi, '')
+
+        const description = this.event.detail
+        const location = this.event.address
+        const subject = this.event.name
+
+        const calendarEvent = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'BEGIN:VEVENT',
+            'CLASS:PUBLIC',
+            'DESCRIPTION:' + description,
+            'DTSTART:' + start,
+            'DTEND:' + end,
+            'LOCATION:' + location,
+            'SUMMARY:' + subject,
+            'TRANSP:TRANSPARENT',
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join(SEPARATOR);
+
+        window.open("data:text/calendar;charset=utf8," + escape(calendarEvent), "event.ics");
     }
 }
 

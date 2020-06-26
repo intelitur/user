@@ -1,12 +1,23 @@
 <div>
 <div class="events__containerName">
-    <button class="tab1__event--button"></button>
-    <a class="tab1__event--Nombre">{events}</a>
+    <button class="tab1__event--button" style="background-color: {events.color};"></button>
+    <a class="tab1__event--Nombre" >{events.name}</a>
     <button class = "tab1_event--location"><i class="material-icons">place</i></button>
     </div>
+    <div class="tab1__coming-eventMobile">
+        <div class="tab1__coming-event--infoMobile">
+            <div class="tab1__coming-event--dateMobile">
+                <em></em>
+                <strong></strong>
+                <span style="color: {color}">{dateI}</span>
+            </div>
+        </div>
+    </div>
+    
+    <!--
 <a class= "tab1__event--fecha1"></a>
 <a class= "tab1__calendar__event--item1--fecha2"></a>
-<a class="tab1__event--details" ></a>
+<a class="tab1__event--details" ></a>-->
 <div class= "tab1__event__containerStars">
     <p class="clasificacion">
     <input id="radio1" type="radio" name="estrellas" value="5">

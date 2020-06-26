@@ -344,6 +344,10 @@
         display:flex;
         flex-direction: row;
     }
+    .tab1__event--Nombre{
+        margin-top: 3px;
+        margin-left: 5px;
+    }
     .tab1__calendar__events--item1{
         position: relative;
         margin-top: calc(100% - 75%);
@@ -367,14 +371,17 @@
         overflow: hidden;
         position: absolute;
         bottom: 0;
-        height: calc(100% - 90%);
+        width: 100%;
+        height: calc(100% - 80%);
         display:flex;
         flex-direction: row;
+        justify-content: center;
+        align-items: center;
         
     }
 
     .tab1_event--location{
-        margin-right:calc(100% - 99%);
+        margin-left:calc(100% - 140px);
         background: none;
         border: none;
         color: red;
@@ -383,7 +390,8 @@
         font-size: 20px;
     }
     .clasificacion{
-        margin-top: -6px;
+        
+        width: 60%;
         margin-left: calc(100% - 88%);
         
     }
@@ -414,10 +422,8 @@
         visibility: hidden;
     }
     .tab__event--more{
-        float: right;
-        height: 20px;
+        height: calc(100% - 15%);
         width: calc(100% - 40%) ;
-        margin-top: -6px;
         background-color: white;
         border:none;
         color:blue;
@@ -530,5 +536,70 @@
     .div{
         height: 100%;
     }
+
+    /*Parte del view de fecha en la parte mobile de los eventos próximos*/
+
+    .tab1__coming-eventMobile {
+        position: relative;
+        display: flex;
+        border-radius: 10px;
+    }
+
+    .tab1__coming-event--infoMobile {
+        width: 50%;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    
+.tab1__coming-event--dateMobile {
+    margin: auto;
+    font-size: calc(5px + 0.5vw);
+    /* change icon size */
+    display: block;
+    position: relative;
+    width: 5em;
+    height: 5em;
+    background-color: #fff;
+    border-radius: 0.6em;
+    box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px #bdbdbd;
+    overflow: hidden;
+}
+
+.tab1__coming-event--dateMobile *{
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+}
+
+.tab1__coming-event--dateMobile span
+{
+  font-size: 2.8em;
+  letter-spacing: -0.05em;
+  padding-top: 0.8em;
+  color: #2f2f2f;
+}
+.tab1__coming-event--dateMobile strong
+{
+  position: absolute;
+  top: 0;
+  padding: 0.4em 0;
+  color: #fff;
+  background-color: gray;
+  border-bottom: 1px dashed rgb(160, 160, 160);
+  box-shadow: 0 2px 0 gray;
+  
+}
+
+.tab1__coming-event--dateMobile em
+{
+  position: absolute;
+  bottom: 0.3em;
+  color: gray;
+}
     
 }

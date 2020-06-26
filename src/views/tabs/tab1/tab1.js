@@ -146,19 +146,10 @@ class Tab1 {
 
     hiddenDiv(events) {
         const padre = this.el.querySelector('.tab1__calendar__events--container');
-        console.log(padre.children[0]);
-        /**
-        padre.children[0].addEventListener('mouseenter', function () {
-            
-            padre.children[0].children[0].children[4].classList.add('size');
-        }); */
         padre.children[1].addEventListener('mouseenter', function () {
             padre.children[0].classList.add('hidden');
-            //padre.children[1].children[2].text = events[0].detail;
-            //padre.children[1].children[3].style.marginTop = "30px";
         });
         padre.children[1].addEventListener('mouseleave', function () {
-            //padre.children[1].children[3].text ="";
             padre.children[0].classList.remove('hidden');
         });
         const consurso = this.el.querySelector('.tab1__calendar__concurso--container')
@@ -177,31 +168,18 @@ class Tab1 {
     async getEvents(){
         
         const tooltipHTML = await TemplatesManager.getTemplate('tab1_viewEvent');
-        let events = await EventsService.getEvents();
-        const htmlNode = TemplatesManager.createHtmlNode(tooltipHTML.patch({events: events[0]}));
+        let events = await EventsService.getComingEvents();
+        const htmlNode = TemplatesManager.createHtmlNode(tooltipHTML.patch({events: events[0], ...this.getDateInfo(events[0])}));
         const htmlNode2 = TemplatesManager.createHtmlNode(tooltipHTML.patch({events : events[1]}));
+
         
-        console.log(events);
         var info = new Tab1(this.el.children[0]);
-        //var date = new Date();
-        //console.log(events[0].date_range.initial_date);
         const padre = this.el.querySelector('.tab1__calendar__events--container');
-        console.log(htmlNode);
         padre.children[0].appendChild(htmlNode);
-
-        padre.children[1].appendChild(htmlNode2);
-        //padre.children[0].children[1].text= "jueves 03:40"; padre.children[0].children[2].text= "Martes 3:20";
-        //padre.children[0].children[1].text= events[0].name; date = events[0].date_range.initial_date;
         
-        //padre.children[1].children[1].text = events[1].name;
-        //padre.children[1].children[0].children[0].style.backgroundColor = events[1].color;
-        //padre.children[1].children[1].text= "viernes 4:05"; padre.children[1].children[2].text= "Martes 3:20";
+        console.log(padre.children[0].children[0].children[1].children[0]);
+        padre.children[1].appendChild(htmlNode2);
         return events;
-
-       /*
-                 event.date_range.initial_date.split("T")[0] + "T" + (event.initial_time ? event.initial_time : "00:00:00"),
-                 event.date_range.final_date.split("T")[0] + "T" + (event.final_time ? event.final_time : "23:59:00"),
-             event.all_day,*/
             
     }
 

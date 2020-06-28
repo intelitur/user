@@ -202,7 +202,7 @@ class Tab1 {
     async getEvents(){
         
         const tooltipHTML = await TemplatesManager.getTemplate('tab1_viewEvent');
-        let events = await EventsService.getComingEvents();
+        let events = await EventsService.getComingEvents(0, 2);
         const htmlNode = TemplatesManager.createHtmlNode(tooltipHTML.patch({events: events[0], ...this.getDateInfo(events[0])}));
         const htmlNode2 = TemplatesManager.createHtmlNode(tooltipHTML.patch({events : events[1]}));
 

@@ -135,10 +135,8 @@ class Tab1 {
 
         document.querySelector(".tab1_coming-events--input").addEventListener("keyup", ((e) => {
             this.filter = e.target.value
-            if(e.keyCode == 13){
                 this.index = 0
                 this.renderEvents()
-            }
         }).bind(this))
 
         document.querySelector(".tab1_coming-events--search-button").addEventListener("click", (() => {this.index = 0; this.renderEvents()}).bind(this))
@@ -167,7 +165,6 @@ class Tab1 {
     }
 
     getMainImage(event){
-        console.log(event)
         return `${IMAGES_BASE_URL}/${event.images[0]}`
     }
 

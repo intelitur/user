@@ -295,7 +295,7 @@
     }
 
     .tab1__coming-events--header div input {
-        width: 0px;
+        width: calc(80% - 40px);
         height: 30px;
         margin: auto;
         border: none;
@@ -305,13 +305,6 @@
         font-size: 15px;
         
     }
-
-    .tab1__coming-events--header div input {
-        width: calc(80% - 40px);
-    }
-
-
-
 
     .tab1__coming-events--container{
         width: 100%;

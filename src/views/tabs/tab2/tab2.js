@@ -1,6 +1,7 @@
 import TemplatesManager from "../../../utils/TemplatesManager";
 import Map from "../../map/map"
-import DesignController from "../../../utils/DesignController"
+import DesignController from "../../../utils/DesignController";
+
 
 
 import './tab2.css'
@@ -37,11 +38,17 @@ class Tab2 {
     async renderContent() {
         const htmlName = DesignController.mobile ? 'mobile_tab2_content' : 'tab2_content'
         const view = await TemplatesManager.getTemplate(htmlName)
-        TemplatesManager.renderElement('tab2_content', view)
+        const htmlNode = TemplatesManager.contextPipe(view, this)
+        TemplatesManager.renderElement('tab2_content', htmlNode)
         this.loading = true;
         await this.renderMap()
-        this.setupSrollAnimation()
-        this.setupEventListeners()
+        if(DesignController.mobile){
+
+        }
+        else{
+            this.setupSrollAnimation()
+            this.setupEventListeners()
+        }
         this.loading = false;
     }
 
@@ -55,6 +62,8 @@ class Tab2 {
     }
 
     setupEventListeners(){
+
+
         document.querySelectorAll(".tab2__left--item").forEach((item) => {
             item.addEventListener("click", () => {
                 if(!item.classList.contains("expanded"))
@@ -63,6 +72,8 @@ class Tab2 {
                     item.classList.remove("expanded")
             })
         })
+
+        
 
         document.querySelector("#tab2_checkbox_Eventos").addEventListener("click", ()=> this.map.toggleLayer("Eventos"))
         

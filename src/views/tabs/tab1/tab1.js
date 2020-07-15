@@ -24,6 +24,22 @@ class Tab1 {
         this.pageSize = 3;
     }
 
+    set loading(value){
+        this.loadingState = value;
+        if(value){
+            this.el.querySelector(".lds-ellipsis").style.display = "block"
+            this.el.querySelector(".tab1__coming-events--no-more").style.display = "none"
+        }
+        else{
+            this.el.querySelector(".lds-ellipsis").style.display = "none"
+            this.el.querySelector(".tab1__coming-events--no-more").style.display = "block"
+        }
+    }
+
+    get loading(){
+        return this.loadingState
+    }
+
     async render() {
         const view = await TemplatesManager.getTemplate('tab1')
         this.el = TemplatesManager.renderElement('tab1', view)
@@ -48,7 +64,7 @@ class Tab1 {
             this.setudDesktopListeners()
             await this.renderCalendar()
             this.setupSrollAnimation()
-            await this.renderComingEvents()
+            await this.renderEvents()
         }
     }
 
@@ -58,44 +74,74 @@ class Tab1 {
         
     }
 
-    async renderComingEvents(){
-        let template = await TemplatesManager.getTemplate("tab1_viewEventDesktop")
-        
-        let comingEvents = await EventsService.getComingEvents(this.index, this.pageSize)
-        comingEvents.forEach((event) => {
-            let node = TemplatesManager.contextPipe(template, {...event, ...this.getDateInfo(event), main_image: this.getMainImage(event)}, false)
-            node.classList.add("tab1__coming-events--item")
-            document.querySelector(".tab1__coming-events--container").insertBefore(node, document.querySelector(".tab1__coming-events--container").lastElementChild)
-        })
+    resetContainer(){
+        let container = document.querySelector(".tab1__coming-events--container")
+            container.innerHTML = `<div>
+            <div class="tab1__coming-events--no-more" style="font-size: 12px; color: gray; margin: 20px auto; margin-bottom: 40px; display: none;"> No hay más eventos próximos para mostrar</div>
+            <div class="lds-ellipsis" style="margin: 0 auto; color: tomato; margin-bottom: 100px; height: 0;">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>`
+        this.el.querySelector(".tab1__coming-events--no-more").innerHTML = 
+                this.filter != undefined && this.filter != ""? 
+                `No hay más eventos que coincidan con <b>${this.filter}<b/>`: 
+                "No hay más eventos próximos para mostrar"
+    }
 
-        if(comingEvents.length < this.pageSize){
-            this.el.querySelector(".lds-ellipsis").style.display = "none"
-            this.el.querySelector(".tab1__coming-events--no-more").style.display = "block"
+    async renderEvents(){
+        if(this.index == 0){
+            this.resetContainer()
         }
-        
+        this.loading = true;
+        let events = []
+        if(this.filter != undefined && this.filter != ""){
+            this.events = await EventsService.getEvents();
+            events = this.events.filter(item => item.name.toLowerCase().includes(this.filter.toLowerCase()))
+            events = events.slice(this.pageSize * this.index, this.pageSize * (this.index + 1))
+        }
+        else{
+            events = await EventsService.getComingEvents(this.index, this.pageSize)
+        }
 
-        const comingEventsDOM = this.el.querySelectorAll(".tab1__coming-event--button")
-        comingEventsDOM.forEach(item => {
-            item.addEventListener('click', DesignController.showEvent.bind(this, item.getAttribute("event_id")))
-        })
+        
+        if(events.length > 0){
+            let template = await TemplatesManager.getTemplate("tab1_viewEventDesktop")
+    
+            events.forEach((event) => {
+                let node = TemplatesManager.contextPipe(template, {...event, ...this.getDateInfo(event), main_image: this.getMainImage(event)}, false)
+                node.classList.add("tab1__coming-events--item")
+                document.querySelector(".tab1__coming-events--container").insertBefore(node, document.querySelector(".tab1__coming-events--container").lastElementChild)
+            })
+                
+            const eventsDOM = this.el.querySelectorAll(".tab1__coming-event--button")
+            eventsDOM.forEach(item => {
+                item.addEventListener('click', DesignController.showEvent.bind(this, item.getAttribute("event_id")))
+            })
+        }
+        this.loading = false;
     }
 
     setudDesktopListeners(){
-        let loading = false;
         document.querySelector(".tab1__coming-events--container").addEventListener("scroll", (async (e) => {
-            if(e.target.scrollTop + 70 > e.target.scrollHeight - e.target.clientHeight && !loading){
-                loading = true
-                console.log("Carga")
+            if(e.target.scrollTop + 70 > e.target.scrollHeight - e.target.clientHeight && !this.loading){
                 this.index += 1
-                await this.renderComingEvents()
-                loading = false
-                console.log("Ya no carga")
+                await this.renderEvents()
             }
                 
-        }).bind(this))
-        
+        }).bind(this)) 
 
-        
+        document.querySelector(".tab1_coming-events--input").addEventListener("keyup", ((e) => {
+            this.filter = e.target.value
+            if(e.keyCode == 13){
+                this.index = 0
+                this.renderEvents()
+            }
+        }).bind(this))
+
+        document.querySelector(".tab1_coming-events--search-button").addEventListener("click", (() => {this.index = 0; this.renderEvents()}).bind(this))
     }
 
     getDateInfo(event){

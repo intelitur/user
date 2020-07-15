@@ -33,10 +33,10 @@ class TemplatesManager {
 
     static doLoops(htmlText){
         const template = TemplatesManager.createHtmlNode(htmlText)
-        const loops = template.querySelectorAll('[for]')
+        const loops = template.querySelectorAll('[foreach]')
         loops.forEach((loop) => {
             const {parentNode, outerHTML} = loop
-            const forValues = loop.getAttribute('for').split(' of ')
+            const forValues = loop.getAttribute('foreach').split(' of ')
             const iteratorName = forValues[0].split(' & ')[0]
             const withIndex = forValues[0].split(' & ').length === 2
             const iterableS = forValues[1].split(".")
@@ -47,7 +47,7 @@ class TemplatesManager {
             iterable.forEach((iterator, i) => {
                 const obj = Object.fromEntries(withIndex? [[iteratorName, iterator], [i, i]]: [[iteratorName, iterator]])
                 const node = TemplatesManager.createHtmlNode(outerHTML.patch(obj))
-                node.removeAttribute('for')
+                node.removeAttribute('foreach')
                 parentNode.appendChild(node)
             })
         })

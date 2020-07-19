@@ -5,6 +5,7 @@ import DesignController from "../../../utils/DesignController";
 
 
 import './tab2.css'
+import EventsService from "../../../services/EventsService";
 class Tab2 {
 
     constructor(){
@@ -64,22 +65,28 @@ class Tab2 {
     setupEventListeners(){
 
 
-        document.querySelectorAll(".tab2__left--item").forEach((item) => {
-            item.addEventListener("click", () => {
-                if(!item.classList.contains("expanded"))
-                    item.classList.add("expanded")
+        document.querySelectorAll(".tab2__left--item--header").forEach((item) => {
+            item.addEventListener("click", (() => {
+                let parent = item.parentNode
+                if(!parent.classList.contains("expanded")){
+                    parent.classList.add("expanded")
+                    this.showEvents()
+                }
                 else
-                    item.classList.remove("expanded")
-            })
+                    parent.classList.remove("expanded")
+            }).bind(this))
         })
 
         
 
         document.querySelector("#tab2_checkbox_Eventos").addEventListener("click", ()=> this.map.toggleLayer("Eventos"))
+
+        this.map.map.on("moveend", this.showEvents.bind(this))
         
     }
 
     setupSrollAnimation() {
+        
         const container = this.el.children[0]
         
         container.addEventListener('scroll', ((e) => {
@@ -101,7 +108,9 @@ class Tab2 {
         DesignController.showTab(i);
     }
 
-    show() { this.el.classList.add('active') }
+    show() { 
+        this.el.classList.add('active')
+     }
 
     hide() {
         if(!DesignController.mobile)
@@ -115,6 +124,31 @@ class Tab2 {
 
     hideInfoContainer(){
         this.el.querySelector('.tab2__left__info--container').classList.remove('visible')
+    }
+
+    async showEvents(){
+        if(document.querySelector("#tab2_checkbox_Eventos").checked){
+            let container = document.querySelector(".tab2__left--item")
+            
+            if(container.classList.contains("expanded")){
+                container = document.querySelector(".tab2__left--item--content")
+                container.innerHTML = ""
+                let events = await EventsService.getEvents()
+                let visibleEvents = events.filter((item) => this.map.isVisible(item.latitude, item.longitude))
+    
+                let template = await TemplatesManager.getTemplate("event_item")
+
+                visibleEvents.forEach(event => {
+                    let node = TemplatesManager.contextPipe(template, event, false)
+                    container.appendChild(node)
+                    node.addEventListener("click", this.map.showEventPopup.bind(this.map, event.event_id))
+                })
+
+                
+                
+            }
+
+        }
     }
 }
 

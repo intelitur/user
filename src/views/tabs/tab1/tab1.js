@@ -40,6 +40,10 @@ class Tab1 {
         return this.loadingState
     }
 
+    get noMore(){
+        return this.el.querySelector(".tab1__coming-events--no-more").style.display == "block"
+    }
+
     async render() {
         const view = await TemplatesManager.getTemplate('tab1')
         this.el = TemplatesManager.renderElement('tab1', view)
@@ -126,7 +130,7 @@ class Tab1 {
 
     setudDesktopListeners(){
         document.querySelector(".tab1__coming-events--container").addEventListener("scroll", (async (e) => {
-            if(e.target.scrollTop + 70 > e.target.scrollHeight - e.target.clientHeight && !this.loading){
+            if(e.target.scrollTop + 70 > e.target.scrollHeight - e.target.clientHeight && !this.loading && !this.noMore){
                 this.index += 1
                 await this.renderEvents()
             }

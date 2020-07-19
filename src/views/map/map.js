@@ -106,7 +106,8 @@ class Map {
                 });
             }
         })
-        this.map.mapLayersControl.addOverlay(layer, "Eventos")
+        if(DesignController.mobile)
+            this.map.mapLayersControl.addOverlay(layer, "Eventos")
         this.layers.push({name: "Eventos", layer})
         this.toggleLayer("Eventos")
 
@@ -130,6 +131,10 @@ class Map {
             this.map.removeLayer(layer)
         else    
             layer.addTo(this.map)
+    }
+
+    isVisible(lat, lng){ 
+        return this.map.getBounds().contains([lat, lng])
     }
 }
 

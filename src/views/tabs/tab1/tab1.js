@@ -4,6 +4,7 @@ import DesignController from "../../../utils/DesignController";
 import CalendarView from "../../calendar/calendar";
 import EventsService from "../../../services/EventsService";
 import { IMAGES_BASE_URL } from "../../../env";
+import tab1_companies from "./js/tab1_companies";
 
 
 import './tab1.css'
@@ -69,6 +70,7 @@ class Tab1 {
             await this.renderCalendar()
             this.setupSrollAnimation()
             await this.renderEvents()
+            tab1_companies.renderCompanies()
         }
     }
 

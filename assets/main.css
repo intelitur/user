@@ -1034,9 +1034,21 @@ svg.leaflet-image-layer.leaflet-interactive path {
         margin-top: 25px;
     }
 
+    .tab2__left--item--content {
+        height: 0px;
+        min-height: 0px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+    }
+
     .expanded .tab2__left--item--content{
-        min-height: calc(100% - 60px);
-        height: calc(100% - 60px);
+        min-height: calc(100% - 70px);
+        height: calc(100% - 70px);
+    }
+
+    .tab2__left--item ::-webkit-scrollbar {
+        width: 4px;
+        height: 8px;
     }
 
     .tab2>::-webkit-scrollbar-thumb {
@@ -1055,6 +1067,30 @@ svg.leaflet-image-layer.leaflet-interactive path {
     .tab2__left__info--container.visible {
         left: 0%;
     }
+
+    .tab2__item--event {
+        display: flex; 
+        flex-direction: row; 
+        margin: 3px 5%;
+        padding: 7px 5%; 
+        font-size: 13.5px; 
+        justify-content: space-between; 
+        cursor: pointer;
+        margin-left: 10%;
+        border-radius: 5px;
+        border: solid 0.5px rgb(230, 230, 230)
+    }
+
+    .tab2__item--event:hover {
+        background-color: rgb(245, 245, 245);
+    }
+
+    .tab2__item--event--button{
+        border: none; 
+        background-color: transparent ; 
+    }
+
+
 }
 
 /* Mobile css */

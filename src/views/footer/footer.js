@@ -24,7 +24,7 @@ class Footer {
         ]
         await tabs.render()
         this.addEventListeners()
-        this.showTab(5)
+        this.showTab(1)
         DesignController.showTab = this.showTab.bind(this)
 
     }

@@ -1,3 +1,5 @@
+
+
 import TemplatesManager from "../../../utils/TemplatesManager";
 import Carousel from "../../carousel/carousel";
 import DesignController from "../../../utils/DesignController";
@@ -211,7 +213,6 @@ class Tab1 {
         const padre = this.el.querySelector('.tab1__calendar__events--container');
         padre.children[0].appendChild(htmlNode);
         
-        console.log(padre.children[0].children[0].children[1].children[0]);
         padre.children[1].appendChild(htmlNode2);
         return events;
             

@@ -457,14 +457,14 @@
         border-radius: 50%;
     }
     .events__containerName{
-        position: relative;
-        top: 0;
+        position: absolute;
         height: calc(100% - 98%);
-        border-bottom: ridge;
         color: black;
         border-radius: 2px;
-        display:flex;
-        flex-direction: row;
+        float: left;
+        width: 33.33%; /* three containers (use 25% for four, and 50% for two, etc) */
+        padding: 5px;
+        
     }
     .tab1__calendar__events--item1{
         position: relative;
@@ -488,10 +488,13 @@
     .tab1__event__containerStars{
         overflow: hidden;
         position: absolute;
-        bottom: 0;
-        height: calc(100% - 90%);
-        display:flex;
-        flex-direction: row;
+        float: right;
+        bottom: 3px;
+        display: flex;
+        height: calc(100% - 85%);
+        justify-content: center;
+        align-items: center;
+        width: 100%;
         
     }
 
@@ -536,13 +539,11 @@
         visibility: hidden;
     }
     .tab__event--more{
-        float: right;
-        height: 20px;
-        width: calc(100% - 40%) ;
-        margin-top: -6px;
-        background-color: white;
+        height: 100%;
+        width: 100%;
         border:none;
-        color:blue;
+        border-radius: 5px;
+        font-size: calc(10px + 1.3w)
     }
     .tab1__calendar__concurso--container{
         float: right;
@@ -559,6 +560,9 @@
         opacity: 0.4;
         transition: 0.2s;
         
+    }
+    .tab1__event--Nombre{
+        font-size: calc(15px + 0.8vw);
     }
     .tab1__calendar__concurso--item2{
         margin-top: 30px;
@@ -652,5 +656,67 @@
     .div{
         height: 100%;
     }
-    
+    .tab__event--more{
+        color: white;
+        font-size: calc(10px + 0.3vw);
+        border-radius: 5px;
+        height: 25px;
+        width: 90%;
+    }
+    .events__comingEvents{
+        position: relative;
+        display:flex;
+        height: 100%;
+        box-sizing: border-box;
+        flex-direction: row;
+    }
+    .tab1__event--date{
+        margin-top: 10%;
+        margin-left: calc(100% - 45%);
+        font-size: calc(5px + 0.5vh);
+        /* change icon size */
+        display: block;
+        position: relative;
+        float: right;
+        width: 7em;
+        height: 7em;
+        background-color: #fff;
+        border-radius: 0.6em;
+        box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px #bdbdbd;
+        overflow: hidden;
+    }
+    .tab1__event--date strong
+{
+  position: absolute;
+  top: 0;
+  padding: 0.4em 0;
+  color: #fff;
+  background-color: gray;
+  border-bottom: 1px dashed rgb(160, 160, 160);
+  box-shadow: 0 2px 0 gray;
+  
+}
+
+.tab1__event--date em
+{
+  position: absolute;
+  bottom: 0.3em;
+  color: gray;
+}
+
+.tab1__event--date span
+{
+  font-size: 2.8em;
+  letter-spacing: -0.05em;
+  padding-top: 0.8em;
+  color: #2f2f2f;
+}
+.tab1__event--date *{
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+}
 }

@@ -41,7 +41,7 @@ class Tab2 {
         this.loading = true;
         await this.renderMap()
         this.setupSrollAnimation()
-        this.setupEventListeners()
+        //this.setupEventListeners()
         this.loading = false;
     }
 

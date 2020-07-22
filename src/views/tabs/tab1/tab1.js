@@ -43,8 +43,8 @@ class Tab1 {
         
           
         if (DesignController.mobile) {
-            this.hiddenDiv(await this.getEvents());
             this.showSearchScreen()
+            this.hiddenDiv(await this.getEvents());
         }
         else {
             this.setudDesktopListeners()
@@ -64,6 +64,7 @@ class Tab1 {
         let template = await TemplatesManager.getTemplate("tab1_viewEventDesktop")
         
         let comingEvents = await EventsService.getComingEvents(this.index, this.pageSize)
+        
         comingEvents.forEach((event) => {
             let node = TemplatesManager.contextPipe(template, {...event, ...this.getDateInfo(event), main_image: this.getMainImage(event)}, false)
             node.classList.add("tab1__coming-events--item")
@@ -182,6 +183,11 @@ class Tab1 {
 
     hiddenDiv(events) {
         const padre = this.el.querySelector('.tab1__calendar__events--container');
+        /**
+        padre.children[0].addEventListener('mouseenter', function () {
+            
+            padre.children[0].children[0].children[4].classList.add('size');
+        }); */
         padre.children[1].addEventListener('mouseenter', function () {
             padre.children[0].classList.add('hidden');
         });
@@ -204,16 +210,15 @@ class Tab1 {
     async getEvents(){
         
         const tooltipHTML = await TemplatesManager.getTemplate('tab1_viewEvent');
-        let events = await EventsService.getComingEvents(0, 2);
-        const htmlNode = TemplatesManager.createHtmlNode(tooltipHTML.patch({events: events[0], ...this.getDateInfo(events[0])}));
-        const htmlNode2 = TemplatesManager.createHtmlNode(tooltipHTML.patch({events : events[1]}));
-
-        
-        var info = new Tab1(this.el.children[0]);
-        const padre = this.el.querySelector('.tab1__calendar__events--container');
-        padre.children[0].appendChild(htmlNode);
-        
-        padre.children[1].appendChild(htmlNode2);
+        const tooltipHTML2 = await TemplatesManager.getTemplate('tab1_viewEvent');
+        let events = await EventsService.getComingEvents(0,2);
+        const htmlNode = TemplatesManager.createHtmlNode(tooltipHTML.patch({name: events[0].name, color: events[0].color, ...this.getDateInfo(events[0]), main_image: this.getMainImage(events[0])}));
+        const htmlNode2 = TemplatesManager.createHtmlNode(tooltipHTML2.patch({name: events[1].name, color: events[1].color, ...this.getDateInfo(events[1]), main_image: this.getMainImage(events[1])}));
+           
+            const padre = this.el.querySelector('.tab1__calendar__events--container');
+            padre.children[0].appendChild(htmlNode);
+            padre.children[1].appendChild(htmlNode2);
+      
         return events;
             
     }

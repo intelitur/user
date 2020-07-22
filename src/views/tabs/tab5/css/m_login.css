@@ -1,0 +1,98 @@
+/*  Mobile  */
+
+
+@media only screen and (max-width: 700px) {
+    .tab5__login {
+        width: 100%;
+        height: 100%;
+        background-color: var(--tab5_color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .tab5__title {
+        color: white;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 6%;
+        text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, 0.496)
+    }
+
+    .tab5__login--container {
+        margin: 0 auto;
+        width: calc(85% - 20px);
+        height: calc(70% - 20px);
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        padding: 10px
+    }
+
+    .active .tab5__login--container{
+
+    }
+
+    .tab5__login--image {
+        width: 100%;
+        height: 50%;
+        object-fit: contain;
+    }
+
+    .tab5__login--form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 50%;
+    }
+
+    .tab5__login--inputs {
+        border: none;
+        margin: 0 auto;
+        width: 70%;
+        border-bottom: 1px solid var(--tab5_color);
+        color: rgb(56, 56, 56);
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    .tab5__login--inputs:focus {
+        outline: none;
+        border-bottom: 2.5px solid var(--tab5_color);
+
+    }
+
+    /* .tab5__login--input--username {
+        margin-top: 4%;
+    }
+
+    .tab5__login--input--password {
+        margin-top: 8%;
+    } */
+
+    .tab5__login--buttons--container{
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    .tab5__login--button{
+        border: none;
+        padding: 3% 7%;
+        border-radius: 5px;
+        margin: auto 2%;
+        color: white;
+        box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    }
+
+    .tab5__login--button--login {
+        background-color: var(--tab5_color);
+    }
+
+    .tab5__login--button--register {
+        background-color: gray;
+    }
+}

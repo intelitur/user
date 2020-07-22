@@ -26,14 +26,13 @@ class Tab1Companies {
 
         this.loading = true;
         await this.refreshCompanies()
+        console.log(this.companies)
 
         const template = await TemplatesManager.getTemplate("tab1_item_company")
 
         this.companies.forEach(company => {
 
             const node = TemplatesManager.contextPipe(template, company, false)
-
-            console.log(company)
             this.container.insertBefore(node, this.container.lastElementChild);
 
         })

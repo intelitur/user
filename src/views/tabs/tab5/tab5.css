@@ -1,0 +1,10 @@
+[theme=color] .tab5{
+    background-color: var(--tab5_color);
+}
+
+[theme=light] .tab5{
+    color: var(--tab5_color);
+}
+
+
+

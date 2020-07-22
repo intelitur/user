@@ -107,7 +107,10 @@ class DesignController {
 
 DesignController.mobile = window.screen.width < 700
 
-document.addEventListener('DOMSubtreeModified', DesignController.setupImageView)
+document.addEventListener('DOMSubtreeModified', () => {
+    DesignController.setupImageView()
+})
 document.querySelector('.img--overlay').addEventListener("click", ()=> document.querySelector('.img--overlay').classList.remove("visible"))
+
 
 export default DesignController

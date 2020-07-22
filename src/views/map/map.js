@@ -92,10 +92,19 @@ class Map {
             layer.bindPopup(htmlNode)
         }
 
+        var icon = leaflet.icon({
+            iconUrl: 'assets/event_icon.png',
+        
+            iconSize:     [40, 45], // size of the icon
+            iconAnchor:   [20, 22.5], // point of the icon which will correspond to marker's location
+            popupAnchor:  [0, -12] // point from which the popup should open relative to the iconAnchor
+        });
+
         const layer = leaflet.geoJSON(geoJSON, {
             onEachFeature: onEachFeature,
 
             pointToLayer: function (feature, latlng) {
+                //return leaflet.marker(latlng, {icon})
                 return leaflet.circleMarker(latlng, {
                     radius: 8,
                     fillColor: feature.properties.point.color,

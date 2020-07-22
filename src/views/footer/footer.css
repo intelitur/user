@@ -13,6 +13,10 @@
         margin-left: 0;
         width: 100%;
     }
+
+    .footer__tablink__label {
+        font-size: 70%;
+    }
 }
 
 .footer__tablink {
@@ -48,7 +52,8 @@
 .footer__tablink__label {
     transition: 1s;
     opacity: 0;
-    margin-left: 0px;
+    margin: auto 0;
+    margin-left: 0%;
     display: none;
 }
 
@@ -61,12 +66,12 @@
 }
 
 .footer__tablink.active {
-    width: 55%;
+    width: 40%;
 }
 
 .active .footer__tablink__label{
     animation: visible_in 1000ms;
-    margin-left: 15px;
+    margin-left: 5%;
     display: block;
     opacity: 1;
 }
@@ -107,11 +112,20 @@
     border-bottom-color: var(--tab4_control);
 }
 
+[theme=color] .footer__tablink--5.active {
+    background-color: var(--tab5_color);
+}
+
+[theme=light] .footer__tablink--5.active {
+    color: var(--tab5_color);
+    border-bottom-color: var(--tab5_control);
+}
+
 
 @keyframes visible_in {
     0% { opacity: 0; margin-left: 0; width: 0px;}
     10% { width: max-content;}
     25% { opacity: 0; margin-left: 0; width: auto;}
-    75% { margin-left: 15px;}
+    75% { margin-left: 5%;}
     100% { opacity: 1 }
   }

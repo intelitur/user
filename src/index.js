@@ -2,11 +2,15 @@ import footer from './views/footer/footer'
 import './styles.css'
 
 function initRender(){
+    configBounds()
+
     const initElements = {
         footer
     }
 
     Object.values(initElements).forEach(el => el.render())
+
+    
     
 }
 
@@ -25,6 +29,10 @@ function configStringPatch(){
 }
 
 
+function configBounds(){
+    let minHeight = document.body.clientHeight
+    document.body.style.minHeight = `${minHeight}px`
+}
 
 
 configStringPatch()

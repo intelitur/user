@@ -3,6 +3,7 @@ import tab1 from "./tab1/tab1";
 import tab2 from "./tab2/tab2";
 import tab3 from "./tab3/tab3";
 import tab4 from "./tab4/tab4";
+import tab5 from "./tab5/tab5";
 
 import './tabs.css'
 import DesignController from "../../utils/DesignController";
@@ -13,7 +14,8 @@ class Tabs {
             tab1,
             tab2,
             tab3,
-            tab4
+            tab4,
+            tab5
         ]
     }
 

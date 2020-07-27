@@ -53,9 +53,12 @@ class Map {
         })
 
         try{
-            return (await promise).coords
+            const response = await promise
+            console.log(response)
+            return response.coords
         }
-        catch {
+        catch (error) {
+            console.error(error)
             return undefined
         }
 

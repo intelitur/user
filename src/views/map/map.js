@@ -25,7 +25,7 @@ class Map {
             options: {
                 fullscreenControl: true,
                 fullscreenControlOptions: {
-                    position: DesignController.mobile? 'topleft': 'topright' 
+                    position: 'topleft'
                 }
             }
         }
@@ -38,28 +38,73 @@ class Map {
     async render(htmlName) {
         const view = await TemplatesManager.getTemplate('map')
         this.el = TemplatesManager.renderElement(htmlName, view)
-
+        console.log(await this.getUserPosition())
+        this.userCords = await this.getUserPosition()
         await this.renderMap()
+    }
+
+    async getUserPosition(){
+        const promise = new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(
+                (result) => resolve(result),
+                (error) => reject(error),
+                {enableHighAccuracy: true, timeout: 10000}
+            )
+        })
+
+        try{
+            return (await promise).coords
+        }
+        catch {
+            return undefined
+        }
+
     }
 
     async renderMap() {
         const { tileConfig, mapConfig } = this.config
-        const mainTile = leaflet.tileLayer(tileConfig.tileURL, tileConfig.options)
+        const OSM = leaflet.tileLayer(tileConfig.tileURL, tileConfig.options)
+        const googleSatelite = leaflet.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+            maxZoom: 20,
+            subdomains:['mt0','mt1','mt2','mt3']
+        })
+        const googleStreets = leaflet.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+            maxZoom: 20,
+            subdomains:['mt0','mt1','mt2','mt3']
+        })
         const mapLayersControl = leaflet.control.layers(undefined, undefined, {collapsed: false})
         
 
         this.map = leaflet.map(mapConfig.elementName,
             {
                 layers: [
-                    mainTile
+                    OSM,
+                    googleSatelite,
+                    googleStreets
                 ],
                 ...mapConfig.options,
             }
         )
 
-        this.map.addControl(mapLayersControl.setPosition(DesignController.mobile? 'bottomleft': 'bottomright'))
+        const baseLayers = {
+            "Mapa": OSM,
+            "Satélite": googleSatelite,
+            "Google": googleStreets
+        }
+
+        this.map.addControl(leaflet.control.layers(baseLayers, undefined, {collapsed: false}))
+
+        if (DesignController.mobile)
+            this.map.addControl(mapLayersControl.setPosition('bottomleft'))
         this.map.mapLayersControl = mapLayersControl
         this.setupEventsTile()
+
+        if(this.userCords){
+            this.setMapView(this.userCords.latitude, this.userCords.longitude, 15)
+        }
+        else{
+            this.setMapView(10.471681129073158, -84.64514404535294, 15);
+        }
     }
 
     setMapView(lat, lng, zoom) {
@@ -71,6 +116,29 @@ class Map {
     }
 
     async setupEventsTile() {
+
+        const getDateInfo = event => {
+
+            const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    
+            const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+    
+            const date = new Date(event.date_range.initial_date.split("T")[0])
+    
+            
+            const monthName = months[date.getMonth()]
+    
+            const dayName = days[date.getDay()]
+    
+            const dateI = date.getDate() + 1
+    
+            return {
+                monthName,
+                dayName,
+                dateI
+            }
+        }
+
         tab2.loading = true;
         let events = await EventsService.getEvents()
 
@@ -83,7 +151,7 @@ class Map {
             const dateString = feature.properties.point.date_range.initial_date.split("T")[0].split("-")
             
             const schedule = !feature.properties.point.initial_time? " todo el día" : (" a las " + feature.properties.point.initial_time.substring(0, 5))
-            const tooltip = tooltipHTML.patch({dateString, feature, layer, schedule})
+            const tooltip = tooltipHTML.patch({dateString, feature, layer, schedule, ...getDateInfo(feature.properties.point)})
 
             const htmlNode = TemplatesManager.createHtmlNode(tooltip)
             htmlNode.addEventListener('click', (async function() {

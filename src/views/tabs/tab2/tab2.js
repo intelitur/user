@@ -56,7 +56,7 @@ class Tab2 {
     async renderMap(){
         const map = new Map()
         await map.render('map')
-        map.setMapView(10.471681129073158, -84.64514404535294, 15);
+        
 
         this.map = map
         console.log(this.map)

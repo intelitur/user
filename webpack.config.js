@@ -22,6 +22,10 @@ const copyWebpack = new CopyWebpackPlugin([
         to: './info/',
         flatten: true,
     },
+    {
+        from: './assets/*',
+        to: './'
+    }
 ])
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')

@@ -110,6 +110,8 @@ class Tab2 {
 
     show() { 
         this.el.classList.add('active')
+        if(this.map.userCords == undefined)
+            this.map.setInitialPosition()
      }
 
     hide() {

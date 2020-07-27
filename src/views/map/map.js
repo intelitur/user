@@ -39,17 +39,13 @@ class Map {
         const view = await TemplatesManager.getTemplate('map')
         this.el = TemplatesManager.renderElement(htmlName, view)
         await this.renderMap()
-        await this.setInitialPosition()
         
     }
 
     async setInitialPosition(){
         this.userCords = await this.getUserPosition()
-        if(this.userCords){
+        if(this.userCords.latitude && this.userCords.longitude){
             this.setMapView(this.userCords.latitude, this.userCords.longitude, 15)
-        }
-        else{
-            this.setMapView(10.471681129073158, -84.64514404535294, 15);
         }
     }
 
@@ -69,7 +65,7 @@ class Map {
         }
         catch (error) {
             console.error(error)
-            return undefined
+            return {error: error}
         }
 
     }
@@ -112,7 +108,7 @@ class Map {
         this.map.mapLayersControl = mapLayersControl
         this.setupEventsTile()
 
-        
+        this.setMapView(10.471681129073158, -84.64514404535294, 15);
     }
 
     setMapView(lat, lng, zoom) {

@@ -3154,11 +3154,11 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         background-color:rgba(255, 255, 255);
         transition: 0.2s;
     }
-    input[type = "radio"]{ 
+    .tab1 input[type = "radio"]{ 
         display:none;
         color: grey;
     }
-    input[type = "radio"]~label{ 
+    .tab1 input[type = "radio"]~label{ 
         margin-left: calc(50% - 95%);
         color: grey;
     }

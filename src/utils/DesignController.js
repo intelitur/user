@@ -4,6 +4,8 @@ import tab2 from '../views/tabs/tab2/tab2'
 import SearchView from '../views/search/search'
 import tabs from '../views/tabs/tabs'
 import footer from '../views/footer/footer'
+import EventsService from '../services/EventsService'
+import searchEvents from '../views/search_events/search_events'
 
 class DesignController {
 
@@ -23,10 +25,12 @@ class DesignController {
             DesignController.doWhenHide()
             DesignController.doWhenHide = undefined
         }
+        overlay.firstElementChild.className = "";
     }
 
 
     static async showEvent(event_id, doWhenHide) {
+        EventsService.addVisit(event_id);
         if(DesignController.mobile){
             DesignController.showLoadingBar()
             const eventView = new EventView(event_id)
@@ -58,7 +62,7 @@ class DesignController {
         DesignController.showOverlay(doWhenHide)
     }
     static showOverlaySearch() {
-        const search = document.querySelector('.searchScreen')
+        const search = document.querySelector('.search')
         search.classList.add('visible')
     }
 
@@ -72,13 +76,18 @@ class DesignController {
         DesignController.showLoadingBar()
         if(!DesignController.search){
             DesignController.search = new SearchView()
-            console.log('a')
         }
         let search = DesignController.search
-        await search.render('searchScreen')
+        await search.render('search')
         DesignController.hideLoadingBar()
         DesignController.showOverlaySearch()
         
+    }
+
+    static async showSearchEventsScreen(){
+        DesignController.showLoadingBar()
+        await searchEvents.show()
+        DesignController.hideLoadingBar()
     }
 
     static showLoadingBar(){
@@ -92,7 +101,8 @@ class DesignController {
     static setupImageView(){
         document.querySelectorAll("img:not([config='true'])").forEach((img) => {
             img.setAttribute('config', 'true')
-            img.addEventListener('click', ()=> {
+            img.addEventListener('click', (e)=> {
+                e.stopPropagation();
                 DesignController.showImage(img.getAttribute('src'))
             })
         })

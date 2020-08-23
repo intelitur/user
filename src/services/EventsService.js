@@ -4,6 +4,13 @@ const module = 'events'
 
 class EventsService {
 
+    static async getEventsFiltered(filters){
+        console.log(filters)
+        let response = await fetch(`${API_URL}/${module}`)
+        response = await response.json()
+        return response
+    }
+
     static async updateEvents(){
         let response = await fetch(`${API_URL}/${module}`)
         //let response = await fetch(`./info/events.json`)
@@ -11,7 +18,8 @@ class EventsService {
         return response
     }
 
-    static async getEvents(update = false) {
+    static async getEvents(update = false, filters) {
+        console.log(filters)
         if(EventsService.events === undefined || update){
             EventsService.events =  await EventsService.updateEvents()
         }
@@ -47,6 +55,10 @@ class EventsService {
         let response = await fetch(url)
         response = await response.json()
         return response
+    }
+
+    static async addVisit(event_id){
+        
     }
 }
 

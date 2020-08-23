@@ -10,7 +10,7 @@ import tab1_companies from "./js/tab1_companies";
 
 
 import './tab1.css'
-import './css/tab1_viewEventDesktop.css'
+import './css/d_tab1_event_view.css'
 import '../../../utils/css/loader-ellipsis.css'
 
 
@@ -51,11 +51,10 @@ class Tab1 {
         const view = await TemplatesManager.getTemplate('tab1')
         this.el = TemplatesManager.renderElement('tab1', view)
         await this.renderContent()
-        
     }
 
     async renderContent() {
-        const htmlName = DesignController.mobile ? 'mobile_tab1_content' : 'tab1_content'
+        const htmlName = DesignController.mobile ? 'm_tab1_content' : 'd_tab1_content'
         const view = await TemplatesManager.getTemplate(htmlName)
         TemplatesManager.renderElement('tab1_content', view)
 
@@ -64,8 +63,9 @@ class Tab1 {
         
           
         if (DesignController.mobile) {
-            this.showSearchScreen()
-            this.hiddenDiv(await this.getEvents());
+            this.setupSearchScreen()
+            this.renderEventsMobile()
+            //this.hiddenDiv();
         }
         else {
             this.setudDesktopListeners()
@@ -116,8 +116,8 @@ class Tab1 {
 
         
         if(events.length > 0){
-            let template = await TemplatesManager.getTemplate("tab1_viewEventDesktop")
-    
+            let template = await TemplatesManager.getTemplate("d_tab1_event_view")
+            
             events.forEach((event) => {
                 let node = TemplatesManager.contextPipe(template, {...event, ...this.getDateInfo(event), main_image: this.getMainImage(event)}, false)
                 node.classList.add("tab1__coming-events--item")
@@ -130,6 +130,25 @@ class Tab1 {
             })
         }
         this.loading = false;
+    }
+
+    async renderEventsMobile(){
+        const template = await TemplatesManager.getTemplate('m_tab1_event_view');
+
+        const events = await this.getEvents();
+
+        const htmlNode = TemplatesManager.createHtmlNode(template.patch({name: events[0].name, color: events[0].color, ...this.getDateInfo(events[0]), main_image: this.getMainImage(events[0]), event_id: events[0].event_id}));
+        const htmlNode2 = TemplatesManager.createHtmlNode(template.patch({name: events[1].name, color: events[1].color, ...this.getDateInfo(events[1]), main_image: this.getMainImage(events[1]), event_id: events[1].event_id}));
+           
+        const container = this.el.querySelector('.tab1__events--container');
+        container.children[0].appendChild(htmlNode);
+        container.children[1].appendChild(htmlNode2);
+
+        const eventsDOM = this.el.querySelectorAll(".m_tab1__event--container")
+        eventsDOM.forEach(item => {
+            item.getAttribute("event_id")
+            item.addEventListener('click', DesignController.showEvent.bind(this, item.getAttribute("event_id")))
+        })
     }
 
     setudDesktopListeners(){
@@ -229,52 +248,42 @@ class Tab1 {
         }
     }
 
-    hiddenDiv(events) {
-        const padre = this.el.querySelector('.tab1__calendar__events--container');
-        /**
-        padre.children[0].addEventListener('mouseenter', function () {
+    // hiddenDiv(events) {
+    //     const padre = this.el.querySelector('.tab1__calendar__events--container');
+    //     /**
+    //     padre.children[0].addEventListener('mouseenter', function () {
             
-            padre.children[0].children[0].children[4].classList.add('size');
-        }); */
-        padre.children[1].addEventListener('mouseenter', function () {
-            padre.children[0].classList.add('hidden');
-        });
-        padre.children[1].addEventListener('mouseleave', function () {
-            padre.children[0].classList.remove('hidden');
-        });
-        const consurso = this.el.querySelector('.tab1__calendar__concurso--container')
+    //         padre.children[0].children[0].children[4].classList.add('size');
+    //     }); */
+    //     padre.children[1].addEventListener('mouseenter', function () {
+    //         padre.children[0].classList.add('hidden');
+    //     });
+    //     padre.children[1].addEventListener('mouseleave', function () {
+    //         padre.children[0].classList.remove('hidden');
+    //     });
+    //     const consurso = this.el.querySelector('.tab1__calendar__concurso--container')
         
-            consurso.children[1].addEventListener('mouseenter', function()
-        {
-            consurso.children[0].classList.add('hidden');
-        })
-        consurso.children[1].addEventListener('mouseleave', function()
-        {
-            consurso.children[0].classList.remove('hidden');
-        })
+    //         consurso.children[1].addEventListener('mouseenter', function()
+    //     {
+    //         consurso.children[0].classList.add('hidden');
+    //     })
+    //     consurso.children[1].addEventListener('mouseleave', function()
+    //     {
+    //         consurso.children[0].classList.remove('hidden');
+    //     })
         
-    }
+    // }
     
     async getEvents(){
-        
-        const tooltipHTML = await TemplatesManager.getTemplate('tab1_viewEvent');
-        const tooltipHTML2 = await TemplatesManager.getTemplate('tab1_viewEvent');
         let events = await EventsService.getComingEvents(0,2);
-        const htmlNode = TemplatesManager.createHtmlNode(tooltipHTML.patch({name: events[0].name, color: events[0].color, ...this.getDateInfo(events[0]), main_image: this.getMainImage(events[0])}));
-        const htmlNode2 = TemplatesManager.createHtmlNode(tooltipHTML2.patch({name: events[1].name, color: events[1].color, ...this.getDateInfo(events[1]), main_image: this.getMainImage(events[1])}));
-           
-            const padre = this.el.querySelector('.tab1__calendar__events--container');
-            padre.children[0].appendChild(htmlNode);
-            padre.children[1].appendChild(htmlNode2);
-      
         return events;
-            
     }
 
     
-    async showSearchScreen(){
-        this.el.querySelector('.search-input').addEventListener('click', DesignController.showSearchScreen)
 
+    
+    async setupSearchScreen(){
+        this.el.querySelector('.tab1__search--button').addEventListener('click', DesignController.showSearchScreen)
     }
    
 

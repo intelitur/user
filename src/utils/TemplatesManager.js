@@ -16,7 +16,7 @@ class TemplatesManager {
             htmlNode = TemplatesManager.createHtmlNode(htmlNode)
         htmlNode.setAttribute('render', name)
         const element = document.querySelectorAll(`[render*=${name}]`)[0]
-        htmlNode.className = `${element.className} ${htmlNode.className}`
+        htmlNode.className = `${htmlNode.className} ${element.className}`
         element.parentNode.insertBefore(htmlNode, element)
         element.parentNode.removeChild(element)
         return htmlNode
@@ -57,7 +57,7 @@ class TemplatesManager {
     static createHtmlNode(htmlText){
         const node = document.createElement('template')
         node.innerHTML = htmlText.trim()
-        return node.content.firstChild
+        return node.content.firstElementChild
     }
 }
 TemplatesManager.templates = []

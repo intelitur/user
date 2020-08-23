@@ -9,6 +9,12 @@ class CategoryService {
         response = await response.json()
         return response
     }
+
+    static async getEventsCategories(){
+        let response = await fetch(`${API_URL}/${module}?state=1`) // State es el tipo de la categoría
+        response = await response.json()
+        return response
+    }
 }
 
 export default CategoryService

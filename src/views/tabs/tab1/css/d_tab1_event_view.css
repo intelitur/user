@@ -1,0 +1,80 @@
+@media only screen and (min-width: 700px) {
+    .tab1__coming-event {
+        position: relative;
+        display: flex;
+        border-radius: 10px;
+    }
+    .tab1__coming-event--img {
+        width: calc(50% - 1px);
+        height: 100%;
+        object-fit: contain;
+        margin: 0;
+        border-radius: 10px;
+        background-color: rgb(223, 223, 223);
+    }
+    .tab1__coming-event--info {
+        width: 50%;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .tab1__coming-event--name {
+        margin: auto 5px;
+        font-weight: 600;
+        font-size: calc(15px + 0.8vw);
+    }
+    .tab1__coming-event--date {
+        margin: auto;
+        font-size: calc(5px + 0.5vh);
+        /* change icon size */
+        display: block;
+        position: relative;
+        width: 7em;
+        height: 7em;
+        background-color: #fff;
+        border-radius: 0.6em;
+        box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px #bdbdbd;
+        overflow: hidden;
+    }
+    .tab1__coming-event--date * {
+        display: block;
+        width: 100%;
+        font-size: 1em;
+        font-weight: bold;
+        font-style: normal;
+        text-align: center;
+    }
+    .tab1__coming-event--date strong {
+        position: absolute;
+        top: 0;
+        padding: 0.4em 0;
+        color: #fff;
+        background-color: gray;
+        border-bottom: 1px dashed rgb(160, 160, 160);
+        box-shadow: 0 2px 0 gray;
+    }
+    .tab1__coming-event--date em {
+        position: absolute;
+        bottom: 0.3em;
+        color: gray;
+    }
+    .tab1__coming-event--date span {
+        font-size: 2.8em;
+        letter-spacing: -0.05em;
+        padding-top: 0.8em;
+        color: #2f2f2f;
+    }
+    .tab1__coming-event--button {
+        margin: auto;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        background-color: gray;
+        width: 70%;
+        height: 25px;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.306);
+        font-size: calc(10px + 0.3vw);
+        cursor: pointer;
+    }
+}

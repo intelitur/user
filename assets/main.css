@@ -40,41 +40,18 @@
         display: none;
     }
 }
-.carousel__item-weather{
-    position: absolute;
-    bottom: 0;
-    background : rgba(255,99,71,0.6);
-    width: 80px;
-    color: white;
-    height: 60px;
-    border-radius: 20%;
-    justify-content: center;
-    font-size: 35px;
-    text-align: center;
-    
-    margin-left: 10px;
 
-}
-.carousel__item-weather i{
-    font-size: 22px;
-    margin-top: 16px;
-    left:50px;
-    position: absolute;
-}
-.carousel__item-weather a{
-    position: absolute;
-    font-size: 33px;
-    margin-top: 10px;
-    left: 0;
-}
 .carousel__items-icono{
     font-size: 50px;
 }
 .carousel__items--button{
+    position: absolute;
     background : rgba(255,99,71,0.7);
     border: none;
     border-radius: 40%;
-    margin-left: calc(100vw - 50px);
+    right: 5px;
+    height: 30px;
+    top: calc(50% - 15px);
     color:white;
 }
 
@@ -2623,63 +2600,315 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     height: 100%;
 }
 @media only screen and (max-width: 700px) {
-    .search_container{
+    .search_container {
         height: 100%;
         width: 100%;
+        background-color: white;
     }
-    .div_search{
-        border: 0.3px solid;
-        border-color: gray;
+    .search__back {
         position: absolute;
-        top: 13px;
-        left: 69px;
-        color: black;
-        width: 70%;
-        height: 4%;
-    }
-    .div_search i{
-        position: absolute;
-        
-        left: 0;
-        top: 2px;
-        font-size: 20px;
-    }
-    .div_search input{
-        color:black;
+        bottom: 75px;
+        left: -6px;
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+        color: rgb(76, 76, 76);
+        display: flex;
+        cursor: pointer;
+        font-size: 25px;
         border: none;
-        margin-left: 20px;
-        background: none;
-        width: 90%;
-        height: 100%;
+        z-index: 1;
+        display: flex;
     }
-    .div_search_input::placeholder{
-        margin-left: 10px;
-        color:black;
-    }
-    .search_container_button{
-        background-color: #2C3E50;
-        border-color: #2C3E50;
-        color: white;
-        border-radius: 30%;
-        margin-top: 10px;
-        margin-left: 10px;
-    }
-    .search__container--item{
-        margin-top: 50px;
+    .search__back * {
         margin: auto;
-        width: 65%;
-        height: 20%;
-        background-color: #2C3E50;
     }
-    .search_content{
+
+    .search__cards--container {
+        height: calc(100% - 100px);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+    } 
+
+    .search__card {
+        width: 45%;
+        height: 45%;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
+        color: rgb(76, 76, 76);
+        display: flex;
+        cursor: pointer;
+        font-size: 25px;
+        display: flex;
+        margin-top: 5vw;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search__card label {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    
+
+    .search__title--container {
+        display: flex;
+        padding: 0 20px;
+        height: 100px;
+    }
+
+    .search__title {
+        margin: auto;
+        color: white;
+    }
+    
+}
+.title {
+    
+}
+@media only screen and (max-width: 700px) {
+    .search__events {
+        position: absolute;
         width: 100%;
         height: 100%;
+        top: 100%;
+        transition: top 0.5s;
+        background-color: white;
+        color: gray;
+        z-index: 20000;
     }
-    .search_content_top{
+    .search__events.visible {
+        left: 0;
+        top: 0;
+    }
+
+    .search__events--container {
+        height: 100%;
         width: 100%;
-        height: 10%;
+        position: relative;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
     }
+
+    .search__events--title {
+        position: absolute;
+        font-weight: 500;
+        font-size: 27px;
+        color: rgb(78, 78, 78);
+        left: 70px;
+        top: 14px;
+        margin: 0;
+    }
+
+    .search__events__back {
+        top: 5px;
+        left: 5px;
+    }
+
+    .search__events__filter--container{
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    .search__events__filter:before {
+        content: ""; 
+        display: block; 
+        margin: -1px auto ;
+        margin-right: 0;
+        width: 78px; 
+        border-top: solid 1px rgb(255, 255, 255); 
+    }
+
+    .search__events__button {
+        /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); */
+        border: solid 1px rgba(218, 218, 218);
+        margin: 10px auto;
+        margin-bottom: 0;
+        margin-right: 20px;
+        min-height: 50px;
+        max-height: 50px;
+        width: 80px;
+        border-radius: 10px;
+        background-color: white;
+        color: tomato;
+        font-size: 24px;
+        transition: 0.5s;
+        z-index: 1;
+        animation-name: icon;
+        animation-duration: 0.6s; 
+    }
+
+    .search__events__button:focus{
+        outline:none;
+    }
+
+    .expanded>.search__events__button {
+        border-radius: 10px 10px 0 0;
+        /* box-shadow:  0 0px 4px 0 rgba(0,0,0,.12); */
+        animation-name: icon-change;
+        animation-duration: 0.6s; 
+        border-bottom: white;
+    }
+
+    /* .search__events__button i {
+        animation-name: icon;
+        animation-duration: 1s;
+    }
+
+    .expanded>.search__events__button i {
+        animation-name: icon;
+    } */
+
+    .search__events__filter {
+        transition: 0.6s;
+        height: 0px;
+        width: 80px;
+        
+        /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2); */
+        border: solid 1px rgba(218, 218, 218, 0);
+        margin: 0 auto;
+        margin-right: 20px;
+        z-index: 1;
+        border-radius: 10px 0 10px 10px;
+
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .expanded>.search__events__filter {
+        height: 450px;
+        
+        width: calc(100% - 42px);
+        border: solid 1px rgb(218, 218, 218);
+    }
+
+    .search__events__filter>div {
+        opacity: 0;
+        transition: opacity 0.2;
+        height: calc(100% - 10px);
+        width: calc(100% - 10px);
+        padding: 5px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        animation-duration: 0.6s;
+    }
+
+    .expanded>.search__events__filter>div {
+        
+        opacity: 1;
+        animation-name: opacity-change;
+    }
+
+    @keyframes opacity-change {
+        0% {
+            opacity: 0;
+        }
+        80% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes icon {
+        0% {
+            font-size: 24px
+        }
+        50% {
+            font-size: 3px;
+        }
+        100% {
+            font-size: 24px;
+        }
+    }
+
+    @keyframes icon-change {
+        0% {
+            font-size: 24px
+        }
+        50% {
+            font-size: 3px;
+        }
+        100% {
+            font-size: 24px;
+        }
+    }
+
+    .search__events__filter--title{
+        margin-left: 6px;
+    }
+
+    .search__events__filter__buttons--container{
+        display: flex;
+        margin: 0 auto;
+        width: 80%;
+        justify-content: space-around;
+    }
+
+    .search__events__filter__buttons--container button{
+        /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); */
+        border: 1px solid gray;
+        background-color: white;
+        padding: 8px 16px;
+        border-radius: 5px;
+    }
+
+    .search__events__filter--yes{
+        color: rgb(51, 164, 51);
+        border: 1px solid rgb(51, 164, 51) !important;
+    }
+
+    .search__events__filter--no{
+        color: rgb(196, 71, 71);
+        border: 1px solid rgb(196, 71, 71) !important;
+    }
+
+    .search__events__events--container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: calc(100% - 20px);
+        margin: 10px
+    }
+
+    .search__events__event--item{
+        width: 45%;
+        height: 130px;
+        padding: 3px;
+        position: relative;
+        color: black;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255);
+        transition: 0.2s;
+        margin: 10px auto;
+
+        display: flex; 
+        flex-direction: column; 
+        justify-content: space-around; 
+    }
+
+    .invisible{
+        display: none !important;
+    }
+
+
 }
+
 [theme=color] .tab1 {
     background-color: var(--tab1_color);
 }
@@ -2696,27 +2925,22 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         height: calc(100vh - 48px);
         overflow-y: hidden;
     }
-
     .tab1__content {
         height: calc(100vh - 48px);
         position: relative;
         overflow-x: hidden;
         overflow-y: scroll;
     }
-
     .overflow {
         height: calc(450px);
     }
-
     .tab1__mosaic--container {
         top: 0px;
         position: sticky;
         height: calc(100vh - 48px);
         width: 100%;
         display: flex;
-        
     }
-
     .tab1__content--left {
         width: 38%;
         height: 100%;
@@ -2729,7 +2953,6 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         position: relative;
         overflow: hidden;
     }
-
     .tab1--button {
         z-index: 100;
         position: absolute;
@@ -2762,14 +2985,11 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     .tab1--icon {
         margin: auto;
     }
-
-    
     .tab1__carousel--right {
         position: absolute;
         height: 100%;
         width: 100%;
     }
-
     .tab1__calendar--right {
         position: absolute;
         top: 5%;
@@ -2781,27 +3001,22 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         margin: -10px -5px;
         color: black
     }
-
-    .tab1__contests--right{
+    .tab1__contests--right {
         height: 100%;
         width: 100%;
         background-color: rgb(220, 220, 220);
     }
-
     .mosaic__item--right {
         transform: rotate(180deg);
         transform-origin: -50% 50%;
         transition: transform 0.3s;
         overflow: hidden;
     }
-
     .mosaic__item--right.active {
         transform: rotate(0deg);
         animation: mosaicAnimationRight 0.5s;
         z-index: 10;
     }
-
-
     @keyframes mosaicAnimationRight {
         from {
             transform: rotate(180deg);
@@ -2810,27 +3025,23 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
             transform: rotate(360deg);
         }
     }
-    
     .tab1__carousel--left {
         position: absolute;
         height: 100%;
         width: 100%;
         color: black;
     }
-
     .tab1__calendar--left {
         position: absolute;
         height: 100%;
         width: 100%;
         color: black;
     }
-
-    .tab1__contests--left{
+    .tab1__contests--left {
         height: 100%;
         width: 100%;
         color: black;
     }
-
     .mosaic__item--left {
         transform: rotate(-180deg);
         transform-origin: -50% 50%;
@@ -2839,14 +3050,11 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         z-index: 5;
         background-color: white;
     }
-
     .mosaic__item--left.active {
         transform: rotate(0deg);
         animation: mosaicAnimationLeft 0.5s;
         z-index: 10;
     }
-
-
     @keyframes mosaicAnimationLeft {
         from {
             transform: rotate(-180deg);
@@ -2855,21 +3063,18 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
             transform: rotate(-360deg);
         }
     }
-
-    .tab1__weather--container{
+    .tab1__weather--container {
         width: 100%;
         height: 100%;
         display: flex;
         flex-direction: column;
         background-color: rgb(226, 226, 226);
     }
-
     .tab1__card {
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         border-radius: 10px;
     }
-
-    .tab1__weather__temperature{
+    .tab1__weather__temperature {
         width: 80%;
         height: 35%;
         margin: auto;
@@ -2877,8 +3082,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         display: flex;
         text-align: center;
     }
-
-    .tab1__weather__title{
+    .tab1__weather__title {
         width: calc(100% - 40px);
         height: calc(50% - 40px);
         margin: 0;
@@ -2889,7 +3093,6 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         padding: 20px;
     }
-
     .tab1__weather__title h2 {
         margin: auto 0;
         margin-bottom: 10px;
@@ -2897,36 +3100,30 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         color: var(--tab1_color);
         text-align: center;
         width: 100%;
-        font-weight: 200; 
+        font-weight: 200;
     }
-
-    .tab1__weather__title--span{
+    .tab1__weather__title--span {
         margin: auto;
         margin-top: 10px;
         font-size: calc (10px + 2vw);
         color: rgb(86, 86, 86)
     }
-
     .tab1>::-webkit-scrollbar-thumb {
         background: var(--tab1_color);
         border-radius: 5px;
-      }
-
-    .tab1__weather__temperature--span{
+    }
+    .tab1__weather__temperature--span {
         margin: auto;
         font-size: calc(40px + 4vw);
         color: rgb(86, 86, 86)
     }
-
-    .tab1__coming-events--header{
+    .tab1__coming-events--header {
         width: calc(100% - 1.5px);
         height: 50px;
-        
         background-color: rgb(245, 245, 245);
         display: flex;
         border-right: 1.5px solid rgb(241, 241, 241);
     }
-
     .tab1__coming-events--header h4 {
         margin: auto;
         color: gray;
@@ -2935,14 +3132,11 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         opacity: 1;
         transition: opacity 0.4s, width 1s;
         width: 100%;
-        
     }
-    
     .tab1__coming-events--header h4.hide {
         opacity: 0;
         width: 0%;
     }
-
     .tab1__coming-events--header div {
         display: flex;
         margin: auto;
@@ -2954,13 +3148,10 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         justify-content: space-between;
         transition: width 0.6s;
         background-color: white;
-
     }
-
     .tab1__coming-events--header div.active {
         width: 90%;
     }
-
     .tab1__coming-events--header div button {
         width: 40px;
         height: 40px;
@@ -2970,12 +3161,10 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         background-color: transparent;
         cursor: pointer;
     }
-
     .tab1__coming-events--header div *:focus {
         border: none;
         outline: none;
     }
-
     .tab1__coming-events--header div input {
         width: calc(80% - 40px);
         height: 30px;
@@ -2985,19 +3174,16 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         padding: 0;
         transition: width 0.6s;
         font-size: 15px;
-        
     }
-
-    .tab1__coming-events--container{
+    .tab1__coming-events--container {
         width: 100%;
-        height: calc(100% - 50px) ;
+        height: calc(100% - 50px);
         display: flex;
         flex-direction: column;
         background-color: rgb(245, 245, 245);
         overflow: auto;
     }
-
-    .tab1__coming-events--item{
+    .tab1__coming-events--item {
         width: 82%;
         height: 30vh;
         margin: 20px auto;
@@ -3005,31 +3191,24 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         transition: 0.3s;
     }
-
-    .tab1__coming-events--item:first-child{
+    .tab1__coming-events--item:first-child {
         margin-bottom: 3%;
     }
-
-    .tab1__coming-events--item:last-child{
+    .tab1__coming-events--item:last-child {
         margin-top: 3%;
     }
-
-    .tab1__coming-events--item:hover{
+    .tab1__coming-events--item:hover {
         width: 83%;
         height: 30.5vh;
     }
-
-
-    .tab1__contests--container{
+    .tab1__contests--container {
         display: flex;
         flex-flow: row wrap;
         padding: 20px;
         justify-content: center;
         width: 100%;
-        
     }
-
-    .tab1__contests--item{
+    .tab1__contests--item {
         border-radius: 10px;
         min-width: 250px;
         width: 30%;
@@ -3040,8 +3219,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         transition: 0.3s;
     }
-
-    .tab1__adds--container{
+    .tab1__adds--container {
         display: flex;
         flex-direction: column;
         padding: 20px;
@@ -3049,8 +3227,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         height: calc(100% - 40px);
         align-items: center;
     }
-
-    .tab1__adds--item{
+    .tab1__adds--item {
         width: 85%;
         min-height: 150px;
         margin: 10px;
@@ -3069,46 +3246,56 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 
 @media only screen and (max-width: 700px) {
     .tab1>div {
-        height: calc(100% - 48px);
+        height: 100%;
         overflow: hidden;
+        background-color: rgb(248, 248, 248);
     }
     .tab1__carousel--container {
         height: 37%;
     }
     .tab1--content {
-        height: 65%;
-    }
-    .tab1__calendar--container {
-        height: 80%;
+        height: 63%;
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: space-around;
+        position: relative;
     }
     .tab1__calendar--button {
         position: absolute;
-        margin-left:calc(100vw - 100px);
-        margin-bottom: 20px;
         top: 5px;
-        left:20px;
-        background-color: tomato;
-        width: 40px;
-        height: 35px;
-        border-radius: 50%;
-        font-size: 18px;
-        color: white;
+        right: 5px;
+        background-color: white;
+        width: 100px;
+        height: 30px;
+        border-radius: 20px;
+        font-size: 16px;
+        color: tomato;
         display: flex;
         border: none;
         padding: 0;
-        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2);
         transition: 0.35s;
         cursor: pointer;
     }
-    [theme=color] .tab1__calendar--button {
+    .tab1__search--button {
+        position: absolute;
+        top: 7px;
+        right: 7px;
         background-color: white;
-        color: var(--tab1_color);
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        font-size: 13px;
+        color: gray;
+        display: flex;
+        border: none;
+        padding: 0;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        cursor: pointer;
     }
-    [theme=light] .tab1__calendar--button {
-        color: white;
-        background-color: var(--tab1_color);
+    .tab1__search--icon {
+        margin: auto;
     }
     .tab1__calendar--button:focus {
         outline: none;
@@ -3116,13 +3303,63 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     .tab1__calendar--icon {
         margin: auto;
     }
-    .tab1__calendar__events--container {
-        float: right;
-        margin: auto 10px;
-        height: 100%;
-        width: calc(100% - 50%);
+
+
+    .tab1__weather--container{
+        position: absolute;
+        top: calc(37% - 90px);
+        background : rgba(255, 255, 255, 0.95);
+        width: 80px;
+        color: tomato;
+        height: 80px;
+        border-radius: 10px;
+        justify-content: center;
+        font-size: 35px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
     }
-    .tab1__event--button{
+
+    .tab1__weather--container div{
+        display: flex;
+        justify-content: center;
+    }
+    .tab1__weather--container i{
+        font-size: 22px;
+        margin: auto 0
+    }
+    .tab1__weather--container a{
+        margin: auto 0;
+        font-size: 33px;
+    }
+
+    .tab1__weather--container button{
+        margin: 0 auto;
+        background-color: white;
+        width: 60px;
+        height: 20px;
+        border-radius: 5px;
+        font-size: 12px;
+        color: gray;
+        display: flex;
+        border: none;
+        padding: 0;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2);
+        transition: 0.35s;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tab1__events--container {
+        margin: 0 20px;
+        height: calc(50% - 40px);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .tab1__event--button {
         margin-left: 5px;
         border: none;
         float: left;
@@ -3130,39 +3367,43 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         width: 0px;
         border-radius: 50%;
     }
-    .events__containerName{
+    .events__containerName {
         position: absolute;
         height: calc(100% - 98%);
         color: black;
         border-radius: 2px;
         float: left;
-        width: 33.33%; /* three containers (use 25% for four, and 50% for two, etc) */
+        width: 33.33%;
+        /* three containers (use 25% for four, and 50% for two, etc) */
         padding: 5px;
-        
     }
-    .tab1__event--Nombre{
-        margin-left: 5px;
+    .tab1__event--Nombre {
+        margin: auto 10px;
     }
-    .tab1__calendar__events--item1{
+    .tab1__events--item {
+        display: flex; 
+        flex-direction: column; 
+        justify-content: space-around; 
+        width: 45%;
+        padding: 3px;
         position: relative;
-        margin-top: calc(100% - 75%);
-        height: calc(100% - 56%);
-        width: 100%;
+        height: calc(100% - 6px);
         color: black;
-        border-style: ridge;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         border-radius: 10px;
-        background-color:rgba(255, 255, 255);
+        background-color: rgba(255, 255, 255);
         transition: 0.2s;
+        margin: 0 auto;
     }
-    .tab1 input[type = "radio"]{ 
-        display:none;
+    .tab1 input[type="radio"] {
+        display: none;
         color: grey;
     }
-    .tab1 input[type = "radio"]~label{ 
+    .tab1 input[type="radio"]~label {
         margin-left: calc(50% - 95%);
         color: grey;
     }
-    .tab1__event__containerStars{
+    .tab1__event__containerStars {
         overflow: hidden;
         position: absolute;
         float: right;
@@ -3172,35 +3413,12 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         justify-content: center;
         align-items: center;
         width: 100%;
-        
     }
-
-    .tab1_event--location{
-        margin-left:calc(100% - 140px);
-        background: none;
-        border: none;
-        color: red;
-    }
-    .tab1_event--location>i{
-        font-size: 20px;
-    }
-    .clasificacion{
-        
+    .clasificacion {
         width: 60%;
         margin-left: calc(100% - 88%);
-        
     }
-    .tab1__calendar__events--item2{
-        position: relative;
-        margin-top: 30px;
-        height: 44%;
-        width: 100%;
-        border-radius: 10px;
-        border-style: ridge;
-        transition: 0.2s;
-        color: black;
-    }
-    .tab1__calendar__events--item1:hover{
+    /* .tab1__calendar__events--item1:hover{
         margin-top: 60px;
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         height: 80%;
@@ -3215,42 +3433,39 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     .tab1__calendar__events--item1.hidden {
         height: 0;
         visibility: hidden;
+    } */
+
+    .tab1__concurso--container {
+        margin: 0 20px;
+        height: calc(50% - 70px);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 20px;
     }
-    .tab__event--more{
-        height: 100%;
-        width: 100%;
-        border:none;
-        border-radius: 5px;
-        font-size: calc(10px + 1.3w)
-    }
-    .tab1__calendar__concurso--container{
-        float: right;
-        margin: auto 10px;
-        height: 100%;
-        width: 50%;
-        
-    }
-    .tab1__calendar__concurso--item1{
-        margin-top: 40px;
-        height: 45%;
-        width: 100%;
-        background-color: black;
-        opacity: 0.4;
+
+    .tab1__concurso--item {
+        padding: 3px;
+        position: relative;
+        width: 45%;
+        margin: auto;
+        height: calc(100% - 6px);
+        color: black;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255);
         transition: 0.2s;
-        
     }
-    .tab1__event--Nombre{
+
+
+    .tab1__event--Nombre {
         font-size: calc(15px + 0.8vw);
+        text-align: center;
     }
-    .tab1__calendar__concurso--item2{
-        margin-top: 30px;
-        height: 45%;
-        width: 100%;
-        background-color: black;
-        opacity: 0.4;
-        transition: 0.2s;
+    .tab1__concurso--item2 {
+       
     }
-    .tab1__calendar__concurso--item1:hover{
+    /* .tab1__calendar__concurso--item1:hover{
         margin-top: 60px;
         height: 80%;
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
@@ -3270,26 +3485,8 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     }
     .tab1__calendar__concurso--item1:hover~.tab1__calendar__concurso--item2 {
         visibility: hidden;
-    }
-    .tab1__calendar__concurso--moveUp{
-        color: black;
-        border: none;
-        background: none;
-        font-size: 25px;
-    }
-    .tab1__calendar__concurso--moveDown{
-        margin-top: 5px;
-        color: black;
-        border: none;
-        background: none;
-        font-size: 25px;
-    }
-    
-    .tab1__calendar__concurso--move:hover~.tab1__calendar__concurso--item2{
-        visibility: visible;
-        
-    }
-    .tab1__calendar__concurso--button {
+    } */
+    .tab1__concurso--button {
         right: 0px;
         width: 100%;
         height: 35px;
@@ -3297,229 +3494,163 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         background: none;
         border-bottom: none;
     }
-    
-    .tab1__calendar__events--button{
+    .tab1__events--button {
         background: none;
         font-size: 27px;
     }
-    .search{
-        position: absolute;
-        bottom: 30px;
-        left: 15px;
-        top: 10px;
-        color: white;
-        background: rgba(255, 99, 71, 0.9);
-        width: 70%;
-        height: 4%;
-    }
-    .search i{
-        position: absolute;
-        left: 0;
-        top: 2px;
-        font-size: 20px;
-    }
-    .search-input{
-        color:white;
-        border: none;
-        background: none;
-        
-        width: 80%;
+    .div {
         height: 100%;
     }
-    .search-input::placeholder{
-        color:white;
-    }
-  
-
-    .div{
-        height: 100%;
-    }
-    .tab__event--more{
+    .tab1__coming-event--button {
         color: white;
         font-size: calc(10px + 0.3vw);
         border-radius: 5px;
         height: 25px;
         width: 90%;
+        border: none;
     }
-    .events__comingEvents{
+    .events__comingEvents {
         position: relative;
-        display:flex;
+        display: flex;
         height: 100%;
         box-sizing: border-box;
         flex-direction: row;
     }
-.tab1__coming-eventMobile {
-    position: relative;
-    display: flex;
-    margin-left: calc(100% - 60%);
-    margin-top: 10%;
-    border-radius: 10px;
+    .tab1__coming-eventMobile {
+        position: relative;
+        display: flex;
+        margin-left: calc(100% - 60%);
+        margin-top: 10%;
+        border-radius: 10px;
+    }
+    .tab1__coming-event--infoMobile {
+        width: 50%;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .tab1__coming-event--dateMobile {
+        margin: auto;
+        font-size: calc(3px + 0.5vh);
+        /* change icon size */
+        display: block;
+        position: relative;
+        width: 7em;
+        height: 7em;
+        background-color: #fff;
+        border-radius: 0.6em;
+        box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px #bdbdbd;
+        overflow: hidden;
+    }
+    .tab1__coming-event--dateMobile * {
+        display: block;
+        width: 100%;
+        font-size: 1em;
+        font-weight: bold;
+        font-style: normal;
+        text-align: center;
+    }
+    .tab1__coming-event--dateMobile strong {
+        position: absolute;
+        top: 0;
+        padding: 0.4em 0;
+        color: #fff;
+        background-color: gray;
+        border-bottom: 1px dashed rgb(160, 160, 160);
+        box-shadow: 0 2px 0 gray;
+    }
+    .tab1__coming-event--dateMobile em {
+        position: absolute;
+        bottom: 0.3em;
+        color: gray;
+    }
+    .tab1__coming-event--dateMobile span {
+        font-size: 2.8em;
+        letter-spacing: -0.05em;
+        padding-top: 0.8em;
+        color: #2f2f2f;
+    }
 }
-
-
-.tab1__coming-event--infoMobile {
-    width: 50%;
-    height: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-
-.tab1__coming-event--dateMobile {
-    margin: auto;
-    font-size: calc(5px + 0.5vh);
-    /* change icon size */
-    display: block;
-    position: relative;
-    width: 7em;
-    height: 7em;
-    background-color: #fff;
-    border-radius: 0.6em;
-    box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px #bdbdbd;
-    overflow: hidden;
-}
-
-.tab1__coming-event--dateMobile *{
-    display: block;
-    width: 100%;
-    font-size: 1em;
-    font-weight: bold;
-    font-style: normal;
-    text-align: center;
-}
-
-.tab1__coming-event--dateMobile strong
-{
-  position: absolute;
-  top: 0;
-  padding: 0.4em 0;
-  color: #fff;
-  background-color: gray;
-  border-bottom: 1px dashed rgb(160, 160, 160);
-  box-shadow: 0 2px 0 gray;
-  
-}
-
-.tab1__coming-event--dateMobile em
-{
-  position: absolute;
-  bottom: 0.3em;
-  color: gray;
-}
-
-.tab1__coming-event--dateMobile span
-{
-  font-size: 2.8em;
-  letter-spacing: -0.05em;
-  padding-top: 0.8em;
-  color: #2f2f2f;
-}
-
-.tab1__coming-event--button{
-    margin: auto;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    background-color: gray;
-    width: 70%;
-    height: 25px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.306);
-    font-size: calc(10px + 0.3vw);
-    cursor: pointer;
-}
-}
-.tab1__coming-event {
-    position: relative;
-    display: flex;
-    border-radius: 10px;
-}
-
-.tab1__coming-event--img {
-    width: calc(50% - 1px);
-    height: 100%;
-    object-fit: contain;
-    margin: 0;
-    border-radius: 10px;
-    background-color: rgb(223, 223, 223);
-}
-
-.tab1__coming-event--info {
-    width: 50%;
-    height: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.tab1__coming-event--name {
-    margin: auto 5px;
-    font-weight: 600;
-    font-size: calc(15px + 0.8vw);
-}
-
-
-.tab1__coming-event--date {
-    margin: auto;
-    font-size: calc(5px + 0.5vh);
-    /* change icon size */
-    display: block;
-    position: relative;
-    width: 7em;
-    height: 7em;
-    background-color: #fff;
-    border-radius: 0.6em;
-    box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px #bdbdbd;
-    overflow: hidden;
-}
-
-.tab1__coming-event--date *{
-    display: block;
-    width: 100%;
-    font-size: 1em;
-    font-weight: bold;
-    font-style: normal;
-    text-align: center;
-}
-
-.tab1__coming-event--date strong
-{
-  position: absolute;
-  top: 0;
-  padding: 0.4em 0;
-  color: #fff;
-  background-color: gray;
-  border-bottom: 1px dashed rgb(160, 160, 160);
-  box-shadow: 0 2px 0 gray;
-  
-}
-
-.tab1__coming-event--date em
-{
-  position: absolute;
-  bottom: 0.3em;
-  color: gray;
-}
-
-.tab1__coming-event--date span
-{
-  font-size: 2.8em;
-  letter-spacing: -0.05em;
-  padding-top: 0.8em;
-  color: #2f2f2f;
-}
-
-.tab1__coming-event--button{
-    margin: auto;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    background-color: gray;
-    width: 70%;
-    height: 25px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.306);
-    font-size: calc(10px + 0.3vw);
-    cursor: pointer;
+@media only screen and (min-width: 700px) {
+    .tab1__coming-event {
+        position: relative;
+        display: flex;
+        border-radius: 10px;
+    }
+    .tab1__coming-event--img {
+        width: calc(50% - 1px);
+        height: 100%;
+        object-fit: contain;
+        margin: 0;
+        border-radius: 10px;
+        background-color: rgb(223, 223, 223);
+    }
+    .tab1__coming-event--info {
+        width: 50%;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .tab1__coming-event--name {
+        margin: auto 5px;
+        font-weight: 600;
+        font-size: calc(15px + 0.8vw);
+    }
+    .tab1__coming-event--date {
+        margin: auto;
+        font-size: calc(5px + 0.5vh);
+        /* change icon size */
+        display: block;
+        position: relative;
+        width: 7em;
+        height: 7em;
+        background-color: #fff;
+        border-radius: 0.6em;
+        box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px #bdbdbd;
+        overflow: hidden;
+    }
+    .tab1__coming-event--date * {
+        display: block;
+        width: 100%;
+        font-size: 1em;
+        font-weight: bold;
+        font-style: normal;
+        text-align: center;
+    }
+    .tab1__coming-event--date strong {
+        position: absolute;
+        top: 0;
+        padding: 0.4em 0;
+        color: #fff;
+        background-color: gray;
+        border-bottom: 1px dashed rgb(160, 160, 160);
+        box-shadow: 0 2px 0 gray;
+    }
+    .tab1__coming-event--date em {
+        position: absolute;
+        bottom: 0.3em;
+        color: gray;
+    }
+    .tab1__coming-event--date span {
+        font-size: 2.8em;
+        letter-spacing: -0.05em;
+        padding-top: 0.8em;
+        color: #2f2f2f;
+    }
+    .tab1__coming-event--button {
+        margin: auto;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        background-color: gray;
+        width: 70%;
+        height: 25px;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.306);
+        font-size: calc(10px + 0.3vw);
+        cursor: pointer;
+    }
 }
 .lds-ellipsis {
     display: inline-block;
@@ -3576,6 +3707,79 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
       transform: translate(24px, 0);
     }
   }
+
+.snackbar {
+    opacity: 0;
+    z-index: 500000;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: min-content;
+    background-color: #b00020;
+    border-radius: 5px;
+    display: none;
+    padding: 12px 16px;
+    min-width: 280px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    cursor: pointer;
+}
+.snackbar.active {
+    opacity: 1;
+    display: flex;
+    animation: active 0.7s;
+}
+.snackbar * {
+    margin: auto;
+    color: white;
+    font-size: 18px;
+}
+.snackbar i {
+    margin: auto 10px;
+}
+.snackbar label {
+    margin-left: 16px;
+    font-size: 16px;
+}
+.snackbar.error {
+    background-color: #b00020;
+}
+.snackbar.warning {
+    background-color: #ff8800;
+}
+.snackbar.success {
+    background-color: #007e33;
+}
+.snackbar.error:hover {
+    background-color: #94001b;
+}
+.snackbar.warning:hover {
+    background-color: #dd7600;
+}
+.snackbar.success:hover {
+    background-color: #006a2b;
+}
+@media only screen and (max-width: 700px) {
+    .snackbar {
+        width: 85vw;
+        right: 5vw;
+        padding: 12px 2.5vw;
+        bottom: 10px;
+    }
+    .snackbar label {
+        margin-left: 2.5vw;
+    }
+}
+@keyframes active {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
 [theme=color] .tab5{
     background-color: var(--tab5_color);
 }
@@ -3922,7 +4126,7 @@ render {
     left: 100%;
     transition: left 0.5s;
     background-color: white;
-    z-index: 20000;
+    z-index: 20001;
     overflow: hidden;
 }
 
@@ -3931,7 +4135,7 @@ render {
     left: 0;
 }
 
-.searchScreen {
+.search {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -3941,7 +4145,7 @@ render {
     z-index: 20000;
 }
 
-.searchScreen.visible {
+.search.visible {
     left: 0;
     top: 0;
 }
@@ -3962,10 +4166,10 @@ render {
 .img--overlay{
     position: absolute;
     display: none;
-    width: 100vw;
-    height: 100vh;
-    z-index: 20001;
-    background-color: rgba(50, 50, 50, 0.646);
+    width: 100%;
+    height: 100%;
+    z-index: 20002;
+    background-color: rgba(30, 30, 30, 0.714);
 }
 
 .img--overlay--img{

@@ -1,38 +1,49 @@
-
 <div>
     <div class="tab1__carousel--container">
         <render render=tab1_carousel></render>
     </div>
+    <!-- <div class="search">
+        <i class="material-icons">search</i>
+        <input class="search-input" type="search" id="search" placeholder="Buscar..." />
+    </div> -->
+    <button class="tab1__search--button">
+        <i class="fas fa-bullhorn tab1__search--icon"></i>
+    </button>
+    <div class="tab1__weather--container">
+        <div style="width: 100%; height: 40px;">
+            <i class='fas fa-temperature-high'></i>
+            <a style="margin-left:4px;">35</a>
+        </div>
+        <button>Más</button>
+    </div>
     <section class="tab1--content">
-        <article class="tab1__calendar--container">
+        <label style="text-align: start; color: gray; font-size: 13px; margin: 10px 20px;">Eventos</label>
+        <div class="tab1__events--container">
+            <div class="tab1__events--item tab1__events--item1">
+            </div>
+            <div class="tab1__events--item tab1__events--item2">
+            </div>
+        </div>
 
-            <div class="tab1__calendar__events--container">
-                <div class="tab1__calendar__events--item1">
-                </div>
-                <div class="tab1__calendar__events--item2" >
-                </div>
+        <label
+            style="text-align: start; color: gray; font-size: 13px; margin: 5px 20px; margin-top: 10px;">Concursos</label>
+        <div class="tab1__concurso--container">
+
+            <div class="tab1__concurso--item tab1__concurso--item1">
+            </div>
+            <div class="tab1__concurso--item tab1__concurso--item2">
             </div>
 
-            <div class="tab1__calendar__concurso--container">
-                
-                <div class="tab1__calendar__concurso--item1">
-                </div>
-                <div class="tab1__calendar__concurso--item2">
-                </div>
-                
-            </div>
+        </div>
 
 
-            <button class="tab1__calendar--button">
-                <i class="fas fa-calendar-alt tab1__calendar--icon"></i>
-            </button>
-            <div class="search">
-                <i class="material-icons">search</i>
-                <input class="search-input" type="search" id="search" placeholder="Buscar..." />
-            </div>
+        <button class="tab1__calendar--button">
+            <label style="margin: auto; margin-right: 5px; font-size: 12px;">Calendario</label>
+            <i class="fas fa-calendar-alt tab1__calendar--icon" style="margin-left: 0;"></i>
+        </button>
 
-        </article>
-        <div class="div"></div>
+
+
 </div>
 <!-- <div style="height: 52%;display: flex">
     <div style="width: calc(50% - 0.5px); padding-top: 10px;">

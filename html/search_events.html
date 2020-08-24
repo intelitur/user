@@ -1,0 +1,83 @@
+<div class="search__events--container">
+    <button class='search__back search__events__back'>
+        <i class="fas fa-arrow-left"></i>
+    </button>
+    <h3 class="search__events--title">Eventos</h3>
+
+    <div class="search__events__filter--container">
+        <button class='search__events__button'>
+            <i class="fas fa-search-plus"></i>
+        </button>
+        <div class="search__events__filter">
+            <div>
+                <div class="search__events__filters__name">
+                    <div style="display: flex">
+                        <input type="checkbox" name="name_filter" id="checkbox_search_events_name">
+                        <label class="search__events__filter--title">Nombre</label>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+                        <input type="text" name="name" style="height: 20px; width: 70%;" id="input_search_events_name" disabled>
+                    </div>
+                </div>
+
+                <div class="search__events__filters__dates" style="margin-top: 10px;">
+                    <div style="display: flex">
+                        <input type="checkbox" name="dates_filter"  id="checkbox_search_events_dates">
+                        <label class="search__events__filter--title">Rango de fechas</label>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+                        <input type="date" name="start-date" id="input_search_events_start_date" disabled>
+                        -
+                        <input type="date" name="end-date" id="input_search_events_end_date" disabled>
+                    </div>
+                </div>
+
+                <div class="search__events__filters__category" style="margin-top: 10px;">
+                    <div style="display: flex">
+                        <input type="checkbox" name="category_filter" id="checkbox_search_events_category">
+                        <label class="search__events__filter--title">Categoría</label>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+                        <select style="height: 25px; width: 70%;" id="select_search_events_categories" disabled>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="search__events__filters__name" style="margin-top: 10px;">
+                    <div style="display: flex">
+                        <input type="checkbox" name="ubication_filter" id="checkbox_search_events_ubication">
+                        <label class="search__events__filter--title">Ubicación</label>
+                    </div>
+
+                    <div style="display: flex; justify-content: center; margin-top: 10px; font-size: 13px; align-items: center;">
+                        Eventos en
+                        <input type="number" name="km" style="height: 20px; width: 20%; margin: 5px" id="input_search_events_ubication" disabled>
+                        km alrededor
+                    </div>
+                </div>
+
+                <div class="search__events__filter__buttons--container" style="margin-top: 15px;">
+                    <button class="search__events__filter--no" id="button_search_events_no">
+                        Quitar filtros
+                    </button>
+                    <button class="search__events__filter--yes" id="button_search_events_yes">
+                        Aplicar filtros
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="search__events__events--container">
+        
+    </div>
+    <div class="lds-ellipsis" style="margin: 0 auto; color: tomato; margin-bottom: 100px; height: 0;" id="loading_search_events">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>

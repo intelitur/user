@@ -100,8 +100,21 @@ class SearchEvents {
             }).bind(this))
 
             this.elements.checkbox.ubication.addEventListener("change", ((e) => {
-                if (e.target.checked)
-                    this.elements.inputs.ubication.disabled = false
+                if (e.target.checked){
+                    navigator.geolocation.getCurrentPosition(
+                        ((result) => {
+                            this.coords = result.coords
+                            this.elements.inputs.ubication.disabled = false
+                        }).bind(this),
+                        ((error) => {
+                            this.elements.checkbox.ubication.checked = false
+                            if(error.code == 1){
+                                //Usuario bloqueó la vara
+                                alert("Debe brindarle permisos de ubicación a la aplicación")
+                            }
+                        }).bind(this)
+                    )
+                }
                 else
                     this.elements.inputs.ubication.disabled = true
             }).bind(this))
@@ -180,8 +193,11 @@ class SearchEvents {
             filters.date_range = { start: this.elements.inputs.dates.start.value, end: this.elements.inputs.dates.end.value }
         if (this.elements.checkbox.category.checked)
             filters.category = this.elements.inputs.category.value
-        if (this.elements.checkbox.ubication.checked)
-            filters.ubication = this.elements.inputs.ubication.value
+        if (this.elements.checkbox.ubication.checked && this.coords != undefined){
+            filters.metters = this.elements.inputs.ubication.value
+            filters.latitude = this.coords.latitude
+            filters.longitude = this.coords.longitude
+        }
         const events = await EventsService.getEventsFiltered(filters)
         console.log(events)
         this.renderEvents(events)

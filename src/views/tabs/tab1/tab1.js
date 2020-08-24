@@ -12,6 +12,7 @@ import tab1_companies from "./js/tab1_companies";
 import './tab1.css'
 import './css/d_tab1_event_view.css'
 import '../../../utils/css/loader-ellipsis.css'
+import Snackbar from "../../snackbar/snackbar";
 
 
 class Tab1 {
@@ -74,6 +75,8 @@ class Tab1 {
             await this.renderEvents()
             tab1_companies.renderCompanies()
         }
+
+        Snackbar.warning("Se ha hecho bien bien bien bien", 5000)
     }
 
     async renderCalendar() {

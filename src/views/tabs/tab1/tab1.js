@@ -76,7 +76,11 @@ class Tab1 {
             tab1_companies.renderCompanies()
         }
 
-        Snackbar.warning("Se ha hecho bien bien bien bien", 5000)
+        Snackbar.warning("Probando un error", 5000)
+        setTimeout(undefined, 5000)
+        Snackbar.success("Pronbando un éxito", 5000)
+        setTimeout(undefined, 5000)
+        Snackbar.warning("Probando un warning", 5000)
     }
 
     async renderCalendar() {

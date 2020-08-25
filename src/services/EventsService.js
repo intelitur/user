@@ -1,12 +1,13 @@
 import { API_URL } from '../env'
+import ServiceUtils from '../utils/ServiceUtils'
 
 const module = 'events'
 
 class EventsService {
 
     static async getEventsFiltered(filters){
-        console.log(filters)
-        let response = await fetch(`${API_URL}/${module}`)
+        
+        let response = await fetch(`${API_URL}/${module}?${ServiceUtils.createQuery(filters)}`)
         response = await response.json()
         return response
     }
@@ -18,10 +19,16 @@ class EventsService {
         return response
     }
 
-    static async getEvents(update = false, filters) {
-        console.log(filters)
+    static async getEvents(update = false) {
+        const now = new Date()
+        const later = new Date()
+        later.setMonth(now.getMonth() + 3)
+        let filter = {
+            initial_date: `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, "0")}-${now.getDate().toString().padStart(2, "0")}`,
+            final_date: `${later.getFullYear()}-${(later.getMonth() + 1).toString().padStart(2, "0")}-${later.getDate().toString().padStart(2, "0")}`
+        }
         if(EventsService.events === undefined || update){
-            EventsService.events =  await EventsService.updateEvents()
+            EventsService.events =  await EventsService.getEventsFiltered(filter)
         }
         return EventsService.events
     }

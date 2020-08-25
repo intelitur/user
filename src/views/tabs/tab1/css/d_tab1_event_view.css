@@ -23,6 +23,7 @@
         margin: auto 5px;
         font-weight: 600;
         font-size: calc(15px + 0.8vw);
+        text-align: center;
     }
     .tab1__coming-event--date {
         margin: auto;

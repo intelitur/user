@@ -19,13 +19,14 @@ class DesignController {
     static hideOverlay(force) {
         const overlay = document.querySelector('.overlay')
         overlay.classList.remove('visible')
-        if(force)
+        if(force){
             DesignController.doWhenHide = undefined
+            setTimeout(()=>overlay.firstElementChild.className = "", 500);
+        }
         if(DesignController.doWhenHide){
             DesignController.doWhenHide()
             DesignController.doWhenHide = undefined
         }
-        overlay.firstElementChild.className = "";
     }
 
 
@@ -114,6 +115,8 @@ class DesignController {
     }
 
 }
+
+DesignController.badges = 3
 
 DesignController.mobile = window.screen.width < 700
 

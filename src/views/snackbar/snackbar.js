@@ -42,13 +42,18 @@ class Snackbar {
 
     static hide(){
         Snackbar.el.className = "snackbar"
+        delete Snackbar.timeout
     }
 
     static async show(message, ms){
+        if(Snackbar.timeout != undefined){
+            clearTimeout(Snackbar.timeout)
+            Snackbar.hide()
+        }
         if(message)
             Snackbar.el.lastElementChild.innerHTML = message  
         if(ms)
-            setTimeout(Snackbar.hide, ms)
+            Snackbar.timeout = setTimeout(Snackbar.hide, ms)
         Snackbar.el.classList.add("active")
     }
 }

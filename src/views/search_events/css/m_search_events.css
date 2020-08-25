@@ -36,12 +36,14 @@
     .search__events__back {
         top: 5px;
         left: 5px;
+        position: sticky !important;
+        min-height: 50px !important;
     }
 
     .search__events__filter--container{
         display: flex;
         flex-direction: column;
-        
+        margin-top: -50px;
     }
 
     .search__events__filter:before {

@@ -8,6 +8,7 @@ import EventsService from "../../services/EventsService"
 import CategoryService from "../../services/CategoryService"
 import { IMAGES_BASE_URL } from "../../env"
 import DesignController from "../../utils/DesignController"
+import Snackbar from "../snackbar/snackbar"
 
 class SearchEvents {
 
@@ -105,12 +106,13 @@ class SearchEvents {
                         ((result) => {
                             this.coords = result.coords
                             this.elements.inputs.ubication.disabled = false
+                            Snackbar.success("Se tomó la ubicación actual como base")
                         }).bind(this),
                         ((error) => {
                             this.elements.checkbox.ubication.checked = false
                             if(error.code == 1){
                                 //Usuario bloqueó la vara
-                                alert("Debe brindarle permisos de ubicación a la aplicación")
+                                Snackbar.error("Debe brindarle permisos de ubicación a la aplicación")
                             }
                         }).bind(this)
                     )
@@ -189,12 +191,14 @@ class SearchEvents {
         let filters = {}
         if (this.elements.checkbox.name.checked)
             filters.name = this.elements.inputs.name.value
-        if (this.elements.checkbox.dates.checked)
-            filters.date_range = { start: this.elements.inputs.dates.start.value, end: this.elements.inputs.dates.end.value }
+        if (this.elements.checkbox.dates.checked){
+            filters.initial_date = this.elements.inputs.dates.start.value
+            filters.final_date = this.elements.inputs.dates.end.value 
+        }
         if (this.elements.checkbox.category.checked)
-            filters.category = this.elements.inputs.category.value
+            filters.category_id = this.elements.inputs.category.value
         if (this.elements.checkbox.ubication.checked && this.coords != undefined){
-            filters.metters = this.elements.inputs.ubication.value
+            filters.meters = this.elements.inputs.ubication.value * 1000
             filters.latitude = this.coords.latitude
             filters.longitude = this.coords.longitude
         }
@@ -204,8 +208,9 @@ class SearchEvents {
     }
 
     async renderEvents(events){
+        this.elements.eventsContainer.innerHTML = ""
         this.loading = true
-        const template = await TemplatesManager.getTemplate('m_tab1_event_view');
+        const template = await TemplatesManager.getTemplate(`${DesignController.mobile? 'm': 'd'}_tab1_event_view`);
 
 
         let getDateInfo = (event) => {
@@ -243,8 +248,13 @@ class SearchEvents {
         })
            
         Array.from(this.elements.eventsContainer.children).forEach(item => {
-            item.getAttribute("event_id")
-            item.addEventListener('click', DesignController.showEvent.bind(this, item.getAttribute("event_id")))
+
+            item.addEventListener('click', (()=>{
+                DesignController.showEvent(item.getAttribute("event_id"))
+                if(!DesignController.mobile){
+                    this.hide()
+                }
+            }).bind(this))
         })
 
         this.loading = false

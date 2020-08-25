@@ -551,9 +551,9 @@
         font-size: calc(15px + 0.8vw);
         text-align: center;
     }
-    .tab1__concurso--item2 {
+    /* .tab1__concurso--item2 {
        
-    }
+    } */
     /* .tab1__calendar__concurso--item1:hover{
         margin-top: 60px;
         height: 80%;
@@ -659,5 +659,10 @@
         letter-spacing: -0.05em;
         padding-top: 0.8em;
         color: #2f2f2f;
+    }
+
+    .tab1 .badge{
+        top: -4px;
+        right: -4px;
     }
 }

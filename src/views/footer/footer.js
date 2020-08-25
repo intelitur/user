@@ -33,6 +33,13 @@ class Footer {
         this.tabLinks.forEach(tabLink => tabLink.classList.remove('active'))
         this.tabLinks[i - 1].classList.add('active')
         tabs.showTab(i)
+
+        if(i == 1){
+            this.badge1 = 0
+        }
+        else{
+            this.badge1 = DesignController.badges
+        }
     }
 
     addEventListeners(){
@@ -42,6 +49,20 @@ class Footer {
                 this.showTab(i + 1)
             }).bind(this))
         })
+    }
+
+    set badge1(value){
+        if(value <= 0){
+            this.el.querySelector("#badge_tablink1").classList.add("hidden")
+            return
+        }
+        this.el.querySelector("#badge_tablink1").classList.remove("hidden")
+
+        this.el.querySelector("#badge_tablink1").innerHTML = value
+    }
+
+    get badge1(){
+        return Number(this.el.querySelector("#badge_tablink1").innerHTML)
     }
 
     

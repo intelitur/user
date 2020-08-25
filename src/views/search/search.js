@@ -33,5 +33,19 @@ class SearchView{
         document.getElementById("search_card_events").addEventListener("click", DesignController.showSearchEventsScreen)
     }
 
+    set badgeAdds(value){
+        if(value <= 0){
+            this.el.querySelector("#badge_adds").classList.add("hidden")
+            return
+        }
+        this.el.querySelector("#badge_adds").classList.remove("hidden")
+
+        this.el.querySelector("#badge_adds").innerHTML = value
+    }
+
+    get badgeAdds(){
+        return Number(this.el.querySelector("#badge_adds").innerHTML)
+    }
+
 }
 export default SearchView

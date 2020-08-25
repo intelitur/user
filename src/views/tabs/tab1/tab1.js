@@ -48,6 +48,21 @@ class Tab1 {
         return this.el.querySelector(".tab1__coming-events--no-more").style.display == "block"
     }
 
+    set badge(value){
+        const id = DesignController.mobile? "#badge_m_tab1": "#badge_d_tab1"
+        if(value <= 0){
+            this.el.querySelector(id).classList.add("hidden")
+            return
+        }
+        this.el.querySelector(id).classList.remove("hidden")
+
+        this.el.querySelector(id).innerHTML = value
+    }
+
+    get badge(){
+        return Number(this.el.querySelector(id).innerHTML)
+    }
+
     async render() {
         const view = await TemplatesManager.getTemplate('tab1')
         this.el = TemplatesManager.renderElement('tab1', view)
@@ -75,12 +90,6 @@ class Tab1 {
             await this.renderEvents()
             tab1_companies.renderCompanies()
         }
-
-        Snackbar.error("Probando un error", 5000)
-        setTimeout(()=> {Snackbar.success("Pronbando un éxito", 5000)}, 5500)
-        
-        setTimeout(()=>{Snackbar.warning("Probando un warning", 5000)}, 11000)
-        
     }
 
     async renderCalendar() {
@@ -111,16 +120,7 @@ class Tab1 {
             this.resetContainer()
         }
         this.loading = true;
-        let events = []
-        if(this.filter != undefined && this.filter != ""){
-            this.events = await EventsService.getEvents();
-            events = this.events.filter(item => item.name.toLowerCase().includes(this.filter.toLowerCase()))
-            events = events.slice(this.pageSize * this.index, this.pageSize * (this.index + 1))
-        }
-        else{
-            events = await EventsService.getComingEvents(this.index, this.pageSize)
-        }
-
+        let events = await EventsService.getComingEvents(this.index, this.pageSize)
         
         if(events.length > 0){
             let template = await TemplatesManager.getTemplate("d_tab1_event_view")
@@ -140,22 +140,34 @@ class Tab1 {
     }
 
     async renderEventsMobile(){
+        const container = this.el.querySelector('.tab1__events--container');
+        container.innerHTML = '';
+
         const template = await TemplatesManager.getTemplate('m_tab1_event_view');
 
-        const events = await this.getEvents();
+        const events = await this.getComingEvents();
 
-        const htmlNode = TemplatesManager.createHtmlNode(template.patch({name: events[0].name, color: events[0].color, ...this.getDateInfo(events[0]), main_image: this.getMainImage(events[0]), event_id: events[0].event_id}));
-        const htmlNode2 = TemplatesManager.createHtmlNode(template.patch({name: events[1].name, color: events[1].color, ...this.getDateInfo(events[1]), main_image: this.getMainImage(events[1]), event_id: events[1].event_id}));
-           
-        const container = this.el.querySelector('.tab1__events--container');
-        container.children[0].appendChild(htmlNode);
-        container.children[1].appendChild(htmlNode2);
 
-        const eventsDOM = this.el.querySelectorAll(".m_tab1__event--container")
-        eventsDOM.forEach(item => {
-            item.getAttribute("event_id")
-            item.addEventListener('click', DesignController.showEvent.bind(this, item.getAttribute("event_id")))
-        })
+        if(events.length > 0){
+            
+            const htmlNode = TemplatesManager.createHtmlNode(template.patch({name: events[0].name, color: events[0].color, ...this.getDateInfo(events[0]), main_image: this.getMainImage(events[0]), event_id: events[0].event_id}));
+            const htmlNode2 = TemplatesManager.createHtmlNode(template.patch({name: events[1].name, color: events[1].color, ...this.getDateInfo(events[1]), main_image: this.getMainImage(events[1]), event_id: events[1].event_id}));
+            
+            htmlNode.classList.add("tab1__events--item")
+            htmlNode2.classList.add("tab1__events--item")
+            container.appendChild(htmlNode);
+            container.appendChild(htmlNode2);
+            
+            const eventsDOM = this.el.querySelectorAll(".m_tab1__event--container")
+            eventsDOM.forEach(item => {
+                item.getAttribute("event_id")
+                item.addEventListener('click', DesignController.showEvent.bind(this, item.getAttribute("event_id")))
+            })
+        }
+        else{
+            container
+            
+        }
     }
 
     setudDesktopListeners(){
@@ -166,6 +178,8 @@ class Tab1 {
             }
                 
         }).bind(this)) 
+
+        this.el.querySelector(".tab1__search-events--open").addEventListener("click", DesignController.showSearchEventsScreen)
 
         document.querySelector(".tab1_coming-events--input").addEventListener("keyup", ((e) => {
             this.filter = e.target.value
@@ -199,7 +213,7 @@ class Tab1 {
     }
 
     getMainImage(event){
-        return `${IMAGES_BASE_URL}/${event.images[0]}`
+        return `${IMAGES_BASE_URL}/${event.images? event.images[0] : undefined}`
     }
 
     setupSrollAnimation() {
@@ -281,8 +295,8 @@ class Tab1 {
         
     // }
     
-    async getEvents(){
-        let events = await EventsService.getComingEvents(0,2);
+    async getComingEvents(){
+        let events = await EventsService.getEvents();
         return events;
     }
 

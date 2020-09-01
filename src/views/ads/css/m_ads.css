@@ -1,0 +1,264 @@
+@media only screen and (max-width: 700px) {
+    .ads__overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 100%;
+        transition: top 0.5s;
+        background-color: white;
+        color: gray;
+        z-index: 20000;
+    }
+
+    .ads__overlay.visible {
+        top: 0%;
+    }
+
+    .ads--container {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ads__back {
+        top: 5px;
+        left: 5px;
+        position: sticky;
+        width: 50px;
+        min-height: 50px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        color: rgb(76, 76, 76);
+        display: flex;
+        cursor: pointer;
+        font-size: 25px;
+        border: none;
+        z-index: 1;
+        display: flex;
+    }
+
+    .ads__back * {
+        margin: auto
+    }
+
+    .ads--title {
+        position: absolute;
+        font-weight: 500;
+        font-size: 27px;
+        color: rgb(78, 78, 78);
+        left: 70px;
+        top: 14px;
+        margin: 0;
+    }
+
+    .ads__filter--container{
+        display: flex;
+        flex-direction: column;
+        margin-top: -50px;
+    }
+
+    .ads__filter:before {
+        content: ""; 
+        display: block; 
+        margin: -1px auto ;
+        margin-right: 0;
+        width: 78px; 
+        border-top: solid 1px rgb(255, 255, 255); 
+    }
+
+    .ads__button {
+        /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); */
+        border: solid 1px rgba(218, 218, 218);
+        margin: 10px auto;
+        margin-bottom: 0;
+        margin-right: 20px;
+        min-height: 50px;
+        max-height: 50px;
+        width: 80px;
+        border-radius: 10px;
+        background-color: white;
+        color: tomato;
+        font-size: 24px;
+        transition: 0.5s;
+        z-index: 1;
+        animation-name: icon;
+        animation-duration: 0.6s; 
+    }
+
+    .ads__button:focus{
+        outline:none;
+    }
+
+    .expanded>.ads__button {
+        border-radius: 10px 10px 0 0;
+        /* box-shadow:  0 0px 4px 0 rgba(0,0,0,.12); */
+        animation-name: icon-change;
+        animation-duration: 0.6s; 
+        border-bottom: white;
+    }
+
+    /* .search__events__button i {
+        animation-name: icon;
+        animation-duration: 1s;
+    }
+
+    .expanded>.search__events__button i {
+        animation-name: icon;
+    } */
+
+    .ads__filter {
+        transition: 0.6s;
+        height: 0px;
+        width: 80px;
+        
+        /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2); */
+        border: solid 1px rgba(218, 218, 218, 0);
+        margin: 0 auto;
+        margin-right: 20px;
+        z-index: 1;
+        border-radius: 10px 0 10px 10px;
+
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .expanded>.ads__filter {
+        height: 300px;     
+        width: calc(100% - 42px);
+        border: solid 1px rgb(218, 218, 218);
+    }
+
+    .ads__filter>div {
+        opacity: 0;
+        transition: opacity 0.2;
+        height: calc(100% - 10px);
+        width: calc(100% - 10px);
+        padding: 5px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        animation-duration: 0.6s;
+    }
+
+    .expanded>.ads__filter>div {
+        
+        opacity: 1;
+        animation-name: opacity-change;
+    }
+
+    @keyframes opacity-change {
+        0% {
+            opacity: 0;
+        }
+        80% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes icon {
+        0% {
+            font-size: 24px
+        }
+        50% {
+            font-size: 3px;
+        }
+        100% {
+            font-size: 24px;
+        }
+    }
+
+    @keyframes icon-change {
+        0% {
+            font-size: 24px
+        }
+        50% {
+            font-size: 3px;
+        }
+        100% {
+            font-size: 24px;
+        }
+    }
+
+    .ads__filter--title{
+        margin-left: 6px;
+    }
+
+    .ads__filter__buttons--container{
+        display: flex;
+        margin: 0 auto;
+        width: 80%;
+        justify-content: space-around;
+    }
+
+    .ads__filter__buttons--container button{
+        /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); */
+        border: 1px solid gray;
+        background-color: white;
+        padding: 8px 16px;
+        border-radius: 5px;
+    }
+
+    .ads__filter--yes{
+        color: rgb(51, 164, 51);
+        border: 1px solid rgb(51, 164, 51) !important;
+    }
+
+    .ads__filter--no{
+        color: rgb(196, 71, 71);
+        border: 1px solid rgb(196, 71, 71) !important;
+    }
+
+    .ads__item--container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: calc(100% - 20px);
+        margin: 10px;
+        margin-top: 20px;
+    }
+
+    .ads__item {
+        padding: 0;
+        color: white;
+        width: calc(100% - 40px);
+        height: 150px;
+        background-color: white;
+        margin-top: 15px;
+        box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+        display: flex;
+        position: relative;
+    }
+
+    .ads__item--img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background-color: white;
+    }
+
+    .ads__item--title{
+        flex-direction: column;
+        right: 0;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.455);
+        font-size: 15px;
+        width: 50%;
+        color: white;
+        display: flex;
+        height: 100%;
+        text-align: center;
+    }
+
+    .ads__item--title * {
+        margin: auto;
+    }
+}

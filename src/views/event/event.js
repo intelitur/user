@@ -5,7 +5,7 @@ import Carousel from "../carousel/carousel";
 import CategoryService from "../../services/CategoryService"
 import tab2 from "../tabs/tab2/tab2"
 import footer from "../footer/footer"
-import { IMAGES_BASE_URL } from '../../env';
+import { FILES_BASE_URL } from '../../env';
 
 
 import './event.css'
@@ -30,7 +30,7 @@ class EventView {
     }
 
     async renderContent(){
-        this.carousel = new Carousel(this.event.images.map(image => `${IMAGES_BASE_URL}/${image}`));
+        this.carousel = new Carousel(this.event.images.map(image => `${FILES_BASE_URL}/${image}`));
         // this.carousel = new Carousel([
         //     "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
         //     "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",

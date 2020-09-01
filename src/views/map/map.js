@@ -60,11 +60,9 @@ class Map {
 
         try{
             const response = await promise
-            console.log(response)
             return response.coords
         }
         catch (error) {
-            console.error(error)
             return {error: error}
         }
 
@@ -96,12 +94,14 @@ class Map {
         )
 
         const baseLayers = {
-            "Mapa": OSM,
+            "OSM": OSM,
             "Satélite": googleSatelite,
-            "Google": googleStreets
+            "Calles": googleStreets
         }
 
-        this.map.addControl(leaflet.control.layers(baseLayers, undefined, {collapsed: false}))
+        const baseControl = leaflet.control.layers(baseLayers, undefined, {collapsed: false})
+
+        this.map.addControl(baseControl)
 
         if (DesignController.mobile)
             this.map.addControl(mapLayersControl.setPosition('bottomleft'))
@@ -109,6 +109,9 @@ class Map {
         this.setupEventsTile()
 
         this.setMapView(10.471681129073158, -84.64514404535294, 15);
+
+        baseControl._layerControlInputs[2].checked = true
+        baseControl._onInputClick()
     }
 
     setMapView(lat, lng, zoom) {

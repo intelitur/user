@@ -5,7 +5,7 @@ import Carousel from "../../carousel/carousel";
 import DesignController from "../../../utils/DesignController";
 import CalendarView from "../../calendar/calendar";
 import EventsService from "../../../services/EventsService";
-import { IMAGES_BASE_URL } from "../../../env";
+import { FILES_BASE_URL } from "../../../env";
 import tab1_companies from "./js/tab1_companies";
 
 
@@ -213,7 +213,7 @@ class Tab1 {
     }
 
     getMainImage(event){
-        return `${IMAGES_BASE_URL}/${event.images? event.images[0] : undefined}`
+        return `${FILES_BASE_URL}/${event.images? event.images[0] : undefined}`
     }
 
     setupSrollAnimation() {

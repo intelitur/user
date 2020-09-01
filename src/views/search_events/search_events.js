@@ -6,7 +6,7 @@ import './css/m_search_events.css'
 import './css/d_search_events.css'
 import EventsService from "../../services/EventsService"
 import CategoryService from "../../services/CategoryService"
-import { IMAGES_BASE_URL } from "../../env"
+import { FILES_BASE_URL } from "../../env"
 import DesignController from "../../utils/DesignController"
 import Snackbar from "../snackbar/snackbar"
 
@@ -237,7 +237,7 @@ class SearchEvents {
     
         let getMainImage = (event) => {
 
-            return event.images?`${IMAGES_BASE_URL}/${event.images[0]}`: ``
+            return event.images?`${FILES_BASE_URL}/${event.images[0]}`: ``
         }
 
         events.forEach(event => {

@@ -31,6 +31,7 @@ class SearchView{
 
     setupListeners(){
         document.getElementById("search_card_events").addEventListener("click", DesignController.showSearchEventsScreen)
+        document.getElementById("search_card_ads").addEventListener("click", DesignController.showAdsScreen)
     }
 
     set badgeAdds(value){

@@ -59,7 +59,6 @@ class Tab2 {
         
 
         this.map = map
-        console.log(this.map)
     }
 
     setupEventListeners(){

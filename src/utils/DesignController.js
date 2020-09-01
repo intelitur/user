@@ -6,6 +6,7 @@ import tabs from '../views/tabs/tabs'
 import footer from '../views/footer/footer'
 import EventsService from '../services/EventsService'
 import searchEvents from '../views/search_events/search_events'
+import ads from '../views/ads/ads'
 
 class DesignController {
 
@@ -88,6 +89,12 @@ class DesignController {
     static async showSearchEventsScreen(){
         DesignController.showLoadingBar()
         await searchEvents.show()
+        DesignController.hideLoadingBar()
+    }
+
+    static async showAdsScreen(){
+        DesignController.showLoadingBar()
+        await ads.show('ads_overlay')
         DesignController.hideLoadingBar()
     }
 

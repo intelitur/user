@@ -9,6 +9,7 @@
     }
 
     .ads__back {
+
         top: 5px;
         left: 5px;
         position: sticky;
@@ -23,7 +24,7 @@
         font-size: 25px;
         border: none;
         z-index: 1;
-        display: flex;
+        display: none;
     }
 
     .ads__back * {
@@ -35,7 +36,7 @@
         font-weight: 500;
         font-size: 27px;
         color: rgb(78, 78, 78);
-        left: 70px;
+        left: 20px;
         top: 14px;
         margin: 0;
     }

@@ -9,9 +9,9 @@
     }
 
     .ads__back {
-
+        
         top: 5px;
-        left: 5px;
+        left: -60px;
         position: sticky;
         width: 50px;
         min-height: 50px;
@@ -24,7 +24,6 @@
         font-size: 25px;
         border: none;
         z-index: 1;
-        display: none;
     }
 
     .ads__back * {

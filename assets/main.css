@@ -3536,6 +3536,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         font-size: 25px;
         border: none;
         z-index: 1;
+        opacity: 0;
     }
 
     .ads__back * {
@@ -3550,6 +3551,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         left: 20px;
         top: 14px;
         margin: 0;
+        
     }
 
     .ads__filter--container{

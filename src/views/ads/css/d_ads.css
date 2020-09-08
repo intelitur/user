@@ -24,6 +24,7 @@
         font-size: 25px;
         border: none;
         z-index: 1;
+        opacity: 0;
     }
 
     .ads__back * {
@@ -38,6 +39,7 @@
         left: 20px;
         top: 14px;
         margin: 0;
+        
     }
 
     .ads__filter--container{

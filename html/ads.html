@@ -1,0 +1,60 @@
+<div class="ads--container">
+    <button class='ads__back'>
+        <i class="fas fa-arrow-left"></i>
+    </button>
+    <h3 class="ads--title">Anuncios</h3>
+
+    <div class="ads__filter--container">
+        <button class='ads__button'>
+            <i class="fas fa-search-plus"></i>
+        </button>
+        <div class="ads__filter">
+            <div>
+                <div class="ads__filters__dates" style="margin-top: 10px;">
+                    <div style="display: flex">
+                        <input type="checkbox" name="dates_filter"  id="checkbox_ads_dates">
+                        <label class="ads__filter--title">Rango de fechas</label>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+                        <input type="date" name="start-date" id="input_ads_start_date" disabled>
+                        -
+                        <input type="date" name="end-date" id="input_ads_end_date" disabled>
+                    </div>
+                </div>
+
+                <div class="ads__filters__name" style="margin-top: 10px;">
+                    <div style="display: flex">
+                        <input type="checkbox" name="ubication_filter" id="checkbox_ads_ubication">
+                        <label class="ads__filter--title">Ubicación</label>
+                    </div>
+
+                    <div style="display: flex; justify-content: center; margin-top: 10px; font-size: 13px; align-items: center;">
+                        Anuncios a
+                        <input type="number" name="km" style="height: 20px; width: 20%; margin: 5px" id="input_ads_ubication" disabled>
+                        km alrededor
+                    </div>
+                </div>
+
+                <div class="ads__filter__buttons--container" style="margin-top: 15px;">
+                    <button class="ads__filter--no" id="button_ads_no">
+                        Quitar filtros
+                    </button>
+                    <button class="ads__filter--yes" id="button_ads_yes">
+                        Buscar
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="lds-ellipsis" style="margin: 0 auto; color: tomato; margin-bottom: 100px; height: 0;" id="loading_search_events">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="ads__item--container">
+
+    </div>
+</div>

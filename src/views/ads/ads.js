@@ -1,10 +1,12 @@
 import TemplatesManager from "../../utils/TemplatesManager"
 
-import './css/m_ads.css'
 import AdsService from "../../services/AdsService"
 import { FILES_BASE_URL } from "../../env"
 import DesignController from "../../utils/DesignController"
 import Snackbar from "../snackbar/snackbar"
+
+import './css/m_ads.css'
+import './css/d_ads.css'
 
 class Ads {
 
@@ -24,6 +26,17 @@ class Ads {
     }
 
     async render() {
+        if(DesignController.mobile){
+            
+            document.body.appendChild(
+                TemplatesManager.createHtmlNode(
+                    `<section class="ads__overlay">
+                        <render render="ads_overlay"></render>
+                    </section>`
+                )
+            )
+        }
+
         const template = await TemplatesManager.getTemplate('ads')
 
         this.el = TemplatesManager.renderElement(this.where, template)
@@ -161,8 +174,20 @@ class Ads {
             filters.latitude = this.coords.latitude
             filters.longitude = this.coords.longitude
         }
-        const ads = await AdsService.getAds(filters)
-        console.log(ads)
+        const response = await AdsService.getAds(filters)
+
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error(500)
+            }
+            else if(response.status >= 400){
+                Snackbar.error(400)
+            }
+            this.elements.adsContainer.innerHTML = `<div style="margin: auto; font-size: 12px; color: rgb(196, 71, 71);">Error al conectar con nuestros servidores</div>`
+            this.loading = false
+            return
+        }
+        const ads = await response.json()
         this.renderAds(ads)
     }
 
@@ -195,23 +220,19 @@ class Ads {
         }
     
         let getMainImage = (ad) => {
-
+            return `${FILES_BASE_URL}/20200826162313572-Full%20Moon%20Ultra%20HD.jpg`
             return ad.images?`${FILES_BASE_URL}/${ad.images[0]}`: ``
         }
 
         ads.forEach(ad => {
-            let htmlNode = TemplatesManager.createHtmlNode(template.patch({name: ad.name, main_image: getMainImage(ad), ad_id: ad.ad_id}));
-            console.log(htmlNode)
+            let htmlNode = TemplatesManager.createHtmlNode(template.patch({name: ad.name, image: getMainImage(ad), ad_id: ad.ad_id, }));
             htmlNode.classList.add("ads__item")
             this.elements.adsContainer.appendChild(htmlNode)
         })
            
         Array.from(this.elements.adsContainer.children).forEach(item => {
             item.addEventListener('click', (()=>{
-                DesignController.showEvent(item.getAttribute("ad_id"))
-                if(!DesignController.mobile){
-                    this.hide()
-                }
+                DesignController.showAd(item.getAttribute("ad_id"))
             }).bind(this))
         })
 

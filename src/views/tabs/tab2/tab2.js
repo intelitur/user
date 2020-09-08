@@ -6,6 +6,7 @@ import DesignController from "../../../utils/DesignController";
 
 import './tab2.css'
 import EventsService from "../../../services/EventsService";
+import Snackbar from "../../snackbar/snackbar";
 class Tab2 {
 
     constructor(){
@@ -134,7 +135,19 @@ class Tab2 {
             if(container.classList.contains("expanded")){
                 container = document.querySelector(".tab2__left--item--content")
                 container.innerHTML = ""
-                let events = await EventsService.getEvents()
+                const response = await EventsService.getEvents()
+                if(response.status != 200){
+                    if(response.status >= 500){
+                        Snackbar.error(500)
+                    }
+                    else if(response.status >= 400){
+                        Snackbar.error(400)
+                    }
+                    return
+                }
+                
+                let events = await response.json()
+
                 let visibleEvents = events.filter((item) => this.map.isVisible(item.latitude, item.longitude))
     
                 let template = await TemplatesManager.getTemplate("event_item")

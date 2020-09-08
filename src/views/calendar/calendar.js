@@ -11,6 +11,7 @@ import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/list/main.css';
 
 import './calendar.css'
+import Snackbar from '../snackbar/snackbar'
 class CalendarView {
 
     constructor(config) {
@@ -80,12 +81,26 @@ class CalendarView {
         this.calendar.renderComponent()
         this.calendar.tryRerender()
         
-        await this.renderEvents()
+        this.renderEvents()
     }
 
 
     async renderEvents(){
-        let events = await EventsService.getEvents()
+        let response = await EventsService.getEvents()
+
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error(500)
+            }
+            else if(response.status >= 400){
+                Snackbar.error(400)
+            }
+            this.loading = false
+            return
+        }
+
+        
+        let events = await response.json()
 
         events.forEach((event) => {
             let calendarEvent = {

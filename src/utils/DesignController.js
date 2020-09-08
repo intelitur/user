@@ -7,6 +7,7 @@ import footer from '../views/footer/footer'
 import EventsService from '../services/EventsService'
 import searchEvents from '../views/search_events/search_events'
 import ads from '../views/ads/ads'
+import AdView from '../views/ad/ad'
 
 class DesignController {
 
@@ -96,6 +97,25 @@ class DesignController {
         DesignController.showLoadingBar()
         await ads.show('ads_overlay')
         DesignController.hideLoadingBar()
+    }
+
+    static async showAd(ad_id) {
+        const adView = new AdView(ad_id)
+        if(DesignController.mobile){
+            DesignController.showLoadingBar()
+            await adView.show('overlay_ad')
+            DesignController.hideLoadingBar()
+        }   
+        else{
+            footer.showTab(2)
+            tab2.loading = true
+            tab2.map.showEventPopup(event_id)
+            await adView.show('tab2__left__info')
+            document.querySelector(".tab2__left__info--container").classList.add('visible')
+            //tab2.map.showEventPopup(event_id)
+            tab2.loading = false
+        }
+
     }
 
     static showLoadingBar(){

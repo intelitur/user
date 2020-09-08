@@ -10,6 +10,7 @@ import tab2 from "../tabs/tab2/tab2";
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.fullscreen/Control.FullScreen.css'
 import './map.css'
+import Snackbar from "../snackbar/snackbar";
 
 
 class Map {
@@ -147,7 +148,20 @@ class Map {
         }
 
         tab2.loading = true;
-        let events = await EventsService.getEvents()
+        let response = await EventsService.getEvents()
+
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error(500)
+            }
+            else if(response.status >= 400){
+                Snackbar.error(400)
+            }
+            this.loading = false
+            return
+        }
+        
+        let events = await response.json()
 
         const geoJSON = GeoJSONUtils.buildEventsGeoJson(events)
 

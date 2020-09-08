@@ -6,15 +6,16 @@ class CompaniesService {
 
     static async updateCompanies(){
         let response = await fetch(`${API_URL}/${module}`)
-        response = await response.json()
         return response
     }
 
     static async getCompanies(update = false) {
-        if(CompaniesService.companies === undefined || update){
-            CompaniesService.companies =  await CompaniesService.updateCompanies()
-        }
-        return CompaniesService.companies
+        // if(CompaniesService.companies === undefined || update){
+        //     CompaniesService.companies =  CompaniesService.updateCompanies()
+        // }
+        // return CompaniesService.companies
+
+        return CompaniesService.updateCompanies()
     }
 
     static async getCompany(company_id){

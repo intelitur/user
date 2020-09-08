@@ -25,6 +25,12 @@ class Snackbar {
     }
     
     static async error(message, ms = 5000){
+        if(message == 500){
+            message = "Error al conectar con nuestros servidores"
+        }
+        else if(message == 400){
+            message = "Ha ocurrido un error con la consulta, reintente"
+        }
         if(Snackbar.el == undefined)
         await Snackbar.render()
         Snackbar.el.classList.add("error")

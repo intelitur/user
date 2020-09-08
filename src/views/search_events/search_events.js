@@ -202,8 +202,19 @@ class SearchEvents {
             filters.latitude = this.coords.latitude
             filters.longitude = this.coords.longitude
         }
-        const events = await EventsService.getEventsFiltered(filters)
-        console.log(events)
+        const response = await EventsService.getEventsFiltered(filters)
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error(500)
+            }
+            else if(response.status >= 400){
+                Snackbar.error(400)
+            }
+            this.elements.eventsContainer.innerHTML = `<div style="margin: auto; font-size: 12px; color: rgb(196, 71, 71);">Error al conectar con nuestros servidores</div>`
+            this.loading = false
+            return
+        }
+        let events = await response.json()
         this.renderEvents(events)
     }
 

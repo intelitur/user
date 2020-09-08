@@ -18,15 +18,18 @@ class EventView {
 
     async render(name) {
         await this.eventPromise
+        
+        if(this.event != undefined){
+            const template = await TemplatesManager.getTemplate('event')
 
-        const template = await TemplatesManager.getTemplate('event')
+            const view = TemplatesManager.contextPipe(template, {...this, datetime: this.getDateTimeInfo()})
+    
+            this.el = TemplatesManager.renderElement(name, view)
+    
+            await this.renderContent();
+            this.addEventListeners()
+        }
 
-        const view = TemplatesManager.contextPipe(template, {...this, datetime: this.getDateTimeInfo()})
-
-        this.el = TemplatesManager.renderElement(name, view)
-
-        await this.renderContent();
-        this.addEventListeners()
     }
 
     async renderContent(){
@@ -53,7 +56,18 @@ class EventView {
     }
 
     async updateEvent() {
-        this.event = await EventsService.getEvent(this.event_id)
+        const response = await EventsService.getEvent(this.event_id)
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error(500)
+            }
+            else if(response.status >= 400){
+                Snackbar.error(400)
+            }
+            this.loading = false
+            return
+        }
+        this.event = (await response.json())[0]
         console.log(this.event)
         if(this.event.categories === undefined)
             this.event.categories = await this.getCategories()

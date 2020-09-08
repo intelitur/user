@@ -241,7 +241,7 @@
     .ads__item--img{
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         background-color: white;
     }
 
@@ -249,13 +249,14 @@
         flex-direction: column;
         right: 0;
         position: absolute;
-        background-color: rgba(0, 0, 0, 0.455);
+        background-color: rgba(0, 0, 0, 0.555);
         font-size: 15px;
         width: 50%;
         color: white;
         display: flex;
-        height: 100%;
+        height: calc(100% - 20px);
         text-align: center;
+        padding: 10px;
     }
 
     .ads__item--title * {

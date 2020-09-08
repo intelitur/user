@@ -6,7 +6,7 @@ import DesignController from "../../../utils/DesignController";
 import CalendarView from "../../calendar/calendar";
 import EventsService from "../../../services/EventsService";
 import { FILES_BASE_URL } from "../../../env";
-import tab1_companies from "./js/tab1_companies";
+import ads from "../../ads/ads";
 
 
 import './tab1.css'
@@ -87,8 +87,8 @@ class Tab1 {
             this.setudDesktopListeners()
             await this.renderCalendar()
             this.setupSrollAnimation()
-            await this.renderEvents()
-            tab1_companies.renderCompanies()
+            this.renderEvents()
+            ads.show("tab1_ads")
         }
     }
 
@@ -120,7 +120,21 @@ class Tab1 {
             this.resetContainer()
         }
         this.loading = true;
-        let events = await EventsService.getComingEvents(this.index, this.pageSize)
+        let response = await EventsService.getComingEvents(this.index, this.pageSize)
+
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error("Error al conectar y obetener los <b>eventos</b> de nuestros servidores")
+            }
+            else if(response.status >= 400){
+                Snackbar.error("Error al conectar y obetener los <b>eventos</b> de nuestros servidores")
+            }
+            this.loading = false
+            
+            return
+        }
+        
+        let events = await response.json()
         
         if(events.length > 0){
             let template = await TemplatesManager.getTemplate("d_tab1_event_view")
@@ -145,7 +159,20 @@ class Tab1 {
 
         const template = await TemplatesManager.getTemplate('m_tab1_event_view');
 
-        const events = await this.getComingEvents();
+        const response = await this.getComingEvents();
+
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error("Error al conectar y obetener los <b>eventos</b> de nuestros servidores")
+            }
+            else if(response.status >= 400){
+                Snackbar.error("Error al conectar y obetener los <b>eventos</b> de nuestros servidores")
+            }
+            container.innerHTML = `<div style="margin: auto; font-size: 12px; color: rgb(196, 71, 71);">Error al conectar con nuestros servidores</div>`
+            return
+        }
+        
+        let events = await response.json()
 
 
         if(events.length > 0){
@@ -165,8 +192,7 @@ class Tab1 {
             })
         }
         else{
-            container
-            
+            container.innerHTML= `<div style="margin: auto; font-size: 12px; color: rgb(196, 71, 71);">No hay registrados eventos para los siguientes meses</div>`
         }
     }
 

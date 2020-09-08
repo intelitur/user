@@ -8,7 +8,6 @@ class AdsService {
     static async getAds(filters){
         
         let response = await fetch(`${API_URL}/${module}?${ServiceUtils.createQuery(filters)}`)
-        response = await response.json()
         return response
     }
 
@@ -18,7 +17,6 @@ class AdsService {
             response = await fetch(`${API_URL}/${module}/${ad_id}?add_visit=true`)
         else
             response = await fetch(`${API_URL}/${module}/${ad_id}`)
-        response = await response.json()
         if(response)
             return response
     }

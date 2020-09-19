@@ -7,6 +7,8 @@ import Snackbar from "../snackbar/snackbar"
 
 import './css/m_ad.css'
 import './css/d_ad.css'
+import './ad.css'
+import Carousel from "../carousel/carousel"
 
 class AdView {
 
@@ -31,10 +33,8 @@ class AdView {
 
         if (this.ad != undefined) {
 
-
             if (DesignController.mobile && document.querySelector(`[render="ad_overlay"]`) == undefined) {
                 
-                this.where = "ad_overlay"
                 document.body.appendChild(
                     TemplatesManager.createHtmlNode(
                         `<section class="ad__overlay">
@@ -47,13 +47,22 @@ class AdView {
 
             const template = await TemplatesManager.getTemplate('ad')
 
-            const view = TemplatesManager.contextPipe(template, {})
+            const view = TemplatesManager.contextPipe(template, {...this.ad})
 
             this.el = TemplatesManager.renderElement(this.where, view)
 
+            this.renderContent()
             this.setupListeners()
-            this.renderAd()
         }
+    }
+
+    async renderContent(){
+        this.ad.images = [
+            `20200826162313572-Full%20Moon%20Ultra%20HD.jpg`,
+            `20200826162313572-Full%20Moon%20Ultra%20HD.jpg`,
+        ]
+        this.carousel = new Carousel(this.ad.images.map(image => `${FILES_BASE_URL}/${image}`));
+        this.carousel.render('ad_carousel')
     }
 
     async show(where) {
@@ -85,55 +94,18 @@ class AdView {
     }
 
     setupListeners() {
-        // this.el.querySelector(".ads__button").addEventListener("click", this.toggleFiltersView.bind(this))
-        // this.el.querySelector(".ads__back").addEventListener("click", this.hide.bind(this))
+        this.el.querySelector(".ad__back").addEventListener("click", this.hide.bind(this))
 
-        // let disabledListeners = () => {
+        this.el.querySelector(".ad__carousel--button.left").addEventListener("click", this.carousel.pImage.bind(this.carousel))
+        this.el.querySelector(".ad__carousel--button.right").addEventListener("click", this.carousel.nImage.bind(this.carousel))
 
-        //     this.elements.checkbox.ubication.addEventListener("change", ((e) => {
-        //         if (e.target.checked) {
-        //             navigator.geolocation.getCurrentPosition(
-        //                 ((result) => {
-        //                     this.coords = result.coords
-        //                     this.elements.inputs.ubication.disabled = false
-        //                     Snackbar.success("Se tomó la ubicación actual como base")
-        //                 }).bind(this),
-        //                 ((error) => {
-        //                     this.elements.checkbox.ubication.checked = false
-        //                     if (error.code == 1) {
-        //                         //Usuario bloqueó la vara
-        //                         Snackbar.error("Debe brindarle permisos de ubicación a la aplicación")
-        //                     }
-        //                 }).bind(this)
-        //             )
-        //         }
-        //         else
-        //             this.elements.inputs.ubication.disabled = true
-        //     }).bind(this))
-
-        //     this.elements.checkbox.dates.addEventListener("change", ((e) => {
-        //         if (e.target.checked) {
-        //             this.elements.inputs.dates.start.disabled = false
-        //             this.elements.inputs.dates.end.disabled = false
-        //         }
-        //         else {
-        //             this.elements.inputs.dates.start.disabled = true
-        //             this.elements.inputs.dates.end.disabled = true
-        //         }
-        //     }).bind(this))
-        // }
-
-        // disabledListeners()
-
-        // this.elements.buttons.no.addEventListener("click", (() => {
-        //     this.elements.inputs.dates.start.value = ""
-        //     this.elements.inputs.dates.end.value = ""
-        //     this.elements.inputs.ubication.value = ""
-
-        //     Object.values(this.elements.checkbox).forEach(el => el.checked = false)
-        // }).bind(this))
-
-        // this.elements.buttons.yes.addEventListener("click", this.searchAds.bind(this))
+        this.el.querySelector(".ad__address--button").addEventListener("click", (() => { 
+            tab2.map.showAdPopup(this.ad.ad_id); 
+            if(DesignController.mobile){
+                footer.showTab(2);
+                DesignController.hideOverlay(true); 
+            }
+        }).bind(this))
 
     }
 

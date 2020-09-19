@@ -30,14 +30,6 @@ class Tab1 {
 
     set loading(value){
         this.loadingState = value;
-        if(value){
-            this.el.querySelector(".lds-ellipsis").style.display = "block"
-            this.el.querySelector(".tab1__coming-events--no-more").style.display = "none"
-        }
-        else{
-            this.el.querySelector(".lds-ellipsis").style.display = "none"
-            this.el.querySelector(".tab1__coming-events--no-more").style.display = "block"
-        }
     }
 
     get loading(){
@@ -46,6 +38,17 @@ class Tab1 {
 
     get noMore(){
         return this.el.querySelector(".tab1__coming-events--no-more").style.display == "block"
+    }
+
+    set noMore(value){
+        if(value){
+            this.el.querySelector(".tab1__coming-events--no-more").style.display = "block"
+            this.el.querySelector(".lds-ellipsis").style.display = "none"
+        }
+        else{
+            this.el.querySelector(".tab1__coming-events--no-more").style.display = "none"
+            this.el.querySelector(".lds-ellipsis").style.display = "block"
+        }
     }
 
     set badge(value){
@@ -81,6 +84,7 @@ class Tab1 {
         if (DesignController.mobile) {
             this.setupSearchScreen()
             this.renderEventsMobile()
+            this.setupMobileListeners()
             //this.hiddenDiv();
         }
         else {
@@ -109,10 +113,6 @@ class Tab1 {
                 <div></div>
             </div>
         </div>`
-        this.el.querySelector(".tab1__coming-events--no-more").innerHTML = 
-                this.filter != undefined && this.filter != ""? 
-                `No hay más eventos que coincidan con <b>${this.filter}<b/>`: 
-                "No hay más eventos próximos para mostrar"
     }
 
     async renderEvents(){
@@ -149,17 +149,26 @@ class Tab1 {
             eventsDOM.forEach(item => {
                 item.addEventListener('click', DesignController.showEvent.bind(this, item.getAttribute("event_id")))
             })
+
+            if(events.length != this.pageSize){
+                this.noMore = true
+            }
+        }
+        else{
+            this.noMore = true
         }
         this.loading = false;
     }
 
     async renderEventsMobile(){
+        
+        this.loading = true;
+
         const container = this.el.querySelector('.tab1__events--container');
-        container.innerHTML = '';
 
         const template = await TemplatesManager.getTemplate('m_tab1_event_view');
 
-        const response = await this.getComingEvents();
+        const response = await EventsService.getComingEvents(this.index, this.pageSize);
 
         if(response.status != 200){
             if(response.status >= 500){
@@ -168,7 +177,7 @@ class Tab1 {
             else if(response.status >= 400){
                 Snackbar.error("Error al conectar y obetener los <b>eventos</b> de nuestros servidores")
             }
-            container.innerHTML = `<div style="margin: auto; font-size: 12px; color: rgb(196, 71, 71);">Error al conectar con nuestros servidores</div>`
+            this.loading = false
             return
         }
         
@@ -176,24 +185,40 @@ class Tab1 {
 
 
         if(events.length > 0){
-            
-            const htmlNode = TemplatesManager.createHtmlNode(template.patch({name: events[0].name, color: events[0].color, ...this.getDateInfo(events[0]), main_image: this.getMainImage(events[0]), event_id: events[0].event_id}));
-            const htmlNode2 = TemplatesManager.createHtmlNode(template.patch({name: events[1].name, color: events[1].color, ...this.getDateInfo(events[1]), main_image: this.getMainImage(events[1]), event_id: events[1].event_id}));
-            
-            htmlNode.classList.add("tab1__events--item")
-            htmlNode2.classList.add("tab1__events--item")
-            container.appendChild(htmlNode);
-            container.appendChild(htmlNode2);
-            
+
+            events.forEach(item => {
+                const htmlNode = TemplatesManager.createHtmlNode(template.patch({name: item.name, color: item.color, ...this.getDateInfo(item), main_image: this.getMainImage(item), event_id: item.event_id}));
+
+                htmlNode.classList.add("tab1__events--item")
+                container.insertBefore(htmlNode, container.lastElementChild);
+            })
+
             const eventsDOM = this.el.querySelectorAll(".m_tab1__event--container")
             eventsDOM.forEach(item => {
                 item.getAttribute("event_id")
                 item.addEventListener('click', DesignController.showEvent.bind(this, item.getAttribute("event_id")))
             })
+
+            if(events.length != this.pageSize){
+                this.noMore = true
+            }
         }
         else{
-            container.innerHTML= `<div style="margin: auto; font-size: 12px; color: rgb(196, 71, 71);">No hay registrados eventos para los siguientes meses</div>`
+            this.noMore = true
         }
+        this.loading = false
+    }
+
+    setupMobileListeners(){
+        document.querySelector(".tab1__events--container").addEventListener("scroll", (async (e) => {
+            if(e.target.scrollLeft + 70 > e.target.scrollWidth - e.target.clientWidth && !this.loading && !this.noMore){
+                this.index += 1
+                await this.renderEventsMobile()
+            }
+                
+        }).bind(this)) 
+
+        this.el.querySelector(".tab1__weather--container").addEventListener("click", DesignController.showWeather)
     }
 
     setudDesktopListeners(){
@@ -320,11 +345,6 @@ class Tab1 {
     //     })
         
     // }
-    
-    async getComingEvents(){
-        let events = await EventsService.getEvents();
-        return events;
-    }
 
     
 

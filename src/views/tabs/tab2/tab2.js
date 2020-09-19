@@ -7,32 +7,33 @@ import DesignController from "../../../utils/DesignController";
 import './tab2.css'
 import EventsService from "../../../services/EventsService";
 import Snackbar from "../../snackbar/snackbar";
+import AdsService from "../../../services/AdsService";
 class Tab2 {
 
-    constructor(){
+    constructor() {
         this.loadingState = false;
     }
 
-    get loading(){
+    get loading() {
         return this.loadingState
     }
 
-    set loading(value){
+    set loading(value) {
         this.loadingState = value
-        if(!DesignController.mobile){
-            if(value === true){
+        if (!DesignController.mobile) {
+            if (value === true) {
                 this.el.querySelector(".lds-dual-ring").classList.add("visible")
             }
-            else{
+            else {
                 this.el.querySelector(".lds-dual-ring").classList.remove("visible")
             }
         }
     }
-    
-    async render(){
+
+    async render() {
         const view = await TemplatesManager.getTemplate('tab2')
         this.el = TemplatesManager.renderElement('tab2', view)
-        
+
 
         await this.renderContent()
     }
@@ -44,57 +45,85 @@ class Tab2 {
         TemplatesManager.renderElement('tab2_content', htmlNode)
         this.loading = true;
         await this.renderMap()
-        if(DesignController.mobile){
+        if (DesignController.mobile) {
 
         }
-        else{
+        else {
             this.setupSrollAnimation()
             this.setupEventListeners()
         }
         this.loading = false;
     }
 
-    async renderMap(){
+    async renderMap() {
         const map = new Map()
         await map.render('map')
-        
+
 
         this.map = map
     }
 
-    setupEventListeners(){
+    async setupEventListeners() {
+        let response = await EventsService.getEvents()
+        if (response.status != 200) {
+            if (response.status >= 500) {
+                Snackbar.error(500)
+            }
+            else if (response.status >= 400) {
+                Snackbar.error(400)
+            }
+            return
+        }
+        this.events = await response.json()
 
+        response = await AdsService.getAds({})
+        if (response.status != 200) {
+            if (response.status >= 500) {
+                Snackbar.error(500)
+            }
+            else if (response.status >= 400) {
+                Snackbar.error(400)
+            }
+            return
+        }
+        this.ads = await response.json()
 
         document.querySelectorAll(".tab2__left--item--header").forEach((item) => {
             item.addEventListener("click", (() => {
                 let parent = item.parentNode
-                if(!parent.classList.contains("expanded")){
+                if (!parent.classList.contains("expanded")) {
                     parent.classList.add("expanded")
-                    this.showEvents()
+                    this.showObjects()
                 }
                 else
                     parent.classList.remove("expanded")
             }).bind(this))
         })
 
-        
 
-        document.querySelector("#tab2_checkbox_Eventos").addEventListener("click", ()=> this.map.toggleLayer("Eventos"))
 
-        this.map.map.on("moveend", this.showEvents.bind(this))
+        document.querySelector("#tab2_checkbox_Eventos").addEventListener("click", () => this.map.toggleLayer("Eventos"))
+        document.querySelector("#tab2_checkbox_ads").addEventListener("click", () => this.map.toggleLayer("Anuncios"))
+
         
+        this.map.map.on("moveend", this.showObjects.bind(this))
+    }
+
+    showObjects(){
+        this.showAds()
+        this.showEvents()
     }
 
     setupSrollAnimation() {
-        
+
         const container = this.el.children[0]
-        
+
         container.addEventListener('scroll', ((e) => {
             const module = Math.floor(container.scrollTop)
-            if(module <= 0){
+            if (module <= 0) {
                 this.goTo(1)
             }
-            else if(module >= 150){
+            else if (module >= 150) {
                 this.goTo(3)
             }
         }).bind(this))
@@ -102,64 +131,80 @@ class Tab2 {
     }
 
     goTo(i) {
-        if(!DesignController.mobile)
+        if (!DesignController.mobile)
             this.hideInfoContainer()
-            
+
         DesignController.showTab(i);
     }
 
-    show() { 
+    show() {
         this.el.classList.add('active')
-        if(this.map.userCords == undefined)
+        if (this.map.userCords == undefined && !this.showingObject) {
             this.map.setInitialPosition()
-     }
+        }
+        this.showingObject = false
 
-    hide() {
-        if(!DesignController.mobile)
-            this.hideInfoContainer() 
-        this.el.classList.remove('active') 
     }
 
-    showInfoContainer(){
+    hide() {
+        if (!DesignController.mobile)
+            this.hideInfoContainer()
+        this.el.classList.remove('active')
+    }
+
+    showInfoContainer() {
         this.el.querySelector('.tab2__left__info--container').classList.add('visible')
     }
 
-    hideInfoContainer(){
+    hideInfoContainer() {
         this.el.querySelector('.tab2__left__info--container').classList.remove('visible')
     }
 
-    async showEvents(){
-        if(document.querySelector("#tab2_checkbox_Eventos").checked){
+    async showEvents() {
+        if (document.querySelector("#tab2_checkbox_Eventos").checked) {
             let container = document.querySelector(".tab2__left--item")
-            
-            if(container.classList.contains("expanded")){
-                container = document.querySelector(".tab2__left--item--content")
-                container.innerHTML = ""
-                const response = await EventsService.getEvents()
-                if(response.status != 200){
-                    if(response.status >= 500){
-                        Snackbar.error(500)
-                    }
-                    else if(response.status >= 400){
-                        Snackbar.error(400)
-                    }
-                    return
-                }
-                
-                let events = await response.json()
 
-                let visibleEvents = events.filter((item) => this.map.isVisible(item.latitude, item.longitude))
-    
+            if (container.classList.contains("expanded")) {
+                container = this.el.querySelector("#events_container")
+                container.innerHTML = ""
+
+                let visibleEvents = this.events.filter((item) => this.map.isVisible(item.latitude, item.longitude))
+
                 let template = await TemplatesManager.getTemplate("event_item")
 
                 visibleEvents.forEach(event => {
-                    let node = TemplatesManager.contextPipe(template, event, false)
+                    let node = TemplatesManager.contextPipe(template, {...event, color: "inherit"}, false)
                     container.appendChild(node)
                     node.addEventListener("click", this.map.showEventPopup.bind(this.map, event.event_id))
                 })
 
-                
-                
+
+
+            }
+
+        }
+    }
+
+    async showAds(){
+        if (document.querySelector("#tab2_checkbox_ads").checked) {
+            let container = document.querySelectorAll(".tab2__left--item")[1]
+
+            if (container.classList.contains("expanded")) {
+                container = this.el.querySelector("#ads_container")
+                container.innerHTML = ""
+
+                let visibleAds = this.ads.filter((item) => this.map.isVisible(item.latitude, item.longitude))
+
+                let template = await TemplatesManager.getTemplate("event_item")
+
+                visibleAds.forEach(ad => {
+                    let node = TemplatesManager.contextPipe(template, {...ad, color: "inherit"}, false)
+                    container.appendChild(node)
+                    node.addEventListener("click", this.map.showAdPopup.bind(this.map, ad.ad_id))
+                })
+
+
+
             }
 
         }

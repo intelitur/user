@@ -8,6 +8,7 @@ import EventsService from '../services/EventsService'
 import searchEvents from '../views/search_events/search_events'
 import ads from '../views/ads/ads'
 import AdView from '../views/ad/ad'
+import weather from '../views/weather/weather'
 
 class DesignController {
 
@@ -33,7 +34,7 @@ class DesignController {
 
 
     static async showEvent(event_id, doWhenHide) {
-        EventsService.addVisit(event_id);
+        tab2.showingObject = true
         if(DesignController.mobile){
             DesignController.showLoadingBar()
             const eventView = new EventView(event_id)
@@ -100,6 +101,7 @@ class DesignController {
     }
 
     static async showAd(ad_id) {
+        tab2.showingObject = true
         const adView = new AdView(ad_id)
         if(DesignController.mobile){
             DesignController.showLoadingBar()
@@ -109,13 +111,18 @@ class DesignController {
         else{
             footer.showTab(2)
             tab2.loading = true
-            tab2.map.showEventPopup(event_id)
+            tab2.map.showAdPopup(ad_id)
             await adView.show('tab2__left__info')
             document.querySelector(".tab2__left__info--container").classList.add('visible')
-            //tab2.map.showEventPopup(event_id)
             tab2.loading = false
         }
 
+    }
+
+    static async showWeather(){
+        DesignController.showLoadingBar()
+        await weather.show('weather_overlay')
+        DesignController.hideLoadingBar()
     }
 
     static showLoadingBar(){
@@ -127,6 +134,10 @@ class DesignController {
     }
 
     static setupImageView(){
+        if(document.querySelector("#map"))
+            document.querySelector("#map").querySelectorAll("img:not([config='true'])").forEach((img) => {
+                img.setAttribute('config', 'true')
+            })
         document.querySelectorAll("img:not([config='true'])").forEach((img) => {
             img.setAttribute('config', 'true')
             img.addEventListener('click', (e)=> {

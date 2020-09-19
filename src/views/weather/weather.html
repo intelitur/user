@@ -1,0 +1,46 @@
+<div class="weather--container">
+    <button class='weather__back'>
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <div class="weather__title--container" style="background-color: tomato;">
+        <h2 class="weather__title">Clima</h2>
+        <h5 class="weather__datetime">Tomado el {datetime}</h5>
+    </div>
+    <div class="weather__info--container">
+
+        <div class="weather__card">
+            <i class="fas fa-temperature-high" style="font-size: 35px; margin: 0 auto"></i>
+            <h5 style="margin: 0 auto; font-weight:500; text-align: center;">Temperatura</h5>
+            <h1 style="margin: 0 auto ; font-size: 24px;  color: tomato">{temp} °C</h1>
+        </div>
+        <div class="weather__card">
+            <i class="fas fa-water" style="font-size: 35px; margin: 0 auto"></i>
+            <h5 style="margin: 0 auto; font-weight:500; text-align: center;">Humedad relativa</h5>
+            <h1 style="margin: 0 auto ; font-size: 24px;  color: tomato">{rh} %</h1>
+        </div>
+        <div class="weather__card">
+            <i class="fas fa-wind" style="font-size: 35px; margin: 0 auto"></i>
+            <h5 style="margin: 0 auto; font-weight:500; text-align: center;">Velocidad del viento</h5>
+            <h1 style="margin: 0 auto ; font-size: 24px; color: tomato">{avrWindSpeed} km/h</h1>
+        </div>
+        <div class="weather__card">
+            <i class="fas fa-user-friends" style="font-size: 35px; margin: 0 auto"></i>
+            <h5 style="margin: 0 auto; font-weight:500; text-align: center;">Sensación térmica</h5>
+            <h1 style="margin: 0 auto ; font-size: 24px; color: tomato">{thermalSensation} °C</h1>
+
+        </div>
+        <div class="weather__card" style="width: 85%; height: 23%; flex-direction: column; position: relative;">
+            <h5 style="margin: 10px 0; font-weight:500; text-align: center;">Lluvia</h5>
+                <div style="display: flex; flex-direction: column; justify-content: space-around;">
+                    <h6 style="margin: auto 0; font-weight:500;">Tomado el <br><b style="font-size: 14px;">{rainDatetime}</b></h6>
+                    <h1 style=" color: tomato">{rain} mm</h1>
+                </div>
+                <div style="display: flex; height: 100%; width: 30%; position: absolute; right: 0;">
+                    <i class="fas fa-cloud-rain" style="font-size: 55px; margin: auto"></i>
+                </div>
+        </div>
+    </div>
+
+
+</div>

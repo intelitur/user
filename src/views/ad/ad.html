@@ -1,1 +1,25 @@
-<div></div>
+<div class="ad">
+    <button class='ad__back'>
+        <i class="fas fa-arrow-left"></i>
+    </button>
+    <section class="ad__carousel--container">
+        <render render="ad_carousel"></render>
+        <div class="ad__carousel--button left">
+            <i class="material-icons">chevron_left</i>
+        </div>
+        <div class="ad__carousel--button right">
+            <i class="material-icons">chevron_right</i>
+        </div>
+    </section>
+
+    <section class="ad__description--container">
+        {description}
+    </section>
+
+    <div class="ad__tb--container" style="background-color: tomato;">
+        <h2 class="ad__title">{name}</h2>
+        <button class="ad__address--button" style="color: tomato">
+            <i class="fas fa-map-marker-alt"></i>
+        </button>
+    </div>
+</div>

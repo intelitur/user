@@ -10,7 +10,10 @@ import tab2 from "../tabs/tab2/tab2";
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.fullscreen/Control.FullScreen.css'
 import './map.css'
+import './css/map.event.tooltip.css'
 import Snackbar from "../snackbar/snackbar";
+import { FILES_BASE_URL } from "../../env";
+import AdsService from "../../services/AdsService";
 
 
 class Map {
@@ -33,6 +36,7 @@ class Map {
     }) {
         this.config = config
         this.eventLayers = [];
+        this.adsLayers = [];
         this.layers = [];
     }
 
@@ -108,6 +112,7 @@ class Map {
             this.map.addControl(mapLayersControl.setPosition('bottomleft'))
         this.map.mapLayersControl = mapLayersControl
         this.setupEventsTile()
+        this.setupAdsTile()
 
         this.setMapView(10.471681129073158, -84.64514404535294, 15);
 
@@ -121,6 +126,73 @@ class Map {
 
     flyTo(lat, lng, zoom) {
         this.map.flyTo([lat, lng], zoom);
+    }
+
+    async setupAdsTile() {
+
+        
+
+        tab2.loading = true;
+        let response = await AdsService.getAds({})
+
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error(500)
+            }
+            else if(response.status >= 400){
+                Snackbar.error(400)
+            }
+            this.loading = false
+            return
+        }
+        
+        let ads = await response.json()
+
+        const geoJSON = GeoJSONUtils.buildAdsGeoJson(ads)
+
+    
+
+        let onEachFeature = (feature, layer) => {
+            this.adsLayers.push(layer)
+        
+            const tooltip = `<div>${feature.properties.point.name}</div>`
+
+            const htmlNode = TemplatesManager.createHtmlNode(tooltip)
+            htmlNode.addEventListener('click', (async function() {
+                await DesignController.showAd(feature.properties.point.ad_id)
+            }))
+            layer.bindPopup(htmlNode)
+        }
+
+        var icon = leaflet.icon({
+            iconUrl: 'assets/event_icon.png',
+        
+            iconSize:     [40, 35], // size of the icon
+            iconAnchor:   [20, 17.5], // point of the icon which will correspond to marker's location
+            popupAnchor:  [0, -12] // point from which the popup should open relative to the iconAnchor
+        });
+
+        const layer = leaflet.geoJSON(geoJSON, {
+            onEachFeature: onEachFeature,
+
+            pointToLayer: function (feature, latlng) {
+                //return leaflet.marker(latlng, {icon})
+                return leaflet.circleMarker(latlng, {
+                    radius: 8,
+                    fillColor: 'red',
+                    color: 'red',
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                });
+            }
+        })
+        if(DesignController.mobile)
+            this.map.mapLayersControl.addOverlay(layer, "Anuncions")
+        this.layers.push({name: "Anuncios", layer})
+        this.toggleLayer("Anuncios")
+
+        tab2.loading = false;
     }
 
     async setupEventsTile() {
@@ -182,10 +254,9 @@ class Map {
         }
 
         var icon = leaflet.icon({
-            iconUrl: 'assets/event_icon.png',
-        
-            iconSize:     [40, 45], // size of the icon
-            iconAnchor:   [20, 22.5], // point of the icon which will correspond to marker's location
+            iconUrl: `${FILES_BASE_URL}/20200912175227166-marker__red.png`,
+            iconSize:     [40, 40], // size of the icon
+            iconAnchor:   [20, 0], // point of the icon which will correspond to marker's location
             popupAnchor:  [0, -12] // point from which the popup should open relative to the iconAnchor
         });
 
@@ -193,11 +264,13 @@ class Map {
             onEachFeature: onEachFeature,
 
             pointToLayer: function (feature, latlng) {
-                //return leaflet.marker(latlng, {icon})
+                // return leaflet.marker(latlng, {
+                //     icon: icon
+                // });
                 return leaflet.circleMarker(latlng, {
                     radius: 8,
-                    fillColor: feature.properties.point.color,
-                    color: feature.properties.point.color,
+                    fillColor: 'blue',
+                    color: 'blue',
                     weight: 1,
                     opacity: 1,
                     fillOpacity: 0.8
@@ -213,6 +286,7 @@ class Map {
     }
 
     async showEventPopup(event_id){
+        console.log(event_id)
         let eventLayer = this.eventLayers.find((layer) => layer.feature.properties.point.event_id == event_id)
 
         await eventLayer._popup.update()
@@ -221,6 +295,17 @@ class Map {
         .openOn(this.map)
         
         this.map.flyTo(eventLayer._latlng, 17)
+    }
+
+    async showAdPopup(ad_id){
+        let adLayer = this.adsLayers.find((layer) => layer.feature.properties.point.ad_id == ad_id)
+
+        await adLayer._popup.update()
+        adLayer._popup
+        .setLatLng(adLayer._latlng)
+        .openOn(this.map)
+        
+        this.map.flyTo(adLayer._latlng, 17)
     }
 
     toggleLayer(name){

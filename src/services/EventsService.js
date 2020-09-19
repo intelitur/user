@@ -33,7 +33,7 @@ class EventsService {
         //     return {event, status: 200}
         // }
         // else{
-            let response = await fetch(`${API_URL}/${module}/${event_id}`)
+            let response = await fetch(`${API_URL}/${module}/${event_id}?add_visit=true`)
             if(response)
                 return response
         //}

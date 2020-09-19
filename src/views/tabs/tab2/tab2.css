@@ -224,6 +224,7 @@
     }
     .tab2__left--checkbox label {
         background-color: #fff;
+        border-color: inherit;
         border-radius: 50%;
         cursor: pointer;
         height: 35px;
@@ -233,7 +234,8 @@
         width: 35px;
     }
     .tab2__left--checkbox label:after {
-        border: 4px solid var(--tab2_color);
+        border: 4px solid;
+        border-color: inherit;
         border-top: none;
         border-right: none;
         content: "";
@@ -250,7 +252,7 @@
     }
     .tab2__left--checkbox input[type="checkbox"]:checked+label {
         background-color: white;
-        border-color: white;
+        border-color: inherit;
     }
     .tab2__left--checkbox input[type="checkbox"]:checked+label:after {
         opacity: 1;
@@ -327,7 +329,8 @@
         cursor: pointer;
         margin-left: 10%;
         border-radius: 5px;
-        border: solid 0.5px rgb(230, 230, 230)
+        border: solid 0.5px rgb(230, 230, 230);
+        color: inherit;
     }
 
     .tab2__item--event:hover {

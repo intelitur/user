@@ -1,20 +1,22 @@
-<div class="tab1__coming-event">
-    <div class="tab1__coming-event--info" style="width: 100%;">
+<div class="map-event">
+    <div style="font-size: 15px; font-weight: 600; color: gray; margin-bottom: 10px;">Evento</div>
+    <div class="map-event--info" style="width: 100%;">
         <div style="display: flex;">
-            <div class="tab1__coming-event--date" style="margin-right: 10px;">
+            <div class="map-event--date">
                 <em>{dayName}</em>
                 <strong>{monthName}</strong>
                 <span style="color: {feature.properties.point.color}">{dateI}</span>
             </div>
-            <div class="tab1__coming-event--name" style="color: {feature.properties.point.color}">
+            <div class="map-event--name" style="color: {feature.properties.point.color}">
                 {feature.properties.point.name}
             </div>
         </div>
-    <button class="tab1__coming-event--button" event_id="{feature.properties.point.event_id}" style="margin-top: 20px; background-color: {feature.properties.point.color};">
+        <button class="map-event--button" event_id="{feature.properties.point.event_id}"
+            style="margin-top: 20px; background-color: {feature.properties.point.color};">
             Ver detalles
         </button>
     </div>
-    
+
 </div>
 <!-- <div>
     <a class="map-event-tooltip__link" style="color:{feature.properties.point.color}; cursor: pointer;">

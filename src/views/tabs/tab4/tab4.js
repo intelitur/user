@@ -32,11 +32,14 @@ class Tab4 {
     setupEventListeners(){
 
         this.items.forEach(item => {
+            console.log(item)
             item.addEventListener("click", () => {
                 if(!item.classList.contains("expanded")){
                     item.style.zIndex = "1"
                     item.classList.add("expanded")
-                    setTimeout(() => this.back.classList.add("visible"), 800)
+                    setTimeout(() => {
+                        this.back.classList.add("visible"), 800
+                    })
                 }
             })
         })

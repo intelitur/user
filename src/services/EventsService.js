@@ -7,7 +7,7 @@ class EventsService {
 
     static async getEventsFiltered(filters){
         
-        let response = await fetch(`${API_URL}/${module}?${ServiceUtils.createQuery(filters)}`)
+        let response = await ServiceUtils.GET(`${API_URL}/${module}?${ServiceUtils.createQuery(filters)}`)
         return response
     }
 
@@ -33,14 +33,14 @@ class EventsService {
         //     return {event, status: 200}
         // }
         // else{
-            let response = await fetch(`${API_URL}/${module}/${event_id}?add_visit=true`)
+            let response = await ServiceUtils.GET(`${API_URL}/${module}/${event_id}?add_visit=true`)
             if(response)
                 return response
         //}
     }
 
     static async getEventImages(event_id, quantity = 0) {
-        let response = await fetch(`${API_URL}/${module}/${event_id}/images/${quantity}`)
+        let response = await ServiceUtils.GET(`${API_URL}/${module}/${event_id}/images/${quantity}`)
         //let response = await fetch(`./info/eventImages.json`)
         response = await response.json()
         return response
@@ -51,7 +51,7 @@ class EventsService {
         if(index != undefined && pageSize != undefined)
             url += `?index=${index}&pageSize=${pageSize}`
         
-        let response = await fetch(url)
+        let response = await ServiceUtils.GET(url)
         return response
     }
 

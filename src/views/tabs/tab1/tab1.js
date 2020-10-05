@@ -239,6 +239,8 @@ class Tab1 {
         }).bind(this))
 
         document.querySelector(".tab1_coming-events--search-button").addEventListener("click", (() => {this.index = 0; this.renderEvents()}).bind(this))
+
+        document.querySelector(".tab1__weather__temperature--button").addEventListener("click", DesignController.showWeather)
     }
 
     getDateInfo(event){

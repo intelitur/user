@@ -28,9 +28,13 @@ class SearchEvents {
     }
 
     async render() {
+        let renderElement = 'tab1_search_events'
+        if(DesignController.mobile)
+            renderElement = 'search_events'
+
         const template = await TemplatesManager.getTemplate('search_events')
 
-        this.el = TemplatesManager.renderElement('search_events', template)
+        this.el = TemplatesManager.renderElement(renderElement, template)
 
         this.setupElements()
         this.setupListeners()

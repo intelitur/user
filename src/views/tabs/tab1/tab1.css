@@ -158,7 +158,9 @@
         display: flex;
         flex-direction: column;
         background-color: rgb(226, 226, 226);
+        position: relative;
     }
+
     .tab1__card {
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         border-radius: 10px;
@@ -170,6 +172,7 @@
         background-color: white;
         display: flex;
         text-align: center;
+        flex-direction: column;
     }
     .tab1__weather__title {
         width: calc(100% - 40px);
@@ -205,6 +208,18 @@
         margin: auto;
         font-size: calc(40px + 4vw);
         color: rgb(86, 86, 86)
+    }
+    .tab1__weather__temperature--button {
+        background-color: white; 
+        border-radius: 0 0 10px 10px; 
+        border: solid 0.5px rgb(193, 193, 193); 
+        height: 50px; 
+        color: tomato; 
+        font-size: 15px; 
+        cursor: pointer; 
+    }
+    .tab1__weather__temperature--button:hover {
+        background-color: #f3f3f3;
     }
     .tab1__coming-events--header {
         width: calc(100% - 1.5px);
@@ -271,6 +286,7 @@
         flex-direction: column;
         background-color: rgb(245, 245, 245);
         overflow: auto;
+        position: absolute;
     }
     .tab1__coming-events--item {
         width: 82%;

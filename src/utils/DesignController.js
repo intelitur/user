@@ -121,7 +121,10 @@ class DesignController {
 
     static async showWeather(){
         DesignController.showLoadingBar()
-        await weather.show('weather_overlay')
+        if(DesignController.mobile)
+            await weather.show('weather_overlay')
+        else
+            await weather.show('tab1_weather_details')
         DesignController.hideLoadingBar()
     }
 

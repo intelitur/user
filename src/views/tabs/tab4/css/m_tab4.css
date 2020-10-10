@@ -1,6 +1,6 @@
 @media only screen and (max-width: 700px) {
-    .tab2__content {
-        background-color: rgb(248, 248, 248);
+    .tab4__content {
+        background-color: rgb(238, 238, 238);
         width: 100%;
         height: 100%;
         display: flex;
@@ -8,7 +8,7 @@
         position: relative;
     }
 
-    .tab2__item {
+    .tab4__item {
         position: absolute;
         background-color: white;
         color: rgb(56, 56, 56);
@@ -27,19 +27,44 @@
         top: 1.5%;
         font-size: 15px;
         font-weight: 600;
-        color: rgb(103, 103, 103);
     }
 
-    .tab2__item.expanded{
+    .tab4__item.expanded{
         width: 100%;
         min-height: 100%;
         border-radius: 0px;
         left: 0%;
         top: 0% !important;
-        color: white;
+        z-index: 1 !important;
+        
     }
 
-    .tab2__back {
+    .tab4__item .tab4__item--content{
+        display: none;
+    }
+
+    .tab4__item--content {
+        width: 100%;
+        height: 100%;
+    }
+
+    .tab4__item.expanded .tab4__item--content{
+        display: flex;
+    }
+
+    .tab4__item .tab4__item--title {
+        color: rgb(103, 103, 103);
+    }
+
+    .tab4__item.expanded .tab4__item--title {
+        color: white;
+        transition: inherit;
+        display: none;
+    }
+
+    
+
+    .tab4__back {
         position: absolute;
         top: -6px;
         left: -6px;
@@ -59,7 +84,7 @@
         align-items: center;
     }
 
-    .tab2__back.visible{
+    .tab4__back.visible{
         display: flex;
     }
 }

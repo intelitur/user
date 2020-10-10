@@ -1,8 +1,9 @@
 import DesignController from "../../../utils/DesignController";
 import TemplatesManager from "../../../utils/TemplatesManager";
+import frequentQuestions from "../../frequent_questions/frequent_questions";
 
 
-import './css/m_tab2.css';
+import './css/m_tab4.css';
 
 class Tab4 {
 
@@ -17,25 +18,28 @@ class Tab4 {
     }
 
     async renderContent(){
-        const view = await TemplatesManager.getTemplate(`${DesignController.mobile? 'm': 'd'}_tab2`)
+        const view = await TemplatesManager.getTemplate(`${DesignController.mobile? 'm': 'd'}_tab4`)
 
         const node = TemplatesManager.createHtmlNode(view)
 
         this.el.appendChild(node)
 
-        this.back = this.el.querySelector(".tab2__back")
-        this.items =  this.el.querySelectorAll(".tab2__item")
+        this.back = this.el.querySelector(".tab4__back")
+        this.items =  this.el.querySelectorAll(".tab4__item")
         if(DesignController.mobile)
             this.setupEventListeners()
     }
 
     setupEventListeners(){
 
-        this.items.forEach(item => {
-            console.log(item)
+        this.items.forEach((item, i) => {
             item.addEventListener("click", () => {
                 if(!item.classList.contains("expanded")){
                     item.style.zIndex = "1"
+                    
+                    if(i == 0){
+                        frequentQuestions.render("m_frequent_questions")
+                    }
                     item.classList.add("expanded")
                     setTimeout(() => {
                         this.back.classList.add("visible"), 800
@@ -47,6 +51,7 @@ class Tab4 {
         this.back.addEventListener("click", (()=> {
             this.back.classList.remove("visible")
             this.items.forEach(item => {
+                
                 item.classList.remove("expanded")
                 setTimeout(() => item.style.zIndex = "0", 800)
             })

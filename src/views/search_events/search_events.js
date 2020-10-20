@@ -251,8 +251,7 @@ class SearchEvents {
         }
     
         let getMainImage = (event) => {
-
-            return event.images?`${FILES_BASE_URL}/${event.images[0]}`: ``
+            return event.images && event.images.length > 0?`${FILES_BASE_URL}/${event.images[0].name}`: ``
         }
 
         events.forEach(event => {

@@ -266,7 +266,7 @@ class Tab1 {
     }
 
     getMainImage(event){
-        return `${FILES_BASE_URL}/${event.images? event.images[0].name : undefined}`
+        return event.images && event.images.length > 0?`${FILES_BASE_URL}/${event.images[0].name}`: ``
     }
 
     setupSrollAnimation() {

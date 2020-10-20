@@ -48,7 +48,7 @@ class EventView {
     }
 
     async renderContent(){
-        this.carousel = new Carousel(this.event.images.map(image => `${FILES_BASE_URL}/${image}`));
+        this.carousel = new Carousel(this.event.images.map(image => `${FILES_BASE_URL}/${image.name}`));
         // this.carousel = new Carousel([
         //     "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",
         //     "https://intelitur.sytes.net/files/images/file-1590262636507.jpg",

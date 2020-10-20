@@ -1,12 +1,14 @@
 import { API_URL } from '../env'
 import ServiceUtils from '../utils/ServiceUtils'
 
-const module = 'company'
+
+
 
 class CompaniesService {
 
+
     static async updateCompanies(){
-        let response = await ServiceUtils.GET(`${API_URL}/${module}`)
+        let response = await ServiceUtils.GET(`${API_URL}/${CompaniesService.module}`)
         return response
     }
 
@@ -25,7 +27,7 @@ class CompaniesService {
             return event
         }
         else{
-            let response = await ServiceUtils.GET(`${API_URL}/${module}/${event_id}`)
+            let response = await ServiceUtils.GET(`${API_URL}/${CompaniesService.module}/${event_id}`)
             //let response = await fetch(`./info/eventImages.json`)
             response = await response.json()
             if(response[0])
@@ -33,5 +35,6 @@ class CompaniesService {
         }
     }
 }
+CompaniesService.module = "company"
 
 export default CompaniesService

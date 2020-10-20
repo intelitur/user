@@ -1,7 +1,8 @@
 
-const module = "weather"
+
 
 class WeatherService {
+
 
     static async getWeather(filters){
         
@@ -32,5 +33,6 @@ class WeatherService {
         */
     }
 }
+WeatherService.module = "weather"
 
 export default WeatherService

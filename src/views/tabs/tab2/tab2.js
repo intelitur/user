@@ -8,6 +8,7 @@ import './tab2.css'
 import EventsService from "../../../services/EventsService";
 import Snackbar from "../../snackbar/snackbar";
 import AdsService from "../../../services/AdsService";
+import footer from "../../footer/footer";
 class Tab2 {
 
     constructor() {
@@ -94,6 +95,7 @@ class Tab2 {
                 if (!parent.classList.contains("expanded")) {
                     parent.classList.add("expanded")
                     this.showObjects()
+                    console.log("CLICK")
                 }
                 else
                     parent.classList.remove("expanded")
@@ -127,6 +129,10 @@ class Tab2 {
                 this.goTo(3)
             }
         }).bind(this))
+
+        const button = this.el.querySelector(".tab2--button")
+
+        button.addEventListener("click", ()=> footer.showTab(3))
 
     }
 

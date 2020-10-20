@@ -49,3 +49,58 @@
         font-weight: 300;
     }
 }
+
+@media only screen and (min-width: 700px) {
+
+    .frequent_questions {
+        background-color: rgb(248, 248, 248);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        text-align: start;
+        border-radius: 10px;
+    }
+
+    .frequent_questions--title {
+        margin: 20px;
+        font-size: 17px;
+        
+    }
+
+    .frequent_questions--container {
+        width: 100%;
+        max-height: calc(100% - 60px);
+        height: calc(100% - 60px);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .frequent_questions--item {
+        padding: 15px;
+        background-color: white;
+        color: rgb(56, 56, 56);
+        width: 85%;
+        margin: 10px auto;
+        border-radius: 10px;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1), 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
+        font-size: 18px;
+        display: flex;
+        flex-direction: row;
+        transition: 0.8s;
+    }
+
+    .frequent_questions--item--question {
+        text-align: start;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .frequent_questions--item--answer {
+        margin-top: 15px;
+        text-align: start;
+        font-size: 15px;
+        font-weight: 300;
+    }
+}

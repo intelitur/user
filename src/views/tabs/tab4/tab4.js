@@ -4,6 +4,7 @@ import frequentQuestions from "../../frequent_questions/frequent_questions";
 
 
 import './css/m_tab4.css';
+import './css/d_tab4.css';
 
 class Tab4 {
 
@@ -24,11 +25,16 @@ class Tab4 {
 
         this.el.appendChild(node)
 
-        this.back = this.el.querySelector(".tab4__back")
-        this.items =  this.el.querySelectorAll(".tab4__item")
-        if(DesignController.mobile)
+        if(DesignController.mobile){
+            this.back = this.el.querySelector(".tab4__back")
+            this.items =  this.el.querySelectorAll(".tab4__item")
             this.setupEventListeners()
+        }
+        else{
+            await frequentQuestions.render("tab4_frequent_questions")
+        }
     }
+
 
     setupEventListeners(){
 
@@ -56,6 +62,18 @@ class Tab4 {
                 setTimeout(() => item.style.zIndex = "0", 800)
             })
         }).bind(this))
+    }
+
+    showFrequentQuestions(){
+        if(DesignController.mobile){
+            let item = this.items[0]
+            item.style.zIndex = "1"
+            frequentQuestions.render("m_frequent_questions")
+            item.classList.add("expanded")
+            setTimeout(() => {
+                this.back.classList.add("visible"), 800
+            })
+        }
     }
 
     show() { this.el.classList.add('active') }

@@ -15,7 +15,7 @@ class Footer {
         const view = await TemplatesManager.getTemplate('footer')
         this.el = TemplatesManager.renderElement('footer', view)
 
-        this.initTabs()
+        await this.initTabs()
     }
 
     async initTabs(){

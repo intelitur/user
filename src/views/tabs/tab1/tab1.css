@@ -414,16 +414,15 @@
         position: absolute;
         top: calc(37% - 90px);
         background : rgba(255, 255, 255, 0.95);
-        width: 80px;
+        width: 100px;
         color: tomato;
         height: 80px;
-        border-radius: 10px;
+        border-radius: 0 10px 10px 0;
         justify-content: center;
         font-size: 35px;
         text-align: center;
         display: flex;
         flex-direction: column;
-        margin-left: 10px;
     }
 
     .tab1__weather--container div{

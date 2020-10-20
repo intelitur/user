@@ -33,15 +33,18 @@ class Carousel {
 */  
     nextImage(){
         const boton = this.el.querySelector("#changeImage");
-        boton.addEventListener('click', (() => {
-            if (numImage >= this.images.length-1){
-                numImage=0;
-                this.showImage(numImage)
-            }else{
-                numImage++;
-                this.showImage(numImage)
-            }
-        }).bind(this))
+        if(boton){
+
+            boton.addEventListener('click', (() => {
+                if (numImage >= this.images.length-1){
+                    numImage=0;
+                    this.showImage(numImage)
+                }else{
+                    numImage++;
+                    this.showImage(numImage)
+                }
+            }).bind(this))
+        }
 
     }
 

@@ -9,11 +9,13 @@ import { FILES_BASE_URL } from '../../env';
 
 
 import './event.css'
+import Snackbar from '../snackbar/snackbar';
 class EventView {
 
-    constructor(event_id) {
+    constructor(event_id, render) {
         this.event_id = event_id
         this.eventPromise = this.updateEvent()
+        this.render(render)
     }
 
     async render(name) {
@@ -25,9 +27,22 @@ class EventView {
             const view = TemplatesManager.contextPipe(template, {...this, datetime: this.getDateTimeInfo()})
     
             this.el = TemplatesManager.renderElement(name, view)
-    
+
+            if(DesignController.mobile){
+                DesignController.showOverlay()
+            }
+            else {
+                tab2.map.showEventPopup(this.event.event_id)
+                document.querySelector(".tab2__left__info--container").classList.add('visible')
+                tab2.map.showEventPopup(this.event.event.id)
+                tab2.loading = false
+            }
             await this.renderContent();
             this.addEventListeners()
+        }
+        else{
+            footer.showTab(1)
+            tab2.loading = false
         }
 
     }
@@ -68,10 +83,13 @@ class EventView {
             return
         }
         this.event = (await response.json())[0]
-        console.log(this.event)
-        if(this.event.categories === undefined)
+        if(this.event != undefined){
+            if(this.event.categories === undefined)
             this.event.categories = await this.getCategories()
-        console.log(this.event.categories)
+            console.log(this.event.categories)
+        }
+        else
+            Snackbar.error("El evento no existe o fue eliminado")
 
     }
 

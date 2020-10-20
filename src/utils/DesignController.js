@@ -12,45 +12,28 @@ import weather from '../views/weather/weather'
 
 class DesignController {
 
-    static showOverlay(doWhenHide) {
+    static showOverlay() {
         const overlay = document.querySelector('.overlay')
         overlay.classList.add('visible')
-        if(typeof doWhenHide === 'function')
-            DesignController.doWhenHide = doWhenHide
     }
 
-    static hideOverlay(force) {
+    static hideOverlay() {
         const overlay = document.querySelector('.overlay')
         overlay.classList.remove('visible')
-        if(force){
-            DesignController.doWhenHide = undefined
-            setTimeout(()=>overlay.firstElementChild.className = "", 500);
-        }
-        if(DesignController.doWhenHide){
-            DesignController.doWhenHide()
-            DesignController.doWhenHide = undefined
-        }
     }
 
 
-    static async showEvent(event_id, doWhenHide) {
+    static async showEvent(event_id) {
         tab2.showingObject = true
         if(DesignController.mobile){
             DesignController.showLoadingBar()
-            const eventView = new EventView(event_id)
-            await eventView.render('overlay')
+            new EventView(event_id, "overlay")
             DesignController.hideLoadingBar()
-            DesignController.showOverlay(doWhenHide)
         }   
         else{
             footer.showTab(2)
             tab2.loading = true
-            tab2.map.showEventPopup(event_id)
-            const eventView = new EventView(event_id)
-            await eventView.render('tab2__left__info')
-            document.querySelector(".tab2__left__info--container").classList.add('visible')
-            tab2.map.showEventPopup(event_id)
-            tab2.loading = false
+            new EventView(event_id, 'tab2__left__info')
         }
 
     }
@@ -61,10 +44,12 @@ class DesignController {
             DesignController.calendar = new CalendarView()
         }
         let calendar = DesignController.calendar
-        await calendar.render('overlay')
+        await calendar.render('calendar')
         DesignController.hideLoadingBar()
-        DesignController.showOverlay(doWhenHide)
+        const overlay = document.querySelector('.calendar--overlay')
+        overlay.classList.add('visible')
     }
+
     static showOverlaySearch() {
         const search = document.querySelector('.search')
         search.classList.add('visible')
@@ -102,21 +87,7 @@ class DesignController {
 
     static async showAd(ad_id) {
         tab2.showingObject = true
-        const adView = new AdView(ad_id)
-        if(DesignController.mobile){
-            DesignController.showLoadingBar()
-            await adView.show('overlay_ad')
-            DesignController.hideLoadingBar()
-        }   
-        else{
-            footer.showTab(2)
-            tab2.loading = true
-            tab2.map.showAdPopup(ad_id)
-            await adView.show('tab2__left__info')
-            document.querySelector(".tab2__left__info--container").classList.add('visible')
-            tab2.loading = false
-        }
-
+        new AdView(ad_id)
     }
 
     static async showWeather(){

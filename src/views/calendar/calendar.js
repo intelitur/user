@@ -60,7 +60,10 @@ class CalendarView {
                 customButtons: {
                     back: {
                         text: 'Atras',
-                        click: DesignController.hideOverlay
+                        click: ()=> {
+                            const overlay = document.querySelector('.calendar--overlay')
+                            overlay.classList.remove('visible')
+                        }
                     }
                 }
             }

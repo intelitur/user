@@ -9,12 +9,23 @@ import './css/m_ad.css'
 import './css/d_ad.css'
 import './ad.css'
 import Carousel from "../carousel/carousel"
+import tab2 from "../tabs/tab2/tab2"
+import footer from "../footer/footer"
 
 class AdView {
 
     constructor(ad_id) {
         this.ad_id = ad_id
         this.adPromise = this.getAd()
+        if(DesignController.mobile){
+            DesignController.showLoadingBar()
+            this.show('overlay_ad')
+        }
+        else{
+            footer.showTab(2)
+            tab2.loading = true
+            this.show('tab2__left__info')
+        }
     }
 
     get loading() {
@@ -33,7 +44,7 @@ class AdView {
 
         if (this.ad != undefined) {
 
-            if (DesignController.mobile && document.querySelector(`[render="ad_overlay"]`) == undefined) {
+            if (DesignController.mobile && document.querySelector(`.ad__overlay`) == undefined) {
                 
                 document.body.appendChild(
                     TemplatesManager.createHtmlNode(
@@ -46,6 +57,7 @@ class AdView {
             }
 
             const template = await TemplatesManager.getTemplate('ad')
+            console.log("UNIUNINEFINEFI", template, "")
 
             const view = TemplatesManager.contextPipe(template, {...this.ad})
 
@@ -53,6 +65,26 @@ class AdView {
 
             this.renderContent()
             this.setupListeners()
+
+            if(DesignController.mobile){
+                DesignController.hideLoadingBar()
+            }
+            else{
+                tab2.map.showAdPopup(this.ad.ad_id)
+                tab2.loading = false
+            }
+
+            
+        }
+        else{
+
+            if(DesignController.mobile){
+                DesignController.hideLoadingBar()
+            }
+            else{
+                tab2.loading = false
+                footer.showTab(1)
+            }
         }
     }
 
@@ -67,10 +99,9 @@ class AdView {
 
     async show(where) {
         this.where = where
-        if (this.el == undefined) {
-            await this.render()
-        }
-        this.el.parentElement.classList.add("visible")
+        await this.render()
+        if(this.ad != undefined)
+            this.el.parentElement.classList.add("visible")
     }
 
     async hide() {
@@ -83,6 +114,9 @@ class AdView {
         if(response.status != 200){
             if(response.status >= 500){
                 Snackbar.error(500)
+            }
+            else if(response.status == 404){
+                Snackbar.error("El anuncio ya acabó o no existe")
             }
             else if(response.status >= 400){
                 Snackbar.error(400)

@@ -1,15 +1,17 @@
 import footer from './views/footer/footer'
 import './styles.css'
+import RouteController from './utils/RouteController'
 
-function initRender(){
+async function initRender(){
     configBounds()
 
     const initElements = {
         footer
     }
 
-    Object.values(initElements).forEach(el => el.render())
-
+    Promise.all(Object.values(initElements).map(el => el.render())).then((r)=> {
+        RouteController.verifyQuery()
+    })
     
     
 }
@@ -33,6 +35,8 @@ function configBounds(){
     let minHeight = document.body.clientHeight
     document.body.style.minHeight = `${minHeight}px`
 }
+
+
 
 
 configStringPatch()

@@ -5,3 +5,10 @@
 [theme=light] .tab4{
     color: var(--tab4_color);
 }
+
+@media only screen and (min-width: 700px) {
+
+    .tab4_card{
+        
+    }
+}

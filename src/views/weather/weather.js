@@ -42,8 +42,9 @@ class Weather {
         this.el = TemplatesManager.renderElement(this.where, template)
 
         const response = await WeatherService.getWeather()
+        const data = await response.json()
 
-        this.el.innerHTML = this.el.innerHTML.patch(response.body)
+        this.el.innerHTML = this.el.innerHTML.patch(data)
         
         this.setupListeners()
     }

@@ -311,18 +311,34 @@
         flex-flow: row wrap;
         padding: 20px;
         justify-content: center;
-        width: 100%;
+        width: calc(100% - 40px);
     }
     .tab1__contests--item {
         border-radius: 10px;
         min-width: 250px;
         width: 30%;
-        min-height: 110px;
+        min-height: 250px;
         height: 20vh;
         margin: 10px;
         background-color: white;
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tab1__contest--img {
+        height: 70%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+        background-color: #ff634732;
+    }
+
+    .tab1__contest--name {
+        font-size: 14px;
+        margin: auto;
     }
     .tab1__adds--container {
         display: flex;
@@ -566,26 +582,67 @@
         visibility: hidden;
     } */
 
-    .tab1__concurso--container {
-        margin: 0 20px;
+    .tab1__contests--container {
+        padding: 6px;
         height: calc(50% - 70px);
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
         margin-bottom: 20px;
+        overflow-x: auto;
+        overflow-y: visible;
     }
 
-    .tab1__concurso--item {
-        padding: 3px;
+    .tab1__contests--container::-webkit-scrollbar {
+        width: 5px;
+        height: 4px;
+    }
+    
+    /* Track */
+    
+    .tab1__contests--container::-webkit-scrollbar-track {
+        background: #f1f1f11a;
+    }
+    
+    /* Handle */
+    
+    .tab1__contests--container::-webkit-scrollbar-thumb {
+        background: rgba(80, 80, 80, 0.3);
+        border-radius: 5px;
+    }
+    
+    /* Handle on hover */
+    
+    .tab1__contests--container::-webkit-scrollbar-thumb:hover {
+        background: rgba(75, 75, 75, 0.3);
+    }
+
+    .tab1__contests--item {
         position: relative;
-        width: 45%;
-        margin: auto;
+        min-width: 40vw;
+        max-width: 40vw;
+        margin: auto 6px;
         height: calc(100% - 6px);
         color: black;
-        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2);
         border-radius: 10px;
         background-color: rgba(255, 255, 255);
         transition: 0.2s;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tab1__contest--img {
+        height: 70%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+        background-color: #ff634732;
+    }
+
+    .tab1__contest--name {
+        font-size: 12px;
+        margin: auto;
     }
 
 

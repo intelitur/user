@@ -24,6 +24,10 @@
     min-height: 100%;
 }
 
+video.carousel__images-container__img {
+    object-fit: contain;
+}
+
 .carousel__items-container{
     position: absolute;
     display: flex;

@@ -13,17 +13,14 @@ import './tab1.css'
 import './css/d_tab1_event_view.css'
 import '../../../utils/css/loader-ellipsis.css'
 import Snackbar from "../../snackbar/snackbar";
+import ContestsService from "../../../services/ContestsService";
+import HomeImagesService from "../../../services/HomeImagesService";
 
 
 class Tab1 {
     
 
     constructor() {
-        this.carousel = new Carousel([
-            "https://cdn.shopify.com/s/files/1/0094/5052/files/LaFortunaWaterfall-1500x1000x300.jpg?v=1540451385",
-            "https://puntadelesteibt.com/wp-content/uploads/2012/07/NTN_6571.jpg",
-            "https://d3hne3c382ip58.cloudfront.net/resized/750x420/combination-tour-la-fortuna-in-one-day-tour-2-457721_1549285516.JPG"
-        ])
         this.index = 0;
         this.pageSize = 3;
     }
@@ -63,6 +60,7 @@ class Tab1 {
     }
 
     get badge(){
+        const id = DesignController.mobile? "#badge_m_tab1": "#badge_d_tab1"
         return Number(this.el.querySelector(id).innerHTML)
     }
 
@@ -77,13 +75,15 @@ class Tab1 {
         const view = await TemplatesManager.getTemplate(htmlName)
         TemplatesManager.renderElement('tab1_content', view)
 
-        await this.carousel.render('tab1_carousel')
+        
         this.configCalendarButton()
+        this.renderHomeImages()
         
           
         if (DesignController.mobile) {
             this.setupSearchScreen()
             this.renderEventsMobile()
+            this.renderContestsMobile()
             this.setupMobileListeners()
             //this.hiddenDiv();
         }
@@ -92,8 +92,35 @@ class Tab1 {
             await this.renderCalendar()
             this.setupSrollAnimation()
             this.renderEvents()
+            this.renderContests()
             ads.show("tab1_ads")
         }
+    }
+
+    async renderHomeImages() {
+        const response = await HomeImagesService.getHomeImages()
+
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error("Error al conectar y obetener los <b>eventos</b> de nuestros servidores")
+            }
+            else if(response.status >= 400){
+                Snackbar.error("Error al conectar y obetener las <b>imágenes de inicio</b> de nuestros servidores")
+            }
+            this.loading = false
+            
+            return
+        }
+
+        const images = await response.json()
+
+        console.log(images)
+        
+        this.carousel = new Carousel(images.map(image => `${FILES_BASE_URL}/${image.name}`))
+
+        await this.carousel.render('tab1_carousel')
+
+        setInterval(this.carousel.nImage.bind(this.carousel), 5000)
     }
 
     async renderCalendar() {
@@ -365,6 +392,118 @@ class Tab1 {
                 container.scrollTop += 151
             }).bind(this))
         }
+    }
+
+    async renderContestsMobile(){
+        this.loading = true;
+
+        const container = this.el.querySelector('.tab1__contests--container');
+
+        const template = await TemplatesManager.getTemplate('m_tab1_contest_view');
+
+        const response = await ContestsService.getContests();
+
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error("Error al conectar y obetener los <b>concursos</b> de nuestros servidores")
+            }
+            else if(response.status >= 400){
+                Snackbar.error("Error al conectar y obetener los <b>concursos</b> de nuestros servidores")
+            }
+            this.loading = false
+            return
+        }
+        
+        let contests = await response.json()
+
+
+        if(contests.length > 0){
+
+            contests.forEach(item => {
+                const htmlNode = TemplatesManager.createHtmlNode(template.patch({...item, main_image: this.getMainImageContest(item)}));
+
+                htmlNode.classList.add("tab1__contests--item")
+                container.appendChild(htmlNode);
+            })
+
+            const contestsDOM = this.el.querySelectorAll(".tab1__contests--item")
+            contestsDOM.forEach(item => {
+                item.addEventListener('click', DesignController.showContest.bind(this, item.getAttribute("contest_id")))
+            })
+        }
+        this.loading = false
+    }
+
+    async renderContests(){
+        this.loading = true;
+
+        const container = this.el.querySelector('.tab1__contests--container');
+
+        const template = await TemplatesManager.getTemplate('d_tab1_contest_view');
+
+        const response = await ContestsService.getContests();
+
+        if(response.status != 200){
+            if(response.status >= 500){
+                Snackbar.error("Error al conectar y obetener los <b>concursos</b> de nuestros servidores")
+            }
+            else if(response.status >= 400){
+                Snackbar.error("Error al conectar y obetener los <b>concursos</b> de nuestros servidores")
+            }
+            this.loading = false
+            return
+        }
+        
+        let contests = await response.json()
+
+
+        if(contests.length > 0){
+
+            contests.forEach(item => {
+                const htmlNode = TemplatesManager.createHtmlNode(template.patch({...item, main_image: this.getMainImageContest(item)}));
+
+                htmlNode.classList.add("tab1__contests--item")
+                container.appendChild(htmlNode);
+            })
+            contests.forEach(item => {
+                const htmlNode = TemplatesManager.createHtmlNode(template.patch({...item, main_image: this.getMainImageContest(item)}));
+
+                htmlNode.classList.add("tab1__contests--item")
+                container.appendChild(htmlNode);
+            })
+
+            const contestsDOM = this.el.querySelectorAll(".tab1__contests--item")
+            contestsDOM.forEach(item => {
+                item.addEventListener('click', DesignController.showContest.bind(this, item.getAttribute("contest_id")))
+            })
+        }
+        this.loading = false
+    }
+
+    getDateInfoContest(contest){
+
+        const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+
+        const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+
+        const date = new Date(contest.initial_date.split("T")[0])
+
+        
+        const monthName = months[date.getMonth()]
+
+        const dayName = days[date.getDay()]
+
+        const dateI = date.getDate() + 1
+
+        return {
+            monthName,
+            dayName,
+            dateI
+        }
+    }
+
+    getMainImageContest(contest){
+        return contest.images.length > 0 ? `${FILES_BASE_URL}/${contest.images[0].name}`: "https://intelitur.arenalcostarica.cr:7031/files/20201024145734255-7.jpg";
     }
 
     show() { this.el.classList.add('active') }

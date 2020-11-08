@@ -1,30 +1,26 @@
 import TemplatesManager from "../../utils/TemplatesManager"
 
-import AdsService from "../../services/AdsService"
 import { FILES_BASE_URL } from "../../env"
 import DesignController from "../../utils/DesignController"
 import Snackbar from "../snackbar/snackbar"
 
-import './css/m_ad.css'
-import './css/d_ad.css'
-import './ad.css'
+import './css/m_contest.css'
+import './css/d_contest.css'
+import './contest.css'
 import Carousel from "../carousel/carousel"
-import tab2 from "../tabs/tab2/tab2"
-import footer from "../footer/footer"
+import ContestsService from "../../services/ContestsService"
 
-class AdView {
+class ContestView {
 
-    constructor(ad_id) {
-        this.ad_id = ad_id
-        this.adPromise = this.getAd()
+    constructor(contest_id) {
+        this.contest_id = contest_id
+        this.contestPromise = this.getContest()
         if(DesignController.mobile){
             DesignController.showLoadingBar()
-            this.show('overlay_ad')
+            this.show('overlay_contest')
         }
         else{
-            footer.showTab(2)
-            tab2.loading = true
-            this.show('tab2__left__info')
+            this.show('tab1__left__info')
         }
     }
 
@@ -40,26 +36,22 @@ class AdView {
     }
 
     async render() {
-        await this.adPromise
-
-        if (this.ad != undefined) {
-
-            if (DesignController.mobile && document.querySelector(`.ad__overlay`) == undefined) {
-                
+        await this.contestPromise
+        if (this.contest != undefined) {
+            if (DesignController.mobile && document.querySelector(`.contest__overlay`) == undefined) {
                 document.body.appendChild(
                     TemplatesManager.createHtmlNode(
-                        `<section class="ad__overlay">
+                        `<section class="contest__overlay">
                             <render render="${this.where}"></render>
                         </section>`
                     )
                 )
-
             }
 
-            const template = await TemplatesManager.getTemplate('ad')
+            const template = await TemplatesManager.getTemplate('contest')
             //console.log("UNIUNINEFINEFI", template, "")
 
-            const view = TemplatesManager.contextPipe(template, {...this.ad})
+            const view = TemplatesManager.contextPipe(template, {...this.contest})
 
             this.el = TemplatesManager.renderElement(this.where, view)
 
@@ -69,54 +61,44 @@ class AdView {
             if(DesignController.mobile){
                 DesignController.hideLoadingBar()
             }
-            else{
-                tab2.map.showAdPopup(this.ad.ad_id)
-                tab2.loading = false
-            }
-
-            
         }
         else{
-
             if(DesignController.mobile){
                 DesignController.hideLoadingBar()
-            }
-            else{
-                tab2.loading = false
-                footer.showTab(1)
             }
         }
     }
 
     async renderContent(){
-        this.ad.images = [
-            `20200826162313572-Full%20Moon%20Ultra%20HD.jpg`,
-            `20200826162313572-Full%20Moon%20Ultra%20HD.jpg`,
-        ]
-        this.carousel = new Carousel(this.ad.images.map(image => `${FILES_BASE_URL}/${image}`));
-        this.carousel.render('ad_carousel')
+        // this.contest.images = [
+        //     `20200826162313572-Full%20Moon%20Ultra%20HD.jpg`,
+        //     `20200826162313572-Full%20Moon%20Ultra%20HD.jpg`,
+        // ]
+        this.carousel = new Carousel(this.contest.images.map(image => `${FILES_BASE_URL}/${image.name}`));
+        this.carousel.render('contest_carousel')
     }
 
     async show(where) {
         this.where = where
         await this.render()
-        if(this.ad != undefined)
+        if(this.contest != undefined)
             this.el.parentElement.classList.add("visible")
     }
 
     async hide() {
         this.el.parentElement.classList.remove("visible")
+        this.carousel.clear()
         this.el.innerHTML = ""
     }
 
-    async getAd() {
-        const response = await AdsService.getAd(this.ad_id, true)
+    async getContest() {
+        const response = await ContestsService.getContest(this.contest_id)
         if(response.status != 200){
             if(response.status >= 500){
                 Snackbar.error(500)
             }
             else if(response.status == 404){
-                Snackbar.error("El anuncio ya acabó o no existe")
+                Snackbar.error("El concurso ya acabó o no existe")
             }
             else if(response.status >= 400){
                 Snackbar.error(400)
@@ -124,30 +106,26 @@ class AdView {
             this.loading = false
             return
         }
-        this.ad = (await response.json())
+        this.contest = (await response.json())
+        console.log(this.contest)
     }
 
     setupListeners() {
-        this.el.querySelector(".ad__back").addEventListener("click", this.hide.bind(this))
+        this.el.querySelector(".contest__back").addEventListener("click", this.hide.bind(this))
 
-        this.el.querySelector(".ad__carousel--button.left").addEventListener("click", this.carousel.pImage.bind(this.carousel))
-        this.el.querySelector(".ad__carousel--button.right").addEventListener("click", this.carousel.nImage.bind(this.carousel))
+        this.el.querySelector(".contest__carousel--button.left").addEventListener("click", this.carousel.pImage.bind(this.carousel))
+        this.el.querySelector(".contest__carousel--button.right").addEventListener("click", this.carousel.nImage.bind(this.carousel))
 
-        this.el.querySelector(".ad__address--button").addEventListener("click", (() => { 
-            tab2.map.showAdPopup(this.ad.ad_id); 
+        this.el.querySelector(".contest__address--button").addEventListener("click", (() => {  
+            
             if(DesignController.mobile){
-                footer.showTab(2);
                 DesignController.hideOverlay(true); 
             }
         }).bind(this))
 
     }
 
-    renderAd(){
-        //console.log(this.ad)
-    }
-
 
 }
 
-export default AdView
+export default ContestView

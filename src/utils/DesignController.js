@@ -9,6 +9,7 @@ import searchEvents from '../views/search_events/search_events'
 import ads from '../views/ads/ads'
 import AdView from '../views/ad/ad'
 import weather from '../views/weather/weather'
+import ContestView from '../views/contest/contest'
 
 class DesignController {
 
@@ -49,6 +50,11 @@ class DesignController {
         const overlay = document.querySelector('.calendar--overlay')
         overlay.classList.add('visible')
     }
+
+    static async showContest(contest_id) {
+        new ContestView(contest_id)
+    }
+
 
     static showOverlaySearch() {
         const search = document.querySelector('.search')

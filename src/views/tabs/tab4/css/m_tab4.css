@@ -55,6 +55,10 @@
 
     .tab4__item .tab4__item--title {
         color: rgb(103, 103, 103);
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
     }
 
     .tab4__item.expanded .tab4__item--title {

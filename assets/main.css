@@ -24,6 +24,10 @@
     min-height: 100%;
 }
 
+video.carousel__images-container__img {
+    object-fit: contain;
+}
+
 .carousel__items-container{
     position: absolute;
     display: flex;
@@ -4270,6 +4274,261 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     }
 
 }
+@media only screen and (max-width: 700px) {
+    .contest__overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 100%;
+        transition: left 0.5s;
+        background-color: white;
+        color: gray;
+        z-index: 20001;
+        top: 0;
+    }
+
+    .contest__overlay.visible {
+        left: 0%;
+    }
+}
+
+.contest {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contest__tb--container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 100px;
+}
+
+.contest__back {
+    position: absolute;
+    bottom: 75px;
+    left: -6px;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    color: rgb(76, 76, 76);
+    display: flex;
+    cursor: pointer;
+    font-size: 25px;
+    border: none;
+    z-index: 1;
+    display: flex;
+}
+
+.contest__back * {
+    margin: auto;
+}
+
+.contest__back:focus {
+    outline: none;
+}
+
+.contest__title {
+    margin: auto 20px;
+    color: white;
+}
+
+.contest__carousel--container{
+    height: 55%;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.contest__carousel--container>.carousel{
+    overflow: hidden;
+}
+
+
+.contest__carousel--button{
+    position: absolute;
+    top: calc(50% - 16px);
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    color: gray;
+    display: flex;
+    cursor: pointer;
+}
+
+.contest__carousel--button.left{
+    left: 1px;
+    
+}
+
+.contest__carousel--button.right{
+    right: 1px
+}
+
+.contest__carousel--button i{
+    margin: auto;
+}
+
+.contest__carousel--container .carousel__item-weather{
+    display: none
+}
+
+.contest__carousel--container .carousel__items--button{
+    display: none;
+}
+
+
+.contest__date--container{
+    display: flex;
+    margin: 10px;
+    justify-content: space-evenly;
+    width: 65%;
+    margin-top: 0;
+}
+
+.contest__date--arrow{
+    margin: auto 0;
+    font-size: 23px;
+    color: gray;
+}
+
+.contest__date {
+    font-size: calc(4px + 0.7vh);
+    /* change icon size */
+    display: block;
+    position: relative;
+    width: 7em;
+    height: 9.4em;
+    background-color: #fff;
+    border-radius: 0.6em;
+    box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px #bdbdbd;
+    overflow: hidden;
+}
+
+.contest__date *{
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+}
+
+.contest__date strong
+{
+  position: absolute;
+  top: 0;
+  padding: 0.4em 0;
+  color: #fff;
+  background-color: gray;
+  border-bottom: 1px dashed rgb(160, 160, 160);
+  box-shadow: 0 2px 0 gray;
+  
+}
+
+.contest__date em
+{
+    position: absolute;
+    bottom: 2.2em;
+    color: gray;
+    padding-bottom: 0.5em;
+    border-bottom: 1px dashed rgb(160, 160, 160);
+    margin: 0 0.4em;
+    width: calc(100% - 0.8em);
+}
+
+.contest__date span
+{
+  font-size: 2.8em;
+  letter-spacing: -0.05em;
+  padding-top: 0.9em;
+  color: #2f2f2f;
+  
+}
+
+.contest__date label
+{
+  font-size: 1.2em;
+  padding-top: 1.5em;
+  color: #4a4a4a;
+}
+
+.contest__category--container{
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 20px;
+    justify-content: center;
+}
+
+
+.contest__category{
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #e4e4e4;
+    color: #7b7b7b;
+    margin: 2px 7px;
+}
+
+.contest__flex--container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@media only screen and (min-width: 700px) {
+    .contest__flex--container{
+        margin-right: 50px;
+    }
+}
+
+.contest__cost--container {
+    width: 35%;
+    display: flex;
+    color: gray
+}
+
+.contest__cost--container span{
+    font-size: 25px;
+    margin: auto;
+}
+
+.contest__address--button {
+    margin: auto 0;
+    border: none;
+    border-radius: 50px;
+    background-color: white;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    width: 65px;
+    height: 45px;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.contest__description--container{
+    margin: 0 auto;
+    padding: 10px 5%;
+    width: 70%;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    margin-top: 10px;
+    border-radius: 10px;
+    color: gray;
+    font-size: 12px;
+    text-align: start;
+}
+
+
+
 [theme=color] .tab1 {
     background-color: var(--tab1_color);
 }
@@ -4583,18 +4842,34 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         flex-flow: row wrap;
         padding: 20px;
         justify-content: center;
-        width: 100%;
+        width: calc(100% - 40px);
     }
     .tab1__contests--item {
         border-radius: 10px;
         min-width: 250px;
         width: 30%;
-        min-height: 110px;
+        min-height: 250px;
         height: 20vh;
         margin: 10px;
         background-color: white;
         box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
         transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tab1__contest--img {
+        height: 70%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+        background-color: #ff634732;
+    }
+
+    .tab1__contest--name {
+        font-size: 14px;
+        margin: auto;
     }
     .tab1__adds--container {
         display: flex;
@@ -4838,26 +5113,67 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
         visibility: hidden;
     } */
 
-    .tab1__concurso--container {
-        margin: 0 20px;
+    .tab1__contests--container {
+        padding: 6px;
         height: calc(50% - 70px);
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
         margin-bottom: 20px;
+        overflow-x: auto;
+        overflow-y: visible;
     }
 
-    .tab1__concurso--item {
-        padding: 3px;
+    .tab1__contests--container::-webkit-scrollbar {
+        width: 5px;
+        height: 4px;
+    }
+    
+    /* Track */
+    
+    .tab1__contests--container::-webkit-scrollbar-track {
+        background: #f1f1f11a;
+    }
+    
+    /* Handle */
+    
+    .tab1__contests--container::-webkit-scrollbar-thumb {
+        background: rgba(80, 80, 80, 0.3);
+        border-radius: 5px;
+    }
+    
+    /* Handle on hover */
+    
+    .tab1__contests--container::-webkit-scrollbar-thumb:hover {
+        background: rgba(75, 75, 75, 0.3);
+    }
+
+    .tab1__contests--item {
         position: relative;
-        width: 45%;
-        margin: auto;
+        min-width: 40vw;
+        max-width: 40vw;
+        margin: auto 6px;
         height: calc(100% - 6px);
         color: black;
-        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.10), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2);
         border-radius: 10px;
         background-color: rgba(255, 255, 255);
         transition: 0.2s;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tab1__contest--img {
+        height: 70%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+        background-color: #ff634732;
+    }
+
+    .tab1__contest--name {
+        font-size: 12px;
+        margin: auto;
     }
 
 
@@ -5319,6 +5635,10 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 
     .tab4__item .tab4__item--title {
         color: rgb(103, 103, 103);
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
     }
 
     .tab4__item.expanded .tab4__item--title {

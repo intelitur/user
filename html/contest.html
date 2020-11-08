@@ -1,0 +1,25 @@
+<div class="contest">
+    <button class='contest__back'>
+        <i class="fas fa-arrow-left"></i>
+    </button>
+    <section class="contest__carousel--container">
+        <render render="contest_carousel"></render>
+        <div class="contest__carousel--button left">
+            <i class="material-icons">chevron_left</i>
+        </div>
+        <div class="contest__carousel--button right">
+            <i class="material-icons">chevron_right</i>
+        </div>
+    </section>
+
+    <section class="contest__description--container">
+        {detail}
+    </section>
+
+    <div class="contest__tb--container" style="background-color: tomato;">
+        <h2 class="contest__title">{name}</h2>
+        <button class="contest__address--button" style="color: tomato">
+            <i class="fas fa-map-marker-alt"></i>
+        </button>
+    </div>
+</div>

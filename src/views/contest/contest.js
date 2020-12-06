@@ -20,7 +20,7 @@ class ContestView {
             this.show('overlay_contest')
         }
         else{
-            this.show('tab1__left__info')
+            this.show('tab1_contest')
         }
     }
 
@@ -107,7 +107,6 @@ class ContestView {
             return
         }
         this.contest = (await response.json())
-        console.log(this.contest)
     }
 
     setupListeners() {
@@ -116,12 +115,6 @@ class ContestView {
         this.el.querySelector(".contest__carousel--button.left").addEventListener("click", this.carousel.pImage.bind(this.carousel))
         this.el.querySelector(".contest__carousel--button.right").addEventListener("click", this.carousel.nImage.bind(this.carousel))
 
-        this.el.querySelector(".contest__address--button").addEventListener("click", (() => {  
-            
-            if(DesignController.mobile){
-                DesignController.hideOverlay(true); 
-            }
-        }).bind(this))
 
     }
 

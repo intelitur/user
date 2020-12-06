@@ -9,6 +9,7 @@ import EventsService from "../../../services/EventsService";
 import Snackbar from "../../snackbar/snackbar";
 import AdsService from "../../../services/AdsService";
 import footer from "../../footer/footer";
+import LayersService from "../../../services/LayersService";
 class Tab2 {
 
     constructor() {
@@ -89,6 +90,20 @@ class Tab2 {
         }
         this.ads = await response.json()
 
+        response = await LayersService.getLayers()
+        if (response.status != 200) {
+            if (response.status >= 500) {
+                Snackbar.error(500)
+            }
+            else if (response.status >= 400) {
+                Snackbar.error(400)
+            }
+            return
+        }
+        this.layers = await response.json()
+        console.log(this.layers)
+        this.showOtherLayers()
+
         document.querySelectorAll(".tab2__left--item--header").forEach((item) => {
             item.addEventListener("click", (() => {
                 let parent = item.parentNode
@@ -107,11 +122,11 @@ class Tab2 {
         document.querySelector("#tab2_checkbox_Eventos").addEventListener("click", () => this.map.toggleLayer("Eventos"))
         document.querySelector("#tab2_checkbox_ads").addEventListener("click", () => this.map.toggleLayer("Anuncios"))
 
-        
+
         this.map.map.on("moveend", this.showObjects.bind(this))
     }
 
-    showObjects(){
+    showObjects() {
         this.showAds()
         this.showEvents()
     }
@@ -132,7 +147,7 @@ class Tab2 {
 
         const button = this.el.querySelector(".tab2--button")
 
-        button.addEventListener("click", ()=> footer.showTab(3))
+        button.addEventListener("click", () => footer.showTab(3))
 
     }
 
@@ -179,7 +194,7 @@ class Tab2 {
                 let template = await TemplatesManager.getTemplate("event_item")
 
                 visibleEvents.forEach(event => {
-                    let node = TemplatesManager.contextPipe(template, {...event, color: "inherit"}, false)
+                    let node = TemplatesManager.contextPipe(template, { ...event, color: "inherit" }, false)
                     container.appendChild(node)
                     node.addEventListener("click", this.map.showEventPopup.bind(this.map, event.event_id))
                 })
@@ -191,7 +206,8 @@ class Tab2 {
         }
     }
 
-    async showAds(){
+    async showAds() {
+
         if (document.querySelector("#tab2_checkbox_ads").checked) {
             let container = document.querySelectorAll(".tab2__left--item")[1]
 
@@ -204,7 +220,7 @@ class Tab2 {
                 let template = await TemplatesManager.getTemplate("event_item")
 
                 visibleAds.forEach(ad => {
-                    let node = TemplatesManager.contextPipe(template, {...ad, color: "inherit"}, false)
+                    let node = TemplatesManager.contextPipe(template, { ...ad, color: "inherit" }, false)
                     container.appendChild(node)
                     node.addEventListener("click", this.map.showAdPopup.bind(this.map, ad.ad_id))
                 })
@@ -214,6 +230,28 @@ class Tab2 {
             }
 
         }
+    }
+
+
+    async showOtherLayers() {
+
+        let container = document.querySelectorAll(".tab2__left--item")[2]
+        container = this.el.querySelector("#layers_container")
+        container.innerHTML = ""
+
+        let template = await TemplatesManager.getTemplate("layer_item")
+
+        this.layers.forEach(layer => {
+            let node = TemplatesManager.contextPipe(template, { ...layer, color: "inherit" }, false)
+            container.appendChild(node)
+            node.addEventListener("click", (() => {
+
+                const checkbox = node.querySelector("input")
+                checkbox.checked = !checkbox.checked
+                this.map.toggleOtherLayer(layer, checkbox.checked)
+            }).bind(this))
+        })
+
     }
 }
 

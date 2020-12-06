@@ -1,0 +1,37 @@
+.routes--container {
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    padding: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: start;
+}
+
+.routes--items--container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    font-weight: normal;
+    align-items: center;
+}
+
+.routes--item {
+    border: 1px solid rgb(204, 204, 204);
+    height: 60px;
+    width: 90%;
+    border-top: 0;
+}
+
+.routes--item:first-child {
+    border-radius: 10px 10px 0 0;
+    border-top: 1px solid rgb(204, 204, 204);
+}
+
+.routes--item:last-child {
+    border-radius: 0 0 10px 10px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+.routes--item:last-child:first-child {
+    border-radius: 10px;
+}

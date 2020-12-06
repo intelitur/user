@@ -1,5 +1,7 @@
+import RoutesService from "../../../services/RoutesService";
 import DesignController from "../../../utils/DesignController";
 import TemplatesManager from "../../../utils/TemplatesManager";
+import routesView from "../../routes/routes";
 
 import './css/d_tab3.css';
 import './css/m_tab3.css';
@@ -22,6 +24,10 @@ class Tab3 {
         const node = TemplatesManager.createHtmlNode(view)
 
         this.el.appendChild(node)
+
+        if(!DesignController.mobile){
+            routesView.render()
+        }
     }
 
     show() { this.el.classList.add('active') }

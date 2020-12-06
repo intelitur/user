@@ -37,6 +37,25 @@ class GeoJSONUtils {
 
         return geoJson;
     }
+
+    static buildOtherLayerGeoJson(points, layer){
+        const geoJson =
+        {
+            "type": "FeatureCollection",
+            "features": points.map(point => ({
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [point.longitude, point.latitude]
+                    },
+                    "properties": {
+                        ...point, layer: layer                   
+                    }
+            }))
+        }
+
+        return geoJson;
+    }
 }
 
 

@@ -15,6 +15,7 @@ import '../../../utils/css/loader-ellipsis.css'
 import Snackbar from "../../snackbar/snackbar";
 import ContestsService from "../../../services/ContestsService";
 import HomeImagesService from "../../../services/HomeImagesService";
+import WeatherService from "../../../services/WeatherService";
 
 
 class Tab1 {
@@ -77,7 +78,8 @@ class Tab1 {
 
         
         this.configCalendarButton()
-        this.renderHomeImages()
+        this.updateInfo()
+        setInterval(this.updateInfo.bind(this), 300000)
         
           
         if (DesignController.mobile) {
@@ -97,6 +99,11 @@ class Tab1 {
         }
     }
 
+    async updateInfo(){
+        this.renderHomeImages()
+        this.renderTemperature()
+    }
+
     async renderHomeImages() {
         const response = await HomeImagesService.getHomeImages()
 
@@ -113,14 +120,19 @@ class Tab1 {
         }
 
         const images = await response.json()
-
-        console.log(images)
         
         this.carousel = new Carousel(images.map(image => `${FILES_BASE_URL}/${image.name}`))
 
         await this.carousel.render('tab1_carousel')
 
         setInterval(this.carousel.nImage.bind(this.carousel), 5000)
+    }
+
+    async renderTemperature(){
+        const response = await WeatherService.weather
+        const {temp} = response
+        this.el.querySelector("#temperature_span").innerHTML = temp.substr(0, 2)
+        
     }
 
     async renderCalendar() {
@@ -459,12 +471,6 @@ class Tab1 {
 
         if(contests.length > 0){
 
-            contests.forEach(item => {
-                const htmlNode = TemplatesManager.createHtmlNode(template.patch({...item, main_image: this.getMainImageContest(item)}));
-
-                htmlNode.classList.add("tab1__contests--item")
-                container.appendChild(htmlNode);
-            })
             contests.forEach(item => {
                 const htmlNode = TemplatesManager.createHtmlNode(template.patch({...item, main_image: this.getMainImageContest(item)}));
 

@@ -57,7 +57,6 @@ class AdView {
             }
 
             const template = await TemplatesManager.getTemplate('ad')
-            //console.log("UNIUNINEFINEFI", template, "")
 
             const view = TemplatesManager.contextPipe(template, {...this.ad})
 

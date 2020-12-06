@@ -34,7 +34,7 @@ class EventView {
             else {
                 tab2.map.showEventPopup(this.event.event_id)
                 document.querySelector(".tab2__left__info--container").classList.add('visible')
-                tab2.map.showEventPopup(this.event.event.id)
+                tab2.map.showEventPopup(this.event.event_id)
                 tab2.loading = false
             }
             await this.renderContent();

@@ -39,7 +39,6 @@ class TemplatesManager {
         const template = TemplatesManager.createHtmlNode(htmlText)
         const loops = template.querySelectorAll('[foreach]')
         loops.forEach((loop) => {
-            console.log(loop.parentNode)
             const {parentNode, outerHTML} = loop
             const forValues = loop.getAttribute('foreach').split(' of ')
             const iteratorName = forValues[0].split(' & ')[0]

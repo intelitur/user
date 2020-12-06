@@ -21,10 +21,8 @@ class Carousel {
 
         this.showImage(this.index)
         if(this.animationOptions.autoSlide.enabled)
-            setInterval(this.showImage.bind(this), this.animationOptions.autoSlide.ms)
+            this.interval = setInterval(this.showImage.bind(this), this.animationOptions.autoSlide.ms)
 
-        console.log(this.images)
-        console.log(this.videos)
 
     }
 /** 
@@ -59,7 +57,6 @@ class Carousel {
     showImage(){
         const imageContainer = this.el.querySelector(".carousel__images-container")
 
-        console.log(this.index)
         if(this.index < this.videos.length){
             imageContainer.children.item(this.index).play()
         }
@@ -68,6 +65,8 @@ class Carousel {
     }
 
     clear(){
+        if(this.interval != undefined)
+            clearInterval(this.interval)
         const imageContainer = this.el.querySelector(".carousel__images-container")
         imageContainer.innerHTML = ''
     }

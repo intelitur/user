@@ -86,6 +86,7 @@ class Map {
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         })
         const mapLayersControl = leaflet.control.layers(undefined, undefined, { collapsed: false })
+        const otherLayersControl = leaflet.control.layers(undefined, undefined, { collapsed: true })
 
 
         this.map = leaflet.map(mapConfig.elementName,
@@ -109,11 +110,15 @@ class Map {
 
         this.map.addControl(baseControl)
 
-        if (DesignController.mobile)
+        if (DesignController.mobile){
             this.map.addControl(mapLayersControl.setPosition('bottomleft'))
+            this.map.addControl(otherLayersControl.setPosition('bottomleft'))
+        }
+        this.map.otherLayersControl = otherLayersControl
         this.map.mapLayersControl = mapLayersControl
         this.setupEventsTile()
         this.setupAdsTile()
+        this.setupOtherLayers()
 
         this.setMapView(10.471681129073158, -84.64514404535294, 15);
 
@@ -321,6 +326,24 @@ class Map {
         return this.map.getBounds().contains([lat, lng])
     }
 
+    async setupOtherLayers() {
+        let response = await LayersService.getLayers()
+        if (response.status != 200) {
+            if (response.status >= 500) {
+                Snackbar.error(500)
+            }
+            else if (response.status >= 400) {
+                Snackbar.error(400)
+            }
+            return
+        }
+        let layers = await response.json()
+
+        layers.forEach(layer => {
+            this.toggleOtherLayer(layer, true)
+        })
+    }
+
     async toggleOtherLayer(layerB, b) {
         if (b != undefined) {
             if (b == true) {
@@ -330,19 +353,19 @@ class Map {
                 const geoJSON = GeoJSONUtils.buildOtherLayerGeoJson(points, layerB)
 
                 const onEachFeature = (feature, layer) => {
-                    
-                    
-                    const properties = {...feature.properties}
-                    
-                    const layerAtributtes = {...layerB}
-                    
+
+
+                    const properties = { ...feature.properties }
+
+                    const layerAtributtes = { ...layerB }
+
                     delete layerAtributtes.is_active
                     delete layerAtributtes.layer_id
                     delete layerAtributtes.layer_name
-                    
+
                     const keys = Object.keys(layerAtributtes)
-                    
-                    let tooltip = ""
+
+                    let tooltip = `<h3 style="text-align: center">${layerB.layer_name}</h3>`
                     keys.forEach(key => {
                         tooltip += `<b>${layerAtributtes[key].name}:</b> \t ${properties[key]} <br>`
                     })
@@ -367,10 +390,12 @@ class Map {
                         });
                     }
                 })
-                if (DesignController.mobile)
-                    this.map.mapLayersControl.addOverlay(layer, layerB.layer_name)
                 this.layers.push({ name: layerB.layer_name, layer })
-                this.toggleLayer(layerB.layer_name)
+                if (DesignController.mobile){
+                    this.map.otherLayersControl.addOverlay(layer, layerB.layer_name)
+                }
+                else
+                    this.toggleLayer(layerB.layer_name)
             }
             else {
                 this.toggleLayer(layerB.layer_name)

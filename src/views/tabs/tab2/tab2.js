@@ -240,15 +240,18 @@ class Tab2 {
         container.innerHTML = ""
 
         let template = await TemplatesManager.getTemplate("layer_item")
-
+        let initialized = []
         this.layers.forEach(layer => {
             let node = TemplatesManager.contextPipe(template, { ...layer, color: "inherit" }, false)
             container.appendChild(node)
             node.addEventListener("click", (() => {
-
                 const checkbox = node.querySelector("input")
                 checkbox.checked = !checkbox.checked
-                this.map.toggleOtherLayer(layer, checkbox.checked)
+                let hasToInit = !initialized.includes(layer.layer_name)
+                this.map.toggleOtherLayer(layer, hasToInit)
+                if(hasToInit == true){
+                    initialized.push(layer.layer_name)
+                }
             }).bind(this))
         })
 

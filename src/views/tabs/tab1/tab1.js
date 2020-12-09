@@ -119,9 +119,15 @@ class Tab1 {
             return
         }
 
-        const images = await response.json()
+        let images = await response.json()
+        images = images.slice(0, 2)
         
-        this.carousel = new Carousel(images.map(image => `${FILES_BASE_URL}/${image.name}`))
+        images = images.map(image => `${FILES_BASE_URL}/${image.name}`)
+        images.push("https://www.gotravelandtalk.com/sites/default/files/styles/media_image/public/2018-11/la_fortuna.jpg?h=c5a16901&itok=AaBHQ3-G")
+        images.push("https://img.rezdy.com/PRODUCT_IMAGE/76855/Captura_de_pantalla_2017_11_27_a_la_s__10.31.40_p.m._lg.png")
+        
+
+        this.carousel = new Carousel(images)
 
         await this.carousel.render('tab1_carousel')
 

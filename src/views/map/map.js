@@ -113,12 +113,12 @@ class Map {
         if (DesignController.mobile){
             this.map.addControl(mapLayersControl.setPosition('bottomleft'))
             this.map.addControl(otherLayersControl.setPosition('bottomleft'))
+            this.setupOtherLayers()
         }
         this.map.otherLayersControl = otherLayersControl
         this.map.mapLayersControl = mapLayersControl
         this.setupEventsTile()
         this.setupAdsTile()
-        this.setupOtherLayers()
 
         this.setMapView(10.471681129073158, -84.64514404535294, 15);
 

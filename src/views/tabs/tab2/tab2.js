@@ -193,11 +193,17 @@ class Tab2 {
 
                 let template = await TemplatesManager.getTemplate("event_item")
 
-                visibleEvents.forEach(event => {
-                    let node = TemplatesManager.contextPipe(template, { ...event, color: "inherit" }, false)
-                    container.appendChild(node)
-                    node.addEventListener("click", this.map.showEventPopup.bind(this.map, event.event_id))
-                })
+                if(visibleEvents.length > 0){
+
+                    visibleEvents.forEach(event => {
+                        let node = TemplatesManager.contextPipe(template, { ...event, color: "inherit" }, false)
+                        container.appendChild(node)
+                        node.addEventListener("click", this.map.showEventPopup.bind(this.map, event.event_id))
+                    })   
+                }
+                else{
+                    container.appendChild(TemplatesManager.contextPipe(`<div style="margin: 10px; color: gray">En esta zona no hay ningún evento</div>`, {}, false))
+                }
 
 
 
@@ -219,11 +225,19 @@ class Tab2 {
 
                 let template = await TemplatesManager.getTemplate("event_item")
 
-                visibleAds.forEach(ad => {
-                    let node = TemplatesManager.contextPipe(template, { ...ad, color: "inherit" }, false)
-                    container.appendChild(node)
-                    node.addEventListener("click", this.map.showAdPopup.bind(this.map, ad.ad_id))
-                })
+                if(visibleAds.length > 0){
+
+                    
+                    
+                    visibleAds.forEach(ad => {
+                        let node = TemplatesManager.contextPipe(template, { ...ad, color: "inherit" }, false)
+                        container.appendChild(node)
+                        node.addEventListener("click", this.map.showAdPopup.bind(this.map, ad.ad_id))
+                    })
+                }
+                else{
+                    container.appendChild(TemplatesManager.contextPipe(`<div style="margin: 10px; color: gray">En esta zona no hay ningún anuncio</div>`, {}, false))
+                }
 
 
 

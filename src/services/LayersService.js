@@ -7,7 +7,7 @@ class LayersService {
 
     static async getLayers(){
         
-        let response = fetch(`${API_URL}/${LayersService.module}`)
+        let response = fetch(`${API_URL}/${LayersService.module}?is_active=true`)
         return response
         // let weather = {datetime: "25/08/2020 02:23:39 p.m.", temp: "30,36", rh: "66,17", avrWindSpeed: "7,28", thermalSensation: "34,37", rainDatetime: "25/08/2020 02:00 p.m.", rain: "0,00" }
         // return {status: 200, body: {...weather}}

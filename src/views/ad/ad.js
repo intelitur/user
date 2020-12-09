@@ -88,11 +88,7 @@ class AdView {
     }
 
     async renderContent(){
-        this.ad.images = [
-            `20200826162313572-Full%20Moon%20Ultra%20HD.jpg`,
-            `20200826162313572-Full%20Moon%20Ultra%20HD.jpg`,
-        ]
-        this.carousel = new Carousel(this.ad.images.map(image => `${FILES_BASE_URL}/${image}`));
+        this.carousel = new Carousel(this.ad.images.map(image => `${FILES_BASE_URL}/${image.name}`));
         this.carousel.render('ad_carousel')
     }
 

@@ -220,8 +220,8 @@ class Ads {
         }
     
         let getMainImage = (ad) => {
-            return `${FILES_BASE_URL}/20200826162313572-Full%20Moon%20Ultra%20HD.jpg`
-            return ad.images?`${FILES_BASE_URL}/${ad.images[0]}`: ``
+            console.log(ad)
+            return ad.images?`${FILES_BASE_URL}/${ad.images[0].name}`: ``
         }
 
         ads.forEach(ad => {

@@ -21,7 +21,7 @@ export default class RouteController {
                     case "event":
                         DesignController.showEvent(data.e_id)
                         break
-                    case "ad":
+                    case "ads":
                         DesignController.showAd(data.e_id)
                         break
                     case "contest":

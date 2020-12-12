@@ -25,6 +25,11 @@ const copyWebpack = new CopyWebpackPlugin([
     {
         from: './assets/*',
         to: './'
+    },
+    {
+        from: './*/*.ico',
+        to: './',
+        flatten: true,
     }
 ])
 

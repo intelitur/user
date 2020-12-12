@@ -42,23 +42,34 @@ class Carousel {
         }else{
             this.index--;
         }
-        this.showImage()
+
+        if(byUser || this.lastVideo == undefined  || this.lastVideo.paused || this.lastVideo.ended)
+            this.showImage()
+        else{
+            this.index++
+        }
     }
 
-    nImage(){
+    nImage(byUser){
         if (this.index >= this.medias.length-1){
             this.index = 0;
         }else{
             this.index++;
         }
-        this.showImage()
+
+        if(byUser || this.lastVideo == undefined  || this.lastVideo.paused || this.lastVideo.ended)
+            this.showImage()
+        else{
+            this.index--
+        }
+            
+
     }
     
     showImage(){
         const imageContainer = this.el.querySelector(".carousel__images-container")
 
-        if(this.lastVideo == undefined  || this.lastVideo.paused || this.lastVideo.ended)
-            imageContainer.style.right = `${this.index}00%`
+        imageContainer.style.right = `${this.index}00%`
 
         
         if(this.index < this.videos.length){

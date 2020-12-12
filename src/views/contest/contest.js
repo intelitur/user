@@ -112,8 +112,8 @@ class ContestView {
     setupListeners() {
         this.el.querySelector(".contest__back").addEventListener("click", this.hide.bind(this))
 
-        this.el.querySelector(".contest__carousel--button.left").addEventListener("click", this.carousel.pImage.bind(this.carousel))
-        this.el.querySelector(".contest__carousel--button.right").addEventListener("click", this.carousel.nImage.bind(this.carousel))
+        this.el.querySelector(".contest__carousel--button.left").addEventListener("click", this.carousel.pImage.bind(this.carousel, true))
+        this.el.querySelector(".contest__carousel--button.right").addEventListener("click", this.carousel.nImage.bind(this.carousel, true))
 
 
     }

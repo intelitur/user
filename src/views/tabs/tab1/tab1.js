@@ -131,7 +131,7 @@ class Tab1 {
 
         await this.carousel.render('tab1_carousel')
 
-        setInterval(this.carousel.nImage.bind(this.carousel), 5000)
+        //setInterval(this.carousel.nImage.bind(this.carousel), 5000)
     }
 
     async renderTemperature(){

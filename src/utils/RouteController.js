@@ -25,6 +25,9 @@ export default class RouteController {
                         DesignController.showAd(data.e_id)
                         break
                     case "contest":
+                        if(!DesignController.mobile)
+                            document.querySelector(".tab1--button").click()
+                            document.querySelector(".tab1--button").click()
                         DesignController.showContest(data.e_id)
                         break
                 }

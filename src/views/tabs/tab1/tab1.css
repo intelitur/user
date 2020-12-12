@@ -188,7 +188,7 @@
     .tab1__weather__title h2 {
         margin: auto 0;
         margin-bottom: 10px;
-        font-size: calc(20px + 2vw);
+        font-size: calc(20px + 2.5vw);
         color: var(--tab1_color);
         text-align: center;
         width: 100%;

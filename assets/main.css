@@ -5968,7 +5968,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     outline: none;
     cursor: pointer;
     padding: 14px 0;
-    width: 15%;
+    width: 35%;
     height: 48px;
     display: flex;
     justify-content: center;
@@ -6009,7 +6009,7 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
 }
 
 .footer__tablink.active {
-    width: 40%;
+    width: 65%;
 }
 
 .active .footer__tablink__label{

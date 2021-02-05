@@ -9,19 +9,32 @@ import AdView from '../views/ad/ad'
 import weather from '../views/weather/weather'
 import ContestView from '../views/contest/contest'
 
+/**
+ * @class Contiene diferentes funciones que manipulan la aplicación, básicamente centraliza ciertas funciones para encontrarlas en el miso lugar
+ */
 class DesignController {
 
+    /**
+     * @function Muestra el overlay en el html añadiéndole la clase ".visible"
+     */
     static showOverlay() {
         const overlay = document.querySelector('.overlay')
         overlay.classList.add('visible')
     }
 
+    /**
+     * @function Oculta el overlay en el html quitándole la clase ".visible"
+     */
     static hideOverlay() {
         const overlay = document.querySelector('.overlay')
         overlay.classList.remove('visible')
     }
 
 
+    /**
+     * Muestra en la aplicación el evento con el id recibido
+     * @param {*} event_id Id del evento a mostrar
+     */
     static async showEvent(event_id) {
         tab2.showingObject = true
         if(DesignController.mobile){
@@ -37,7 +50,10 @@ class DesignController {
 
     }
 
-    static async showCalendar(doWhenHide){
+    /**
+     * Muestra el calendario, si no existe lo crea
+     */
+    static async showCalendar(){
         DesignController.showLoadingBar()
         if(!DesignController.calendar){
             DesignController.calendar = new CalendarView()
@@ -49,6 +65,10 @@ class DesignController {
         overlay.classList.add('visible')
     }
 
+    /**
+     * Muestra en la aplicación el concurso que tiene el id recibido, 
+     * @param {*} contest_id Id del concurso a mostrar
+     */
     static async showContest(contest_id) {
         new ContestView(contest_id)
     }
@@ -111,6 +131,9 @@ class DesignController {
         document.querySelector('.main-loading').classList.remove('visible')
     }
 
+    /**
+     * @function Configura las etiquetas <img> que no han sido configuradas de la aplicación para que cuando se le de click se muestre el overlay con la imagen en la pantalla completa
+     */
     static setupImageView(){
         if(document.querySelector("#map"))
             document.querySelector("#map").querySelectorAll("img:not([config='true'])").forEach((img) => {
@@ -125,6 +148,10 @@ class DesignController {
         })
     }
 
+    /**
+     * Muestra en el overlay de imágenes la imagen con la URL recibida
+     * @param {*} imgUrl URL de la imagen a mostrar
+     */
     static showImage(imgUrl){
         document.querySelector(".img--overlay").children[0].setAttribute('src', imgUrl)
         document.querySelector(".img--overlay").classList.add('visible')
@@ -136,9 +163,13 @@ DesignController.badges = 3
 
 DesignController.mobile = window.screen.width < 700
 
+/**
+ * Cada vez que se modifica el html se llama a la función para configurar las imágenes
+ */
 document.addEventListener('DOMSubtreeModified', () => {
     DesignController.setupImageView()
 })
+
 document.querySelector('.img--overlay').addEventListener("click", ()=> document.querySelector('.img--overlay').classList.remove("visible"))
 
 

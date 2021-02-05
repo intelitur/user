@@ -230,24 +230,24 @@ class SearchEvents {
 
         let getDateInfo = (event) => {
 
-            const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-    
-            const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
-    
-            const date = new Date(event.date_range.initial_date.split("T")[0])
-    
-            
-            const monthName = months[date.getMonth()]
-    
-            const dayName = days[date.getDay()]
-    
-            const dateI = date.getDate() + 1
-    
-            return {
-                monthName,
-                dayName,
-                dateI
-            }
+                const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        
+                const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+        
+                const date = new Date(event.date_range.initial_date.split("T")+"-00:00")
+        
+                
+                const monthName = months[date.getMonth()]
+        
+                const dayName = days[date.getDay() - 1]
+        
+                const dateI = date.getDate() 
+        
+                return {
+                    monthName,
+                    dayName,
+                    dateI
+                }
         }
     
         let getMainImage = (event) => {

@@ -44,7 +44,6 @@ class Weather {
         const data = await WeatherService.weather
 
         this.el.innerHTML = this.el.innerHTML.patch(data)
-        console.log(data)
         
         this.setupListeners()
     }

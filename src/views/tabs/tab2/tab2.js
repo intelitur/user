@@ -10,6 +10,7 @@ import Snackbar from "../../snackbar/snackbar";
 import AdsService from "../../../services/AdsService";
 import footer from "../../footer/footer";
 import LayersService from "../../../services/LayersService";
+import CompaniesService from "../../../services/CompaniesService";
 class Tab2 {
 
     constructor() {
@@ -90,6 +91,18 @@ class Tab2 {
         }
         this.ads = await response.json()
 
+        response = await CompaniesService.getCompanies()
+        if (response.status != 200) {
+            if (response.status >= 500) {
+                Snackbar.error(500)
+            }
+            else if (response.status >= 400) {
+                Snackbar.error(400)
+            }
+            return
+        }
+        this.companies = await response.json()
+
         response = await LayersService.getLayers()
         if (response.status != 200) {
             if (response.status >= 500) {
@@ -101,7 +114,6 @@ class Tab2 {
             return
         }
         this.layers = await response.json()
-        console.log(this.layers)
         this.showOtherLayers()
 
         document.querySelectorAll(".tab2__left--item--header").forEach((item) => {
@@ -110,7 +122,6 @@ class Tab2 {
                 if (!parent.classList.contains("expanded")) {
                     parent.classList.add("expanded")
                     this.showObjects()
-                    console.log("CLICK")
                 }
                 else
                     parent.classList.remove("expanded")
@@ -121,6 +132,7 @@ class Tab2 {
 
         document.querySelector("#tab2_checkbox_Eventos").addEventListener("click", () => this.map.toggleLayer("Eventos"))
         document.querySelector("#tab2_checkbox_ads").addEventListener("click", () => this.map.toggleLayer("Anuncios"))
+        document.querySelector("#tab2_checkbox_companies").addEventListener("click", () => this.map.toggleLayer("Empresas"))
 
 
         this.map.map.on("moveend", this.showObjects.bind(this))
@@ -129,6 +141,7 @@ class Tab2 {
     showObjects() {
         this.showAds()
         this.showEvents()
+        this.showCompanies()
     }
 
     setupSrollAnimation() {
@@ -268,6 +281,41 @@ class Tab2 {
                 }
             }).bind(this))
         })
+
+    }
+
+    async showCompanies() {
+
+        if (document.querySelector("#tab2_checkbox_companies").checked) {
+            let container = document.querySelectorAll(".tab2__left--item")[2]
+
+            if (container.classList.contains("expanded")) {
+                container = this.el.querySelector("#companies_container")
+                container.innerHTML = ""
+
+                let visibleCompanies = this.companies.filter((item) => item.latitude && item.longitude && this.map.isVisible(item.latitude, item.longitude))
+
+                let template = await TemplatesManager.getTemplate("event_item")
+
+                if(visibleCompanies.length > 0){
+
+                    
+                    
+                    visibleCompanies.forEach(company => {
+                        let node = TemplatesManager.contextPipe(template, { ...company, color: "inherit" }, false)
+                        container.appendChild(node)
+                        node.addEventListener("click", this.map.showCompanyPopup.bind(this.map, company.company_id))
+                    })
+                }
+                else{
+                    container.appendChild(TemplatesManager.contextPipe(`<div style="margin: 10px; color: gray">En esta zona no hay ninguna empresa</div>`, {}, false))
+                }
+
+
+
+            }
+
+        }
 
     }
 }

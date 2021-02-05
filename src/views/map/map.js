@@ -15,6 +15,7 @@ import Snackbar from "../snackbar/snackbar";
 import { FILES_BASE_URL } from "../../env";
 import AdsService from "../../services/AdsService";
 import LayersService from "../../services/LayersService";
+import CompaniesService from "../../services/CompaniesService";
 
 
 class Map {
@@ -38,6 +39,7 @@ class Map {
         this.config = config
         this.eventLayers = [];
         this.adsLayers = [];
+        this.companiesLayers = [];
         this.layers = [];
     }
 
@@ -119,6 +121,7 @@ class Map {
         this.map.mapLayersControl = mapLayersControl
         this.setupEventsTile()
         this.setupAdsTile()
+        this.setupCompaniesTile()
 
         this.setMapView(10.471681129073158, -84.64514404535294, 15);
 
@@ -194,9 +197,84 @@ class Map {
             }
         })
         if (DesignController.mobile)
-            this.map.mapLayersControl.addOverlay(layer, "Anuncions")
+            this.map.mapLayersControl.addOverlay(layer, "Anuncios")
         this.layers.push({ name: "Anuncios", layer })
         this.toggleLayer("Anuncios")
+
+        tab2.loading = false;
+    }
+
+    async setupCompaniesTile() {
+
+
+
+        tab2.loading = true;
+        let response = await CompaniesService.getCompanies()
+
+        if (response.status != 200) {
+            if (response.status >= 500) {
+                Snackbar.error(500)
+            }
+            else if (response.status >= 400) {
+                Snackbar.error(400)
+            }
+            this.loading = false
+            return
+        }
+
+        let companies = await response.json()
+
+        const geoJSON = GeoJSONUtils.buildCompaniesGeoJson(companies)
+
+
+
+        let onEachFeature = (feature, layer) => {
+            this.companiesLayers.push(layer)
+
+            const tooltip = `
+            <div style="width: 200px">
+                <div style="font-size: 10px; text-align: center">
+                    <b>EMPRESA</b>
+                </div>
+                <div style="margin-top: 5px; display: flex">
+                    <img src="${feature.properties.point.image}" style="object-fit: cover; max-height: 200px; max-width: 200px; margin: auto"/>
+                </div>
+                <div style="font-size: 16px; text-align: center; color: purple; font-weight: 700; margin: 5px 0;">
+                    ${feature.properties.point.name}
+                </div>
+                <div style="">
+                    Tel. ${feature.properties.point.phone_number? feature.properties.point.phone_number: "no registrado" }
+                </div>
+                <div style="">
+                    Email: ${feature.properties.point.email? feature.properties.point.email: "no registrado" }
+                </div>
+            </div>
+            
+            `
+            const htmlNode = TemplatesManager.createHtmlNode(tooltip)
+
+            layer.bindPopup(htmlNode)
+        }
+
+        const layer = leaflet.geoJSON(geoJSON, {
+            onEachFeature: onEachFeature,
+
+            pointToLayer: function (feature, latlng) {
+                //return leaflet.marker(latlng, {icon})
+                return leaflet.circleMarker(latlng, {
+                    radius: 8,
+                    fillColor: 'purple',
+                    color: 'purple',
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                });
+            }
+        })
+        if (DesignController.mobile)
+            this.map.mapLayersControl.addOverlay(layer, "Empresas")
+        this.layers.push({ name: "Empresas", layer })
+        this.toggleLayer("Empresas")
 
         tab2.loading = false;
     }
@@ -292,7 +370,6 @@ class Map {
     }
 
     async showEventPopup(event_id) {
-        console.log(event_id)
         let eventLayer = this.eventLayers.find((layer) => layer.feature.properties.point.event_id == event_id)
 
         await eventLayer._popup.update()
@@ -312,6 +389,17 @@ class Map {
             .openOn(this.map)
 
         this.map.flyTo(adLayer._latlng, 17)
+    }
+
+    async showCompanyPopup(company_id) {
+        let companyLayer = this.companiesLayers.find((layer) => layer.feature.properties.point.company_id == company_id)
+
+        await companyLayer._popup.update()
+        companyLayer._popup
+            .setLatLng(companyLayer._latlng)
+            .openOn(this.map)
+
+        this.map.flyTo(companyLayer._latlng, 17)
     }
 
     toggleLayer(name) {

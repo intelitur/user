@@ -16,14 +16,8 @@ ServiceUtils.GET = async (url) => {
         response = await fetch(url)
     } catch (error) {
         Snackbar.error("Ocurrió un error al conectar con nuestros servidores")
-        return {status: 0}
+        return error
     }
-    // if(response.status){
-    //     return response
-    // }
-    // else{
-    //     Snackbar.error("Error al conectar con nuestros servidores")
-    // }
     return response
 }
 

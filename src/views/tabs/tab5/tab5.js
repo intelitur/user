@@ -39,7 +39,7 @@ class Tab5 {
                 const script = document.createElement('script');
                 document.body.appendChild(script);
                 script.async = true;
-                script.src = 'https://apis.google.com/js/platform.js';
+                //script.src = 'https://apis.google.com/js/platform.js';
             }
         }
     }

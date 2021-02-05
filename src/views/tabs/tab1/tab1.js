@@ -294,14 +294,14 @@ class Tab1 {
 
         const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 
-        const date = new Date(event.date_range.initial_date.split("T")[0])
+        const date = new Date(event.date_range.initial_date.split("T")+"-00:00")
 
         
         const monthName = months[date.getMonth()]
 
-        const dayName = days[date.getDay()]
+        const dayName = days[date.getDay() - 1]
 
-        const dateI = date.getDate() + 1
+        const dateI = date.getDate() 
 
         return {
             monthName,

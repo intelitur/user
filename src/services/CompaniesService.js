@@ -6,19 +6,9 @@ import ServiceUtils from '../utils/ServiceUtils'
 
 class CompaniesService {
 
-
-    static async updateCompanies(){
-        let response = await ServiceUtils.GET(`${API_URL}/${CompaniesService.module}`)
+    static async getCompanies(update = true) {
+        let response = await ServiceUtils.GET(`${API_URL}/${CompaniesService.module}?state=1f`)
         return response
-    }
-
-    static async getCompanies(update = false) {
-        // if(CompaniesService.companies === undefined || update){
-        //     CompaniesService.companies =  CompaniesService.updateCompanies()
-        // }
-        // return CompaniesService.companies
-
-        return CompaniesService.updateCompanies()
     }
 
     static async getCompany(company_id){

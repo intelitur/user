@@ -13,7 +13,7 @@ import RoutesService from "../../services/RoutesService"
 class RoutesView {
 
     constructor() {
-        this.promise = this.getRoutes()
+        //this.promise = this.getRoutes()
     }
 
     get loading() {

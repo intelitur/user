@@ -6,10 +6,12 @@ import CategoryService from "../../services/CategoryService"
 import tab2 from "../tabs/tab2/tab2"
 import footer from "../footer/footer"
 import { FILES_BASE_URL } from '../../env';
+import Snackbar from '../snackbar/snackbar';
 
 
 import './event.css'
-import Snackbar from '../snackbar/snackbar';
+
+
 class EventView {
 
     constructor(event_id, render) {
@@ -104,26 +106,27 @@ class EventView {
     getDateTimeInfo(){
 
         const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-
+        
         const days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+        
 
-        const startDate = new Date(this.event.date_range.initial_date.split("T")[0])
+        const startDate = new Date(this.event.date_range.initial_date.split("T")[0]+"-00:00")
         
         const startMonthName = months[startDate.getMonth()]
 
-        const startDayName = days[startDate.getDay()]
+        const startDayName = days[startDate.getDay() - 1]
 
-        const startDateI = startDate.getDate() + 1
+        const startDateI = startDate.getDate()
 
         const startTime = this.event.initial_time != null? this.event.initial_time.split(":").slice(0, 2).join(":"): undefined
 
-        const endDate = new Date(this.event.date_range.final_date.split("T")[0])
+        const endDate = new Date(this.event.date_range.final_date.split("T")[0]+"-00:00")
         
         const endMonthName = months[endDate.getMonth()]
 
-        const endDayName = days[endDate.getDay()]
+        const endDayName = days[endDate.getDay() - 1]
 
-        const endDateI = endDate.getDate() + 1
+        const endDateI = endDate.getDate()
 
         const endTime = this.event.final_time != null? this.event.final_time.split(":").slice(0, 2).join(":"): undefined
 
